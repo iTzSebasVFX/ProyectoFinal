@@ -3,15 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ProyectoFinal.Controllers;
 
-public class HtmlController : Controller
+public class RegistroController : Controller
 {
 
-    public IActionResult Index()
-    {
-        return View();
-    }
     public IActionResult Registro()
     {
         return View();
     }
+
 }
