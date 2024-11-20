@@ -1,109 +1,200 @@
 .form {
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  /* Alinea los elementos en una columna */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  /* Espaciado entre los elementos */
+  padding: 20px;
+  background: linear-gradient(90deg, #442063, #1d3263);
+  border-radius: 15px;
+
+  /* From Uiverse.io by codebykay101 */
+  .container {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-bottom: 0.4em;
-    background-color: #171717;
-    border-radius: 25px;
-    transition: .4s ease-in-out;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
   }
-  
-  .form:hover {
-    transform: scale(1.05);
-    border: 1px solid black;
-  }
-  
+
   #heading {
+    font-size: 1.5rem;
+    font-weight: bold;
     text-align: center;
-    margin: 2em;
-    color: rgb(255, 255, 255);
-    font-size: 1.2em;
+    margin-bottom: 20px;
+    /* Espaciado entre el título y el contenedor */
   }
-  
-  .field {
+
+  .container .glass {
+    position: relative;
+    width: 180px;
+    height: 200px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    gap: 0.5em;
-    border-radius: 25px;
-    padding: 0.6em;
-    border: none;
-    outline: none;
-    color: white;
-    background-color: #171717;
-    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    transition: 0.5s;
+    border-radius: 10px;
+    margin: 0 -45px;
+    backdrop-filter: blur(10px);
+    transform: rotate(calc(var(--r) * 1deg));
   }
-  
-  .input-icon {
-    height: 1.3em;
-    width: 1.3em;
-    fill: white;
+
+  .container:hover .glass {
+    transform: rotate(0deg);
+    margin: 0 10px;
   }
-  
-  .input-field {
-    background: none;
-    border: none;
-    outline: none;
+
+  .container .glass::before {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    color: #d3d3d3;
-  }
-  
-  .form .btn {
+    height: 40px;
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    margin-top: 2.5em;
+    align-items: center;
   }
-  
-  .button1 {
-    padding: 0.5em;
-    padding-left: 1.1em;
-    padding-right: 1.1em;
-    border-radius: 5px;
-    margin-right: 0.5em;
-    border: none;
-    outline: none;
-    transition: .4s ease-in-out;
-    background-color: #252525;
-    color: white;
+
+  .container .glass svg {
+    font-size: 2.5em;
   }
-  
-  .button1:hover {
-    background-color: black;
-    color: white;
+
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ajusta el contenido de la imagen */
+    border-radius: 12px;
+    /* Mantén las esquinas redondeadas */
   }
-  
-  .button2 {
-    padding: 0.5em;
-    padding-left: 2.3em;
-    padding-right: 2.3em;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    transition: .4s ease-in-out;
-    background-color: #252525;
-    color: white;
+}
+
+.form h3 {
+  width: 20%;
+  padding: 15px;
+  color: #ffff;
+  font-size: 50px;
+  font-style: italic;
+  transition: .12s;
+
+  &:hover {
+    font-size: 55px;
+    letter-spacing: 1px;
   }
-  
-  .button2:hover {
-    background-color: black;
-    color: white;
-  }
-  
-  .button3 {
-    margin-bottom: 3em;
-    padding: 0.5em;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    transition: .4s ease-in-out;
-    background-color: #252525;
-    color: white;
-  }
-  
-  .button3:hover {
-    background-color: red;
-    color: white;
-  }
+
+
+}
+
+.form:hover {
+  transform: scale(1.05);
+
+}
+
+#heading {
+  width: 20%;
+  padding: 15px;
+  color: #ffff;
+  font-size: 30px;
+  font-style: italic;
+  transition: .12s;
+
+
+}
+
+.field {
+  width: 50%;
+  /* Asegura que los campos se ajusten */
+  max-width: 300px;
+  /* Define un ancho máximo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border-radius: 25px;
+  padding: 0.6em;
+  background-color: #171717;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-icon {
+  height: 1.3em;
+  width: 1.3em;
+  fill: white;
+}
+
+.input-field {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #d3d3d3;
+}
+
+.form .btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 2.5em;
+}
+
+
+.button1:hover {
+  background-color: black;
+  color: white;
+}
+
+.button2 {
+  padding: 0.5em;
+  padding-left: 2.3em;
+  padding-right: 2.3em;
+  border-radius: 5px;
+  font-style: italic;
+  border: none;
+  align-items: end;
+  outline: none;
+  font-style: italic;
+  transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+  background-color: #070707;
+  color: white;
+}
+
+.button2:hover {
+  border-radius: 5px;
+  background-color: #1717175e;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: white;
+
+}
+
+.button3 {
+  margin-bottom: 3em;
+  padding: 0.5em;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-style: italic;
+  transition: .4s ease-in-out;
+  background-color: #070707;
+  color: white;
+}
+
+.button3:hover {
+  border-radius: 5px;
+  background-color: #1717175e;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  color: white;
+
+}
+
+.button2,
+.button3 {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
