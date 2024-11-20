@@ -4,11 +4,8 @@ HEAD
 
 }
 body{
-  background-color: #2c1e4a;
+    background: linear-gradient(90deg, #442063, #1d3263);
 
-}
-body {
-    background-color: #3b187c;
 }
 .menu{
     width: 100%;
