@@ -1,6 +1,6 @@
-var modal = document.getElementById("paginita");
+var modal = document.getElementById("myModal");
 
-var li = document.document.getElementById("paginaIS");
+var btn = document.getElementById("openModalBtn");
 
 var span = document.getElementsByClassName("close")[0];
 
