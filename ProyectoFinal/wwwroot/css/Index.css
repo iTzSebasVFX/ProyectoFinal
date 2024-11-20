@@ -3,9 +3,9 @@ HEAD
     margin: 0;padding: 0;box-sizing: border-box;
 
 }
+body{
+    background: linear-gradient(90deg, #442063, #1d3263);
 
-body {
-    background-color: #3b187c;
 }
 .menu{
     width: 100%;
