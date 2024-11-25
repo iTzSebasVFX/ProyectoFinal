@@ -1,6 +1,5 @@
 .form {
   display: flex;
-  display: flex;
   flex-direction: column;
   /* Alinea los elementos en una columna */
   justify-content: center;
