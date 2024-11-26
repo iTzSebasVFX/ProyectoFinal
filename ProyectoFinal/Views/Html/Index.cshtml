@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="~/css/Index.css">
+    <link rel="stylesheet" href="~/css/login.css">
+
 </head>
 
-<body style="background-color: #3b187c">
+<body>
     <!-- start menu  -->
     <nav class="menu">
         <h3>Elite</h3>
         <ul>
             <li><a asp-controller="Html" asp-action="Registro">Registrarse</a></li>
-            <li><a asp-controller="Html" asp-action="InicioSesion">Inicio de Sesion</a></li>
-
+            <li id="openModalBtn"><a>Inicio de sesión</a></li>
             <li><a href="">Juegos disponibles</a></li>
 
             <li><a href="">Tema</a>
@@ -112,8 +113,66 @@
                     </div>
                 </div>
             </div>
+
+            <!--Formulario de Inicio de sesion-->
+
+            <div id="myModal" class="modal">
+                <form class="form">
+                    <h3 id="heading">Inicio de sesión</h3>
+                    <span class="close">&times;</span>
+
+                    <div class="container">
+                        <div data-text="" style="--r:-15;" class="glass">
+                            <img class="img"
+                                src="https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D"
+                                alt="Github" />
+                        </div>
+                        <div data-text="" style="--r:5;" class="glass">
+                            <img class="img"
+                                src="https://images.unsplash.com/photo-1642708447238-c9313d4bfa64?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Zm9ydG5pdGV8ZW58MHx8MHx8fDA%3D"
+                                alt="Code" />
+                        </div>
+                        <div data-text="" style="--r:25;" class="glass">
+                            <img class="img"
+                                src="https://media.istockphoto.com/id/2073254261/es/foto/un-hombre-adulto-est%C3%A1-usando-su-tel%C3%A9fono-inteligente.webp?a=1&b=1&s=612x612&w=0&k=20&c=ftGlziuhVriab4K60iQoCbNrYojS0Z3MxwGNRFhIZ5Q="
+                                alt="Earn" />
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z">
+                            </path>
+                        </svg>
+                        <input autocomplete="off" placeholder="Correo" class="input-field" type="text">
+                    </div>
+
+                    <div class="field">
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+                            </path>
+                        </svg>
+                        <input placeholder="Contraseña" class="input-field" type="password">
+                    </div>
+
+                    <div class="btn">
+                        <button class="button2">Ingresar</button>
+                    </div>
+                    <button class="button3">Olvidé mi contraseña</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!--Formulario de resgistro-->
+
     </main>
     <!-- wnd main  -->
+    <script src="js/iniciodeS.js"></script>
 
 
 </body>

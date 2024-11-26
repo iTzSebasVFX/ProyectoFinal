@@ -1,6 +1,5 @@
 .form {
   display: flex;
-  display: flex;
   flex-direction: column;
   /* Alinea los elementos en una columna */
   justify-content: center;
@@ -197,4 +196,22 @@
   margin-top: 10px;
   padding: 10px 20px;
   border-radius: 10px;
+}
+
+.close {
+  
+  
+position: absolute;  /* Position relative to the nearest positioned ancestor */
+  top: 26px;           /* Adjust the top distance */
+  left: 1600px;          /* Adjust the left distance */
+  color: aliceblue;
+  font-size: 30px;
+  cursor: pointer;
+transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+color: black;        /* Change color on hover/focus */
+text-decoration: none;
 }
