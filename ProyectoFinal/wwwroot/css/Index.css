@@ -73,13 +73,13 @@ body{
                     height: 100%;
                     text-decoration: none;
                     color: #ffffff;
-                    background-color:#3b187c;
+                    background-color: #1d326330;
                     font-size: 20px;
                     font-style: italic;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    /* z-index: 1; */
+           
                     &:hover{
                         font-size: 25px;
                         background-color: #000000df;
