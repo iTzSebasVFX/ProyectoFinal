@@ -2,8 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoFinal.Models
 {
-    public class Usuario
+    public class RegistroModel
     {
+        [Key]
+        public int id {get; set;}
         public string? nombreCompleto {get; set;} = string.Empty;
         public string? apellidoCompleto {get; set;} = string.Empty;
         public int fechaNacimiento {get; set;} = 0;

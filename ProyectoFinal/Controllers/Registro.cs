@@ -12,7 +12,7 @@ public class Registro: Controller{
     }
     
     [HttpPost]
-    public async Task<IActionResult> Crear(Usuario usuario)
+    public async Task<IActionResult> Crear(RegistroModel usuario)
     {
         if (ModelState.IsValid){
             _context.Usuarios.Add(usuario);
