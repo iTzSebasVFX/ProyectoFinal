@@ -1,20 +1,17 @@
-var modal = document.getElementById("myModal");
+var modalLogin = document.getElementById("myModal");
+var btnLogin = document.getElementById("openModalBtn");
+var spanLogin = modalLogin.querySelector(".close");
 
-var btn = document.getElementById("openModalBtn");
-
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function () {
-    modal.style.display = "block";
+btnLogin.onclick = function () {
+    modalLogin.style.display = "block";
 };
 
-
-span.onclick = function () {
-    modal.style.display = "none";
+spanLogin.onclick = function () {
+    modalLogin.style.display = "none";
 };
 
 window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modalLogin) {
+        modalLogin.style.display = "none";
     }
 };
