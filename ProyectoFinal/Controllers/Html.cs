@@ -20,8 +20,19 @@ public class HtmlController : Controller
         return View();
     }
 
+    public IActionResult Principal()
+    {
+
+        return View();
+    }
+
 
     public IActionResult Registro()
+    {
+        return View();
+    }
+
+        public IActionResult Juegos()
     {
         return View();
     }
@@ -32,7 +43,7 @@ public class HtmlController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginModel model)
+    public async Task<IActionResult> InicioSesion(LoginModel model)
     {
         if (ModelState.IsValid)
         {
@@ -60,7 +71,7 @@ public class HtmlController : Controller
                 TempData["SuccessMessage"] = "¡Inicio de sesión exitoso! Bienvenido al sistema.";
 
                 // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
-                return RedirectToAction("Personal", "Home");
+                return RedirectToAction("Principal", "Html");
             }
         }
 
