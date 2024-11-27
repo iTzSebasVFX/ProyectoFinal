@@ -1,97 +1,107 @@
-HEAD
-*{
-    margin: 0;padding: 0;box-sizing: border-box;
+HEAD * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
 }
-body{
+
+body {
     background: linear-gradient(90deg, #442063, #1d3263);
     padding: auto;
 
 }
-.menu{
+
+.menu {
     width: 100%;
     height: 80px;
-    
+
     display: flex;
-    *{
+
+    * {
         height: 100%;
     }
 
-    >h3{
+    >h3 {
         width: 20%;
         padding: 15px;
         color: #ffff;
         font-size: 50px;
         font-style: italic;
         transition: .12s;
-        &:hover{
+
+        &:hover {
             font-size: 55px;
             letter-spacing: 1px;
         }
     }
-    >ul{
+
+    >ul {
         width: 100%;
         list-style: none;
         display: flex;
         justify-content: center;
         align-items: center;
-        >li{
+
+        >li {
             width: 100%;
             color: #ffffff;
             height: 100%;
             position: relative;
-             transform: 1s; 
-            &:hover{
-                >ul{
+            transform: 1s;
+
+            &:hover {
+                >ul {
                     height: 40px;
                     opacity: 20;
                 }
-                
+
             }
-            >ul{
-                width:230px;
+
+            >ul {
+                width: 230px;
                 height: 0;
                 opacity: 0;
                 /* visibility: hidden;  */
                 transition: .12s;
                 position: absolute;
-                
+
                 z-index: 1;
 
 
-           
-            >li{
-                width: 100%;
-                height: 100%;
-                font-style: italic;
-                list-style: none;
-                border-bottom: 1px solid wheat;
-                
-               
-                >a{
+
+                >li {
                     width: 100%;
                     height: 100%;
-                    text-decoration: none;
-                    color: #ffffff;
-                    background-color: #1d326330;
-                    font-size: 20px;
                     font-style: italic;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-           
-                    &:hover{
-                        font-size: 25px;
-                        background-color: #000000df;
+                    list-style: none;
+                    border-bottom: 1px solid wheat;
+
+
+                    >a {
+                        width: 100%;
+                        height: 100%;
+                        text-decoration: none;
                         color: #ffffff;
-                        border-radius: 20px;
+                        background-color: #1d326330;
+                        font-size: 20px;
+                        font-style: italic;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            font-size: 25px;
+                            background-color: #000000df;
+                            color: #ffffff;
+                            border-radius: 20px;
+                        }
                     }
+
+
                 }
-
-
             }
-        }
-            >a{
+
+            >a {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -104,10 +114,11 @@ body{
                 /* background-color: #ce8080; */
                 font-size: 20px;
                 transition: .5s;
-                &:hover{
-                     font-size: 25px;
-                     background-color: #0000000a;
-        }
+
+                &:hover {
+                    font-size: 25px;
+                    background-color: #0000000a;
+                }
             }
         }
     }
@@ -116,16 +127,18 @@ body{
 
 
 
-.main{
+.main {
     width: 103%;
     height: 77vh;
     /* border: 1px solid rgb(45, 15, 210); */
     display: flex;
-    >div{
+
+    >div {
         width: 40%;
         height: 100%;
         position: relative;
-        ::after{
+
+        ::after {
             content: '';
             width: 5px;
             height: 200px;
@@ -134,42 +147,46 @@ body{
             left: 15%;
             top: 15%;
         }
-    
-        >h1{
+
+        >h1 {
             width: 90%;
             margin: 90px 110px 0;
             color: #ffffff;
             font-style: italic;
             font-size: 350%;
             font-style: italic;
-            
+
         }
-        >p{
-             font-family: sans-serif;
+
+        >p {
+            font-family: sans-serif;
             font-size: 150%;
             font-style: italic;
             font-size: 25px;
             color: #ffff;
             margin: 15px 110px 10px;
         }
-       
+
     }
-    >figure{
-        width:60%;
+
+    >figure {
+        width: 60%;
         height: 100%;
+
         /* border: 1px solid rgb(30, 255, 0); */
-        >img{
+        >img {
             width: 100%;
             height: 90%;
             object-fit: contain;
-            
-            
+
+
         }
 
     }
-    
-    
+
+
 }
+
 .wrapper {
     width: 100%;
     height: 100%;
@@ -179,9 +196,9 @@ body{
     align-items: center;
     justify-content: center;
     overflow: hidden;
-  }
-  
-  .inner {
+}
+
+.inner {
     --w: 100px;
     --h: 150px;
     --translateZ: calc((var(--w) + var(--h)) + 0px);
@@ -195,47 +212,47 @@ body{
     z-index: 2;
     transform-style: preserve-3d;
     transform: perspective(var(--perspective));
-    animation: rotating 20s linear infinite; /* */
-  }
-  @keyframes rotating {
+    animation: rotating 20s linear infinite;
+    /* */
+}
+
+@keyframes rotating {
     from {
-      transform: perspective(var(--perspective)) rotateX(var(--rotateX))
-        rotateY(0);
+        transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
     }
+
     to {
-      transform: perspective(var(--perspective)) rotateX(var(--rotateX))
-        rotateY(1turn);
+        transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
     }
-  }
-  
-  .card {
+}
+
+.card {
     position: absolute;
     border: 2px solid rgba(var(--color-card));
     border-radius: 12px;
     overflow: hidden;
     inset: 0;
-    transform: rotateY(calc((360deg / var(--quantity)) * var(--index)))
-      translateZ(var(--translateZ));
-  }
-  
-  .img {
+    transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+}
+
+.img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background: #ffffff00
-      radial-gradient(
-        circle,
-        rgba(var(--color-card), 0.2) 0%,
-        rgba(var(--color-card), 0.6) 80%,
-        rgba(var(--color-card), 0.9) 100%
-      );
-  }
-  .img img {
+    background: #ffffff00 radial-gradient(circle,
+            rgba(var(--color-card), 0.2) 0%,
+            rgba(var(--color-card), 0.6) 80%,
+            rgba(var(--color-card), 0.9) 100%);
+}
+
+.img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajusta el contenido de la imagen */
-    border-radius: 12px; /* Mantén las esquinas redondeadas */
-  }
+    object-fit: cover;
+    /* Ajusta el contenido de la imagen */
+    border-radius: 12px;
+    /* Mantén las esquinas redondeadas */
+}
