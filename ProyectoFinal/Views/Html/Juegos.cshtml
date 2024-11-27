@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona de Juegos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(90deg, #442063, #1d3263);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 50px;
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 3s ease-in-out;
+        }
+       
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 200px; /* Espaciado horizontal entre las opciones */
+            width: 90%;
+        }
+        .option {
+            text-align: center;
+            width: 220px; /* Tamaño fijo del contenedor */
+            height: 300px; /* Altura fija del contenedor */
+            padding: 15px;
+            border: 2px solid white;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+        .option h2 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .option img {
+            width: 200px; /* Tamaño ajustado de la imagen */
+            height: auto;
+            margin-bottom: 5px; /* Espacio entre la imagen y el título */
+        }
+        .option button {
+            padding: 10px 20px;
+            font-size: 14px;
+            color: black;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .option button:hover {
+            transform: scale(1.1);
+        }
+        /* Colores específicos para los botones */
+        .option:nth-child(1) button:hover {
+            background-color: #ff5733; /* Naranja para Rocket League */
+        }
+        .option:nth-child(2) button:hover {
+            background-color: #33c1ff; /* Azul para Roblox */
+        }
+        .option:nth-child(3) button:hover {
+            background-color: #33ff57; /* Verde para Habbo */
+        }
+    </style>
+</head>
+<body>
+    <h1>Zona de Juegos</h1>
+    <div class="container">
+        <div class="option">
+            <img src="https://imgs.search.brave.com/bXRJeZes0gnO5LPiIzHIF1VL-U09omJLKZkuyUjDOq0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDE4NTQy/MzkuanBn" alt="Imagen 1">
+            <h2>ROCKET LEAGUE</h2>
+            <button onclick="alert('Botón 1 presionado')">JUGAR</button>
+        </div>
+        <div class="option">
+            <img src="https://imgs.search.brave.com/qcg4xrncFRfiSVAB5_xokgfLdcSD2WOGYRaOwz-5Tb0/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9kZXZm/b3J1bS11cGxvYWRz/LnMzLmR1YWxzdGFj/ay51cy1lYXN0LTIu/YW1hem9uYXdzLmNv/bS91cGxvYWRzL29w/dGltaXplZC80WC8w/LzMvMi8wMzI3MTA3/Yzg5MGU0NjFjMTQx/N2JjMDA2MzFlNDYw/YjExMTRiMzhkXzJf/NTAweDUwMC5wbmc" alt="Imagen 2">
+            <h2>ROBLOX</h2>
+            <button onclick="alert('Botón 2 presionado')">JUGAR</button>
+        </div>
+        <div class="option">
+            <img src="https://imgs.search.brave.com/fdUAfPLz0FjD0mK5aC6t4ahCLFw8lQHwSbTOoQOtQw8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/d2FsbHBhcGVyc2Fm/YXJpLmNvbS8zMS8z/NS9IUExmME8uanBn" alt="Imagen 3">
+            <h2>HABBO</h2>
+            <button onclick="alert('Botón 3 presionado')">JUGAR</button>
+        </div>
+    </div>
+</body>
+</html>
+
