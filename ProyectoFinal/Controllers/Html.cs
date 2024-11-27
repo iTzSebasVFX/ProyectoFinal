@@ -37,7 +37,7 @@ public class HtmlController : Controller
         if (ModelState.IsValid)
         {
             // Buscar el usuario en la base de datos por email
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == model.correoElectronico);
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == model.Email);
 
             // Si el usuario no existe
             if (usuario == null)
@@ -47,19 +47,24 @@ public class HtmlController : Controller
             }
 
             // Verificar la contraseña (asumiendo que la contraseña está almacenada de forma segura, por ejemplo, hash)
-            bool isPasswordValid = usuario.contrasena == model.contrasena; // Aquí se debe usar un hashing en un caso real
+            bool isPasswordValid = usuario.contrasena == model.Password; // Aquí se debe usar un hashing en un caso real
 
             if (!isPasswordValid)
             {
                 ModelState.AddModelError(string.Empty, "Correo electrónico o contraseña incorrectos.");
                 return View(model); // Si la contraseña no es válida, se muestra un mensaje de error.
             }
+            else
+            {
+                // Si las credenciales son correctas, agregar un mensaje a TempData
+                TempData["SuccessMessage"] = "¡Inicio de sesión exitoso! Bienvenido al sistema.";
 
-            // Si las credenciales son correctas, redirigir al usuario a una página de inicio
-            return RedirectToAction("Inicio", "Home"); // Redirigir a alguna página de inicio.
+                // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
+                return RedirectToAction("Personal", "Home");
+            }
         }
 
-        return View(model); // Si el modelo no es válido, se vuelve a mostrar el formulario de login.
+        return View(model);
     }
 
     [HttpPost]

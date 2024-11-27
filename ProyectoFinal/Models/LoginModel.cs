@@ -6,11 +6,11 @@ namespace ProyectoFinal.Models
     {
         [Required]
         [EmailAddress]
-        public string correoElectronico { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        public string contrasena { get; set; }
+        public string? Password { get; set; }
     }
 
 }
