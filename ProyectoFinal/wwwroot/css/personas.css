@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, #442063, #1d3263);
+    color: white;
+    display: flex;
+    flex-direction: row; /* Cambiar a flex-direction: row para alinear contenedores horizontalmente */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 20px; /* Para separar la imagen de los detalles */
+}
+/* Estilo para el título */
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 3px solid #2b1a3d; /* Borde oscuro */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra para resaltar el borde */
+    animation: borderPulse 1.5s infinite ease-in-out; /* Animación del borde */
+}
+@keyframes borderPulse {
+    0% {
+        border-color: #2b1a3d; /* Borde oscuro inicial */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    }
+    50% {
+        border-color: #6c4f94; /* Color más claro para el borde */
+        box-shadow: 0 0 25px rgba(108, 79, 148, 0.8); /* Resplandor */
+    }
+    100% {
+        border-color: #2b1a3d; /* Regresar al borde oscuro */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    }
+}
+.video-border {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 380px;
+    height: 380px;
+    z-index: -1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.video-border video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.image-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #2b1a3d; /* Color de borde oscuro */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Sombra para resaltar el borde */
+    animation: borderPulse 1.5s infinite ease-in-out; /* Animación del borde */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: fadeInOut 1s ease-in-out; /* Animación de fade */
+}
+.image-container img.visible {
+    opacity: 1;
+}
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    display: none;
+}
+.feedback.show {
+    display: block;
+    animation: fadeOut 2s forwards;
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+}
+.buttons button {
+    padding: 12px 25px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #333;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* Sombra similar al borde */
+}
+.buttons button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(108, 79, 148, 0.8); /* Sombra resaltada */
+}
+.buttons button:nth-child(1):hover {
+    background-color: #007bff; /* Azul para "Anterior" */
+}
+.buttons button:nth-child(2):hover {
+    background-color: #28a745; /* Verde para "Me Gusta" */
+}
+.buttons button:nth-child(3):hover {
+    background-color: #dc3545; /* Rojo para "Eliminar" */
+}
+.buttons button:nth-child(4):hover {
+    background-color: #ffc107; /* Amarillo para "Siguiente" */
+}
+
+/* Nuevo contenedor para los detalles */
+.details-container {
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 3px solid #2b1a3d; /* Borde oscuro */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    animation: borderPulse 1.5s infinite ease-in-out; /* Animación del borde */
+}
+.details-container h3 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.details-container p {
+    color: #dcdcdc;
+    font-size: 16px;
+}

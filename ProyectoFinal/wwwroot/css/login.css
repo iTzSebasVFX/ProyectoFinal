@@ -1,3 +1,10 @@
+body{
+
+  background: linear-gradient(90deg, #442063, #1d3263);
+
+}
+
+
 .form {
   display: flex;
   flex-direction: column;
