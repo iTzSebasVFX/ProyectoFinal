@@ -74,7 +74,6 @@ public class HtmlController : Controller
                 return RedirectToAction("Principal", "Html");
             }
         }
-
         return View(model);
     }
 
