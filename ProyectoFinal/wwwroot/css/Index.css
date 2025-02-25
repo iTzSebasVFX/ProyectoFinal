@@ -125,7 +125,9 @@ body {
 
 }
 
-
+#Registro{
+    cursor: pointer;
+}
 
 .main {
     width: 103%;
