@@ -60,6 +60,7 @@ public class HtmlController : Controller
             {
                 // Verificar la contraseña (asumiendo que la contraseña está almacenada de forma segura, por ejemplo, hash)
                 bool isPasswordValid = usuario.contrasena == model.Password; // Aquí se debe usar un hashing en un caso real
+                Console.WriteLine("Hola aqui ya anda en la validacion de contraseña");
 
                 if (!isPasswordValid)
                 {
