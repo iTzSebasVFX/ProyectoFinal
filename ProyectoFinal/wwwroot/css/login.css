@@ -202,19 +202,17 @@ body{
 }
 
 .close {
-  
-  
-position: absolute;  /* Position relative to the nearest positioned ancestor */
-  top: 26px;           /* Adjust the top distance */
-  left: 1600px;          /* Adjust the left distance */
+position: absolute; 
+  top: 26px;           
+  left: 1051px;          
   color: aliceblue;
-  font-size: 30px;
+  font-size: 31px;
   cursor: pointer;
 transition: color 0.3s;
 }
 
 .close:hover,
 .close:focus {
-color: black;        /* Change color on hover/focus */
+color: black;        
 text-decoration: none;
 }
