@@ -32,7 +32,7 @@ public class HtmlController : Controller
         return View();
     }
 
-        public IActionResult Juegos()
+    public IActionResult Juegos()
     {
         return View();
     }
@@ -53,25 +53,28 @@ public class HtmlController : Controller
             // Si el usuario no existe
             if (usuario == null)
             {
-                ModelState.AddModelError(string.Empty, "Correo electrónico o contraseña incorrectos.");
+                ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
                 return View(model); // Si no se encuentra el usuario, se muestra un mensaje de error.
-            }
-
-            // Verificar la contraseña (asumiendo que la contraseña está almacenada de forma segura, por ejemplo, hash)
-            bool isPasswordValid = usuario.contrasena == model.Password; // Aquí se debe usar un hashing en un caso real
-
-            if (!isPasswordValid)
-            {
-                ModelState.AddModelError(string.Empty, "Correo electrónico o contraseña incorrectos.");
-                return View(model); // Si la contraseña no es válida, se muestra un mensaje de error.
             }
             else
             {
-                // Si las credenciales son correctas, agregar un mensaje a TempData
-                TempData["SuccessMessage"] = "¡Inicio de sesión exitoso! Bienvenido al sistema.";
+                // Verificar la contraseña (asumiendo que la contraseña está almacenada de forma segura, por ejemplo, hash)
+                bool isPasswordValid = usuario.contrasena == model.Password; // Aquí se debe usar un hashing en un caso real
+                Console.WriteLine("Hola aqui ya anda en la validacion de contraseña");
 
-                // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
-                return RedirectToAction("Principal", "Html");
+                if (!isPasswordValid)
+                {
+                    ModelState.AddModelError(string.Empty, "Contraseña Incorrecta, Intente de nuevo");
+                    return View(model); // Si la contraseña no es válida, se muestra un mensaje de error.
+                }
+                else
+                {
+                    // Si las credenciales son correctas, agregar un mensaje a TempData
+                    TempData["SuccessMessage"] = "¡Inicio de sesión exitoso! Bienvenido al sistema.";
+
+                    // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
+                    return RedirectToAction("Principal", "Html");
+                }
             }
         }
 
@@ -81,18 +84,25 @@ public class HtmlController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(RegistroModel usuario)
     {
-        if (ModelState.IsValid)
+        var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == usuario.correoElectronico);
+
+        if (UserSearch == null)
         {
-            _context.Add(usuario);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Html");
+            if (ModelState.IsValid)
+            {
+                _context.Add(usuario);
+                await _context.SaveChangesAsync();
+                ModelState.AddModelError("correoElectronico", "Usuario registrado correctamente");
+                return RedirectToAction("Index", "Html");
+            }
+
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
         }
 
-        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-        {
-            Console.WriteLine(error.ErrorMessage);
-        }
-
+        ModelState.AddModelError("correoElectronico", "El correo electrónico ya está en uso.");
         return View(usuario);
     }
 
