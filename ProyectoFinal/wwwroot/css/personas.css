@@ -119,19 +119,13 @@ body {
                     font-size: 25px;
                     background-color: #0000000a;
                 }
-                a.izquierda {
-                    margin-right: 0; /* Remove margin-right */
-                    margin-left: 200px; /* Ensure no left margin */
-
-                }
+                
             }
         }
     }
 
     /* From Uiverse.io by portseif */ 
 button {
-    justify-content: flex-end;
-
     align-items: center;
     background-color: transparent;
     color: #fff;
@@ -147,6 +141,8 @@ button {
     border: 0;
     padding: 1rem;
   }
+
+  
   
   button:before {
     background-color: #fff;
@@ -164,8 +160,30 @@ button {
   }
 
   .perfil{
-    margin-right: -268px; /* Remove margin-right */
-    margin-left: 0px; /* Ensure no left margin */
+    margin-right: -268px; 
+    margin-left: 0px; 
+    margin-top: 80px;
+
+  }
+
+  .Chat{
+    margin-right: -584px;
+    margin-left: -350px;
+    margin-top: 80px;
+
+  }
+  .juegos{
+    margin-right: -268px; 
+    margin-left: 0px; 
+    margin-top: 80px;
+
+
+  }
+  .Sesion{
+    margin-right: -585px;
+        margin-left: 513px; 
+        margin-top: 80px;
+
   }
 
 }
@@ -178,24 +196,23 @@ button {
     justify-content: center;
     text-align: center;
     margin-right: 137px;
+    margin-top: -35px; 
     /* Para separar la imagen de los detalles */
 }
 
 /* Estilo para el título */
 .title {
+    margin-right: 30px;
     font-size: 36px;
     font-weight: bold;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: 14px;
+    padding: 10px;
     margin-bottom: 30px;
     border: 3px solid #2b1a3d;
-    /* Borde oscuro */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    /* Sombra para resaltar el borde */
-    animation: borderPulse 1.5s infinite ease-in-out;
-    /* Animación del borde */
+    animation: borderPulse 1.5s infiniteease-in-out;
 }
 
 @keyframes borderPulse {
@@ -359,7 +376,7 @@ button {
     border-radius: 22px;
     padding: 21px;
     margin-top: 9px;
-    margin-left: 299px;
+    margin-left: 311px;
     /* Move it a little to the right */
     border: 3px solid #2b1a3d;
     /* Dark border */
