@@ -45,6 +45,7 @@
             <br>
             <br>
             <br>
+            @**@
             @if (!ViewData.ModelState.IsValid){
                 <div id="alertError" class="alert alert-danger">
                     <strong>Error:</strong>
@@ -211,14 +212,14 @@
     </main>
     <!-- wnd main  -->
  <script src="js/registro.js"></script>
-<script>
-    setTimeout(() => {
-        let alertElement = document.getElementById("alertError");
-        if (alertElement) {
-            alertElement.style.display = "none";
-        }
-    }, 10000); // Desaparece en 10 segundos
-</script>
+    <script>
+        setTimeout(() => {
+            let alertElement = document.getElementById("alertError");
+            if (alertElement) {
+                alertElement.style.display = "none";
+            }
+        }, 10000); // Desaparece en 10 segundos
+    </script>
 </body>
 
 </html>
