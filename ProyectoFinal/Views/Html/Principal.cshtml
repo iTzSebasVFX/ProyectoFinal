@@ -13,17 +13,23 @@
         <nav class="menu">
 
             <button class="Chat">
-                chat
+                <a class="ChatT" asp-action="Index" asp-controller="Html">Chat</a>
             </button>
-            <button class="juegos">
-                Zona de jeugos
-            </button>
-            <button class="Sesion">
-                <a asp-action="Index" asp-controller="Html">Cerrar Sesion</a>
 
-                <button class="perfil">
-                    Perfil
-                </button>
+
+            <button class="juegos">
+                 <a class="ZonaJ" asp-action="Index" asp-controller="Html">ZonaJ de Juegos</a>
+            </button>
+
+
+            <button class="Sesion">
+                <a class="cerrar" asp-action="Index" asp-controller="Html">Cerrar Sesion</a>
+            </button>
+
+
+            <button class="perfil">
+                <a class="perfilsec" asp-action="Index" asp-controller="Html">Perfil</a>
+            </button>
 
 
         </nav>
