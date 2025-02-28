@@ -13,9 +13,11 @@ body{
   align-items: center;
   gap: 20px;
   /* Espaciado entre los elementos */
-  padding: 20px;
+  padding: 20px 10px; 
   background: linear-gradient(90deg, #442063, #1d3263);
   border-radius: 15px;
+  padding-left: 10px;
+padding-right: 10px;
 
   /* From Uiverse.io by codebykay101 */
   .container {

@@ -11,22 +11,24 @@
 <body>
     <div class="container">
         <nav class="menu">
-    
-        <ul>
-            <li id="Registro"><a class="izquierda">chat</a></li>
-            <li><a class="izquierda" asp-action="InicioSesion" asp-controller="Html">Zona de Juegos</a></li>
-            
-        </ul>
-        <li><a class="derecha" asp-action="Juegos" asp-controller="Html">Cerrar Sesion</a></li>
 
-         <button class="perfil ">
-                Perfil
+            <button class="Chat">
+                chat
             </button>
+            <button class="juegos">
+                Zona de jeugos
+            </button>
+            <button class="Sesion">
+                <a asp-action="Index" asp-controller="Html">Cerrar Sesion</a>
+
+                <button class="perfil">
+                    Perfil
+                </button>
 
 
-    </nav>
-           
-        
+        </nav>
+
+
         <!-- Título superior -->
         <div class="title">
             Personas con las que podrías interactuar
