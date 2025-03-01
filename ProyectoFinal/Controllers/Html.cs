@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI;
 using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
@@ -69,8 +70,8 @@ public class HtmlController : Controller
                 }
                 else
                 {
-                    // Si las credenciales son correctas, agregar un mensaje a TempData
-                    TempData["SuccessMessage"] = "¡Inicio de sesión exitoso! Bienvenido al sistema.";
+                    // Si las credenciales son correctas, agregar un mensaje en la terminal
+                    Console.WriteLine("Bienvenido a la pagina principal" + model.Email);
 
                     // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
                     return RedirectToAction("Principal", "Html");
