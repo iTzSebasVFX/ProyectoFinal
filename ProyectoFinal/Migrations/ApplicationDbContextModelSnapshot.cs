@@ -46,7 +46,7 @@ namespace ProyectoFinal.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 #pragma warning restore 612, 618
         }
