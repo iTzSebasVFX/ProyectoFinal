@@ -1,25 +1,36 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
 
     box-sizing: border-box;
 
 }
-html{
-    background: linear-gradient(90deg, #442063, #1d3263) !important;
+HEAD * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
-} 
+}
+body {
+    background: linear-gradient(90deg, #442063, #1d3263);
+    margin: 0;
+    padding: 0;
+    height: 100vh;  /* Asegura que el fondo ocupe toda la altura de la ventana */
+}
+.decoracion{
+    text-decoration: none;
+    color:white;
 
-    body {
-        background: linear-gradient(90deg, #442063, #1d3263) !important;
+    >a{
+        color:white;
+
+
     }
-    
 
-
+}
 .pepe {
     .button {
+        text-decoration: none;
+        margin-left: -110px;
+        margin-top: -100px;
         top: 20px;
         height: 50px;
         width: 200px;
@@ -65,30 +76,34 @@ html{
 }
 
 .container {
-    position: absolute;
+    margin-top: -13px;
+    margin-left: 0px;
+    position: fixed;
     top: -34%;
     left: 50%;
     transform: translate(-50%, 50%);
-    width: 1000px;
-    height: 600px;
+    width: 100%;
+    height: 612px;
     background: linear-gradient(90deg, #442063, #1d3263) !important;
-    box-shadow: 0 10px 30px #000000;
+   
 }
+
 
 .panel {
     font-size: 30px;
-    top:20px ;
     text-align: center;
     color: aliceblue;
     padding: -12px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: .12s;
 
+    
+
     >h2 {
-        top:20px ;
-       
+
         color: #ffff;
         font-style: italic;
+        top: -34%; 
     }
 
     &:hover {
@@ -97,7 +112,9 @@ html{
     }
 
 }
-
+.panel h2 {
+    margin-top: -20px;  /* Ajusta el valor para moverlo más arriba */
+}
 .container .slider .item {
     width: 200px;
     height: 300px;

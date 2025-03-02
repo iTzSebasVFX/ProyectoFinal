@@ -26,6 +26,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
 app.UseRouting();
 
 app.UseAuthorization();
@@ -34,7 +35,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Html}/{action=ZonadeJuegos}/{id?}"
+    pattern: "{controller=Html}/{action=Principal}/{id?}"
 );
 
 app.Run();
