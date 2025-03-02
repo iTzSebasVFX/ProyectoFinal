@@ -13,6 +13,18 @@ if (string.IsNullOrEmpty(connectionString)){
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(connectionString));
 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddHttpContextAccessor();
+
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,11 +44,13 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
+app.UseSession();
+
 // app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Html}/{action=Principal}/{id?}"
+    pattern: "{controller=Html}/{action=Index}/{id?}"
 );
 
 app.Run();

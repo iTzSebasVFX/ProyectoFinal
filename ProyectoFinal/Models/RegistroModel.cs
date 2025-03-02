@@ -25,7 +25,7 @@ namespace ProyectoFinal.Models
         [Required(ErrorMessage = "Porfavor Ingrese un Email")]
         public string? correoElectronico {get; set;} = string.Empty;
 
-        [Required(ErrorMessage = "Porfavor Ingrese un Contraseña")]
+        [Required(ErrorMessage = "Porfavor Ingrese un Contraseña")] 
         public string? contrasena {get; set;} = string.Empty;
     }
 }

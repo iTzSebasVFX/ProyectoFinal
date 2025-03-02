@@ -6,6 +6,8 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
+[SessionValidatorAttribute]
+
 public class HtmlController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -37,9 +39,16 @@ public class HtmlController : Controller
     {
         return View();
     }
+
     public IActionResult ZonadeJuegos(){
 
         return View();
+    }
+
+    public IActionResult CerrarSesion()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index", "Html");
     }
 
     public HtmlController(ApplicationDbContext context)
@@ -76,6 +85,11 @@ public class HtmlController : Controller
                 {
                     // Si las credenciales son correctas, agregar un mensaje en la terminal
                     Console.WriteLine("Bienvenido a la pagina principal" + model.Email);
+
+                    var UserName = usuario.nombreCompleto;
+
+                    //Ahora crearemos un session que almacene el nombre del usuario
+                    HttpContext.Session.SetString("NombreUser", UserName);
 
                     // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
                     return RedirectToAction("Principal", "Html");
