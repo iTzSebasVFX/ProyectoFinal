@@ -37,6 +37,10 @@ public class HtmlController : Controller
     {
         return View();
     }
+    public IActionResult ZonadeJuegos(){
+
+        return View();
+    }
 
     public HtmlController(ApplicationDbContext context)
     {
