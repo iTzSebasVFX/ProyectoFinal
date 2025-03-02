@@ -49,8 +49,15 @@
             @**@
             @if (!ViewData.ModelState.IsValid){
                 <div id="alertError" class="alert alert-danger">
-                    <strong>Error:</strong>
-                    @Html.ValidationMessageFor(model => model.correoElectronico, "", new { @class = "text-danger" })
+                    <strong>Error:</strong><br>
+                    @Html.ValidationMessageFor(model => model.nombreCompleto, "", new { @class = "text-danger" }) <br>
+                    @Html.ValidationMessageFor(model => model.apellidoCompleto, "", new { @class = "text-danger" })<br>
+                    @Html.ValidationMessageFor(model => model.correoElectronico, "", new { @class = "text-danger" })<br>
+                    @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })<br>
+                    @*En este caso usamos ValidationMessageFor porque queremos especificar de cual atributo del modelo Registro sacaremos el mensaje de error*@
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @*Por otro lado, aqui utilizamos ValidationSummary para mostrar todos los errores enviados desde el controlador*@
                 </div>
             }
             <br>
@@ -183,8 +190,8 @@
 
     </main>
     <!-- wnd main  -->
- <script src="js/registro.js"></script>
-    <script>
+ <script src="js/registro.js" asp-append-version="true"></script>
+    <script asp-append-version="true">
         setTimeout(() => {
             let alertElement = document.getElementById("alertError");
             if (alertElement) {

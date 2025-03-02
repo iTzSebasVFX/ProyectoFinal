@@ -85,25 +85,29 @@ public class HtmlController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(RegistroModel usuario)
     {
-        var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == usuario.correoElectronico);
-
-        if (UserSearch == null)
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == usuario.correoElectronico);
+
+            if (UserSearch == null)
             {
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 ModelState.AddModelError("correoElectronico", "Usuario registrado correctamente");
                 return RedirectToAction("Index", "Html");
+
             }
 
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                Console.WriteLine(error.ErrorMessage);
-            }
+            ModelState.AddModelError("correoElectronico", "El correo electrónico ya está en uso.");
+            return View(usuario);
         }
 
-        ModelState.AddModelError("correoElectronico", "El correo electrónico ya está en uso.");
+        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+        {
+            Console.WriteLine(error.ErrorMessage);
+        }
+
+        ModelState.AddModelError(string.Empty, "Ingrese datos porfavor");
         return View(usuario);
     }
 
