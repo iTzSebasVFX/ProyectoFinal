@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var usuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,12 +24,12 @@
 
 
             <button class="juegos">
-                 <a class="ZonaJ" asp-action="Index" asp-controller="Html">ZonaJ de Juegos</a>
+                <a class="ZonaJ" asp-action="Index" asp-controller="Html">ZonaJ de Juegos</a>
             </button>
 
 
             <button class="Sesion">
-                <a class="cerrar" asp-action="Index" asp-controller="Html">Cerrar Sesion</a>
+                <a class="cerrar" asp-action="CerrarSesion" asp-controller="Html">Cerrar Sesion</a>
             </button>
 
 
@@ -36,6 +42,12 @@
 
 
         <!-- Título superior -->
+        @if (!string.IsNullOrEmpty(usuario))
+        {
+        <h1>Bienvenido, @usuario</h1>
+        }else{
+        <h1>No hay usuario en sesion</h1>
+        }
         <div class="title">
             Personas con las que podrías interactuar
         </div>
@@ -48,7 +60,7 @@
         </div>
         <div class="image-container" id="imageContainer">
             <img id="displayImage" class="visible" src="https://via.placeholder.com/400/FF0000/FFFFFF?text=Imagen+1"
-                alt="Imagen">
+                 alt="Imagen">
             <div id="feedback" class="feedback"></div>
         </div>
         <div class="buttons">
