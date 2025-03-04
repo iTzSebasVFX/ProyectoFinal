@@ -6,8 +6,6 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
-[SessionValidatorAttribute]
-
 public class HtmlController : Controller
 {
     private readonly ApplicationDbContext _context;
