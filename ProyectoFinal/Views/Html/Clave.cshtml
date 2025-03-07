@@ -1,28 +1,56 @@
+@model ProyectoFinal.Models.RegistroModel
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="~/css/Clave.css" asp-append-version="true">
-    <title>Codigo de seguridad</del></title>
-</head>
-<body>
-    
-<div class="card">
-    
-  <form class="form" method="post" asp-action="InicioSesion">
-    <h3 id="heading">Clave de acceso</h3>
-    <h4> favor Ingresar la Clave de acceso para poder darte la mejor seguridad.</h4>
-    <div class="field">
-      <input placeholder="clave de acceso" class="input-field" type="password">
-    </div>
 
-    <div class="btn">
-      <button class="button2">Generar Clave</button>
-    </div>
-    <button class="button3">Terminosy condiciones</button>
-  </form>
-</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="~/css/Clave.css" asp-append-version="true">
+  <title>Codigo de seguridad</del></title>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <form class="form" method="post" asp-action="Registrar">
+      <h3 id="heading">Clave de acceso</h3>
+      <h4>Con esta clave podrá cambiar la contraseña en caso de ser olvidada, no olvide la clave.</h4>
+      <div class="field">
+        <input placeholder="clave recuperacion" asp-for="clave" class="input-field" type="number" required>
+      </div>
+      <div class="field">
+        <input class="input-field" type="text" asp-for="nombreCompleto" readonly>
+      </div>
+      <div class="field">
+        <input class="input-field" type="text" asp-for="apellidoCompleto" readonly>
+      </div>
+      <div class="field">
+        <input class="input-field" type="text" asp-for="correoElectronico" readonly>
+      </div>
+      <div class="field">
+        <input class="input-field" type="text" asp-for="contrasena" readonly>
+      </div>
+
+      <div class="btn">
+        <button class="button2" type="submit">Registrar Clave</button>
+      </div>
+      <button class="button3">Terminos y condiciones</button>
+    </form>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+      <div id="alertError" class="alert alert-danger">
+        <strong>Error:</strong><br>
+        @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" }) <br>
+        @Html.ValidationMessageFor(model => model.correoElectronico, "", new { @class = "text-danger" }) <br>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+      </div>
+    }
+
+  </div>
 </body>
+
 </html>
