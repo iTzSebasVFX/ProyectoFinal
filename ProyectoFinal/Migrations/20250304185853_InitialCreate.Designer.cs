@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127121706_RevertInitialCreate")]
-    partial class RevertInitialCreate
+    [Migration("20250304185853_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,22 +20,32 @@ namespace ProyectoFinal.Migrations
                 .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ProyectoFinal.Models.RegistroModel", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.UsuariosModel", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("Edad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FotoRuta")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Genero")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("apellidoCompleto")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("clave")
+                        .HasColumnType("int");
 
                     b.Property<string>("contrasena")
                         .HasColumnType("longtext");
 
                     b.Property<string>("correoElectronico")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("fechaNacimiento")
                         .HasColumnType("longtext");
 
                     b.Property<string>("nombreCompleto")

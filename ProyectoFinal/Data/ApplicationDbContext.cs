@@ -8,5 +8,7 @@ public class ApplicationDbContext : DbContext{
         
     }
 
-    public DbSet<RegistroModel> Usuarios { get; set; }
+    public DbSet<UsuariosModel> Usuarios { get; set; }
+
+    
 };

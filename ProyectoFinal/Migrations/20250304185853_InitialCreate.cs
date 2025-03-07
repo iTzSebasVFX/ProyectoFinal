@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace ProyectoFinal.Migrations
 {
     /// <inheritdoc />
-    public partial class baseDatos : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,11 +22,14 @@ namespace ProyectoFinal.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     nombreCompleto = table.Column<string>(type: "longtext", nullable: true),
                     apellidoCompleto = table.Column<string>(type: "longtext", nullable: true),
-                    fechaNacimiento = table.Column<int>(type: "int", nullable: false),
+                    Edad = table.Column<int>(type: "int", nullable: false),
                     numeroTelefono = table.Column<string>(type: "longtext", nullable: true),
                     pais = table.Column<string>(type: "longtext", nullable: true),
                     correoElectronico = table.Column<string>(type: "longtext", nullable: true),
-                    contrasena = table.Column<string>(type: "longtext", nullable: true)
+                    contrasena = table.Column<string>(type: "longtext", nullable: true),
+                    clave = table.Column<int>(type: "int", nullable: false),
+                    Genero = table.Column<string>(type: "longtext", nullable: false),
+                    FotoRuta = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {

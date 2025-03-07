@@ -6,8 +6,6 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
-[SessionValidatorAttribute]
-
 public class HtmlController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -23,13 +21,6 @@ public class HtmlController : Controller
         return View();
     }
 
-    public IActionResult Principal()
-    {
-
-        return View();
-    }
-
-
     public IActionResult Registro()
     {
         return View();
@@ -40,29 +31,19 @@ public class HtmlController : Controller
         return View();
     }
 
-    public IActionResult ZonadeJuegos(){
-
-        return View();
-    }
-
-    public IActionResult CerrarSesion()
-    {
-        HttpContext.Session.Clear();
-        return RedirectToAction("Index", "Html");
-    }
-
     public HtmlController(ApplicationDbContext context)
     {
         _context = context;
     }
 
-    [HttpPost]
+        [HttpPost]
     public async Task<IActionResult> InicioSesion(LoginModel model)
     {
         if (ModelState.IsValid)
         {
             // Buscar el usuario en la base de datos por email
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == model.Email);
+            Console.WriteLine("Hola aqui andamos en verificacion de correo");
 
             // Si el usuario no existe
             if (usuario == null)
@@ -84,15 +65,13 @@ public class HtmlController : Controller
                 else
                 {
                     // Si las credenciales son correctas, agregar un mensaje en la terminal
-                    Console.WriteLine("Bienvenido a la pagina principal" + model.Email);
-
-                    var UserName = usuario.nombreCompleto;
+                    Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
 
                     //Ahora crearemos un session que almacene el nombre del usuario
-                    HttpContext.Session.SetString("NombreUser", UserName);
+                    HttpContext.Session.SetString("NombreUser", usuario.nombreCompleto);
 
                     // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
-                    return RedirectToAction("Principal", "Html");
+                    return RedirectToAction("Principal", "UserPerfil");
                 }
             }
         }
@@ -101,14 +80,26 @@ public class HtmlController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index(RegistroModel usuario)
+    public async Task<IActionResult> Index(RegistroModel nuevoRegistro)
     {
+
         if (ModelState.IsValid)
         {
+
+            var usuario = new UsuariosModel
+            {
+                nombreCompleto = nuevoRegistro.nombreCompleto,
+                apellidoCompleto = nuevoRegistro.apellidoCompleto,
+                correoElectronico = nuevoRegistro.correoElectronico,
+                contrasena = nuevoRegistro.contrasena
+            };
+
             var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == usuario.correoElectronico);
 
             if (UserSearch == null)
             {
+                Console.WriteLine("Opa algo salio mal");
+
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 ModelState.AddModelError("correoElectronico", "Usuario registrado correctamente");
@@ -126,7 +117,7 @@ public class HtmlController : Controller
         }
 
         ModelState.AddModelError(string.Empty, "Ingrese datos porfavor");
-        return View(usuario);
+        return View(nuevoRegistro);
     }
 
 }

@@ -10,8 +10,8 @@ public class SessionValidatorAttribute : ActionFilterAttribute
 
         if (string.IsNullOrEmpty(user))
         {
-            if (context.RouteData.Values["controller"].ToString() != "Html" ||
-                context.RouteData.Values["action"].ToString() != "Index")
+            if (context.RouteData.Values["controller"]?.ToString() != "Html" ||
+                context.RouteData.Values["action"]?.ToString() != "Index")
             {
                 context.Result = new RedirectToActionResult("Index", "Html", null);
             }
