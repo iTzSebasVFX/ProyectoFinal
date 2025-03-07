@@ -11,12 +11,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visor de Imágenes</title>
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/personas.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="menu">
+           
+    <input type="checkbox" id="toggle">
 
             <button class="Chat">
                 <a class="ChatT" asp-action="Index" asp-controller="Html">Chat</a>
@@ -39,6 +42,7 @@
 
 
         </nav>
+        
 
 
         <!-- Título superior -->
@@ -151,6 +155,7 @@
         // Inicializar la imagen
         updateImage();
     </script>
+        <script src="~/js/Tema.js"></script>
 </body>
 
 </html>
