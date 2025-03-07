@@ -1,23 +1,19 @@
 body{
 
   background: linear-gradient(90deg, #442063, #1d3263);
-
+  font-style: italic;
 }
 
 
 .form {
+  font-style: italic;
   display: flex;
   flex-direction: column;
-  /* Alinea los elementos en una columna */
   justify-content: center;
   align-items: center;
   gap: 20px;
-  /* Espaciado entre los elementos */
-  padding: 20px 10px; 
-  background: linear-gradient(90deg, #442063, #1d3263);
+  padding: 20px 10px; /* Esto ya cubre los padding-left y padding-right */
   border-radius: 15px;
-  padding-left: 10px;
-padding-right: 10px;
 
   /* From Uiverse.io by codebykay101 */
   .container {
@@ -217,4 +213,21 @@ transition: color 0.3s;
 .close:focus {
 color: black;        
 text-decoration: none;
+}
+
+#toggle {
+  display: none;
+}
+
+#label_toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.dark {
+  background: #121212;  /* Fondo oscuro */
+  color: #FFFFFF;  /* Texto blanco */
 }

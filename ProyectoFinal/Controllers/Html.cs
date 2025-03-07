@@ -6,6 +6,8 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
+
+
 public class HtmlController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -26,6 +28,12 @@ public class HtmlController : Controller
         return View();
     }
 
+    public IActionResult Clave()
+    {
+
+        return View();
+    }
+
     public IActionResult Juegos()
     {
         return View();
@@ -36,7 +44,8 @@ public class HtmlController : Controller
         _context = context;
     }
 
-        [HttpPost]
+
+    [HttpPost]
     public async Task<IActionResult> InicioSesion(LoginModel model)
     {
         if (ModelState.IsValid)
