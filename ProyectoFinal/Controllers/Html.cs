@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySqlX.XDevAPI;
+using Org.BouncyCastle.Asn1.Mozilla;
 using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
@@ -28,10 +29,10 @@ public class HtmlController : Controller
         return View();
     }
 
-    public IActionResult Clave()
+    public IActionResult Clave(RegistroModel model)
     {
 
-        return View();
+        return View(model);
     }
 
     public IActionResult Juegos()
@@ -89,7 +90,23 @@ public class HtmlController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index(RegistroModel nuevoRegistro)
+    public IActionResult CapturarDatos(RegistroModel model)
+    {
+        Console.WriteLine("Si paso por aqui");
+        if (ModelState.IsValid)
+        {
+            Console.WriteLine("Si eran validos");
+            return View("Clave", model);
+        }
+        else
+        {
+            Console.WriteLine("Tambien por aqui");
+            return RedirectToAction("Index");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Registrar(RegistroModel nuevoRegistro)
     {
 
         if (ModelState.IsValid)
@@ -100,24 +117,33 @@ public class HtmlController : Controller
                 nombreCompleto = nuevoRegistro.nombreCompleto,
                 apellidoCompleto = nuevoRegistro.apellidoCompleto,
                 correoElectronico = nuevoRegistro.correoElectronico,
-                contrasena = nuevoRegistro.contrasena
+                contrasena = nuevoRegistro.contrasena,
+                clave = nuevoRegistro.clave
             };
 
-            var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == usuario.correoElectronico);
-
-            if (UserSearch == null)
+            if (usuario.clave < 100000 || usuario.clave > 999999)
             {
-                Console.WriteLine("Opa algo salio mal");
-
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                ModelState.AddModelError("correoElectronico", "Usuario registrado correctamente");
-                return RedirectToAction("Index", "Html");
-
+                ModelState.AddModelError("clave", "La clave debe tener exactamente 6 dígitos");
+                return View("Clave", nuevoRegistro);
             }
+            else
+            {
+                var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == usuario.correoElectronico);
 
-            ModelState.AddModelError("correoElectronico", "El correo electrónico ya está en uso.");
-            return View(usuario);
+                if (UserSearch == null)
+                {
+                    Console.WriteLine("Opa pasate por aqui");
+
+                    _context.Add(usuario);
+                    await _context.SaveChangesAsync();
+                    ModelState.AddModelError("correoElectronico", "Usuario registrado correctamente");
+                    return RedirectToAction("Index", "Html");
+
+                }
+
+                ModelState.AddModelError("correoElectronico", "El correo electrónico ya está en uso.");
+                return View("Clave", nuevoRegistro);
+            }
         }
 
         foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
@@ -126,7 +152,7 @@ public class HtmlController : Controller
         }
 
         ModelState.AddModelError(string.Empty, "Ingrese datos porfavor");
-        return View(nuevoRegistro);
+        return View("Clave", nuevoRegistro);
     }
 
 }

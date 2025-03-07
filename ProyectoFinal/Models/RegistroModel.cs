@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Mysqlx;
 
 namespace ProyectoFinal.Models
 {
@@ -18,5 +19,7 @@ namespace ProyectoFinal.Models
 
         [Required(ErrorMessage = "Porfavor Ingrese un Contrasena")] 
         public string? contrasena {get; set;} = string.Empty;
+
+        public int clave {get; set;} = 0;
     }
 }
