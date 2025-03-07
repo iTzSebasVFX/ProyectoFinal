@@ -6,7 +6,7 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
-[SessionValidatorAttribute]
+
 
 public class HtmlController : Controller
 {
@@ -35,6 +35,12 @@ public class HtmlController : Controller
         return View();
     }
 
+      public IActionResult Clave()
+    {
+
+        return View();
+    }
+
     public IActionResult Juegos()
     {
         return View();
@@ -55,6 +61,7 @@ public class HtmlController : Controller
     {
         _context = context;
     }
+    
 
     [HttpPost]
     public async Task<IActionResult> InicioSesion(LoginModel model)

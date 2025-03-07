@@ -6,15 +6,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="~/css/login.css" asp-append-version="true">
   <title>Inicio de Sesion</title>
 
 </head>
 
 <body>
+  <label for="toggle" id="label_toggle">
+      <i class="fa-solid fa-palette" style="color: #ffffff;"></i>
+    </label>
+    <input type="checkbox" id="toggle">
+
+
   <form class="form" method="post" asp-action="InicioSesion">
     <h3 id="heading">Inicio de sesión</h3>
-
+    
     <div class="container">
       <div data-text="" style="--r:-15;" class="glass">
         <img class="img"
@@ -67,7 +74,7 @@
   </form>
 
 
-
+<script src="~/js/Tema.js"></script>
 </body>
 
 </html>

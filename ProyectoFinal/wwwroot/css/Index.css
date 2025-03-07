@@ -11,6 +11,7 @@ body {
 
 }
 
+
 .menu {
     width: 100%;
     height: 80px;
@@ -61,7 +62,7 @@ body {
                 width: 230px;
                 height: 0;
                 opacity: 0;
-                /* visibility: hidden;  */
+
                 transition: .12s;
                 position: absolute;
 
@@ -125,7 +126,7 @@ body {
 
 }
 
-#Registro{
+#Registro {
     cursor: pointer;
 }
 
@@ -257,4 +258,24 @@ body {
     /* Ajusta el contenido de la imagen */
     border-radius: 12px;
     /* Mantén las esquinas redondeadas */
+}
+
+/*Tema del index */
+#toggle {
+    display: none;
+}
+
+#label_toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.dark {
+    background: #121212;
+    /* Fondo oscuro */
+    color: #FFFFFF;
+    /* Texto blanco */
 }
