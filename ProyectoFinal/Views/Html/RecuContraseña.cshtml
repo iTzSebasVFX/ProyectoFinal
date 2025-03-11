@@ -1,0 +1,48 @@
+@model ProyectoFinal.Models.RecuContra
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecuperacionContraseña</title>
+</head>
+
+<body>
+    <form asp-action="RecuContrasena" method="post">
+        <label asp-for="Email">Ingrese Correo Electronico</label>
+        <input type="email" asp-for="Email" required>
+
+        <label asp-for="clave">Ingrese su clave</label>        
+        <input type="number" asp-for="clave" required>
+
+        <label asp-for="contrasena">Ingrese la nueva contraseña</label>
+        <input type="password" asp-for="contrasena" required>
+
+        <label asp-for="contrasenaValidator">Repita la contraseña</label>
+        <input type="password" asp-for="contrasenaValidator" required>
+
+        <button type="submit">Buscar Usuario</button>
+    </form>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div id="alertError" class="alert alert-danger">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })<br>
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })<br>
+            @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })<br>
+        </div>
+    }
+</body>
+
+<script asp-append-version="true">
+        setTimeout(() => {
+            let alertElement = document.getElementById("alertError");
+            if (alertElement) {
+                alertElement.style.display = "none";
+            }
+        }, 10000); // Desaparece en 10 segundos
+    </script>
+
+</html>

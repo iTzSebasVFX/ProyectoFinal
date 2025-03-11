@@ -47,6 +47,12 @@
             <br>
             <br>
             <br>
+            @if (ViewData.ModelState.IsValid)
+            {
+                <div id="alertError" class="alert alert-danger">
+                    @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })<br>
+                </div>
+            }
             <br>
             <br>
             <br>
