@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySqlX.XDevAPI;
@@ -21,6 +22,11 @@ public class HtmlController : Controller
     public IActionResult InicioSesion()
     {
 
+        return View();
+    }
+
+    public IActionResult RecuContraseña()
+    {
         return View();
     }
 
@@ -153,6 +159,48 @@ public class HtmlController : Controller
 
         ModelState.AddModelError(string.Empty, "Ingrese datos porfavor");
         return View("Clave", nuevoRegistro);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RecuContrasena(RecuContra model)
+    {
+        Console.WriteLine("Si paso por aqui");
+        if (ModelState.IsValid)
+        {
+
+            Console.WriteLine("Ey estas en validacion de correo");
+            var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == model.Email);
+
+            if (UserSearch != null)
+            {
+                Console.WriteLine("Ya estas en la validacion de la clave");
+                bool ConfirmClave = model.clave == UserSearch.clave;
+
+                if (!ConfirmClave)
+                {
+                    Console.WriteLine("Ey pasaste por el error en la clave");
+                    ModelState.AddModelError("clave", "Error, la clave es incorrecta");
+                    return View(model);
+                }
+                else
+                {
+                    Console.WriteLine("Ey clave confirmada, se debio actualizar correctamente");
+
+                    UserSearch.contrasena = model.contrasena;
+
+                    _context.Usuarios.Update(UserSearch);
+                    await _context.SaveChangesAsync();
+                    ModelState.AddModelError("contrasena", "La contraseña ha sido cambiada exitosamente");
+                    return RedirectToAction("Index", "Html");
+                }
+            }
+            Console.WriteLine("Ey en el error del correo");
+            ModelState.AddModelError("Email", "Error no se encontro al usuario con ese correo electronico");
+            return View(model);
+        }
+
+        ModelState.AddModelError(string.Empty, "Por favor rellene los campo");
+        return View(model);
     }
 
 }

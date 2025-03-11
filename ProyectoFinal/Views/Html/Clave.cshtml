@@ -51,6 +51,15 @@
     }
 
   </div>
+
+  <script asp-append-version="true">
+    setTimeout(() => {
+      let alertElement = document.getElementById("alertError");
+      if (alertElement) {
+        alertElement.style.display = "none";
+      }
+    }, 10000); // Desaparece en 10 segundos
+  </script>
 </body>
 
 </html>
