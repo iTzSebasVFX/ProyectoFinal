@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoFinal.Models
 {
@@ -28,6 +29,9 @@ namespace ProyectoFinal.Models
         public string? Genero { get; set; } = string.Empty;
 
         public string? FotoRuta { get; set; } = string.Empty;
+
+        [NotMapped]
+        public IFormFile? FotoPerfil { get; set; }
 
     }
 }   

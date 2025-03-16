@@ -4,7 +4,7 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
-    var usuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+    var NombreUsuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
 }
 
 <head>
@@ -46,9 +46,9 @@
 
 
         <!-- Título superior -->
-        @if (!string.IsNullOrEmpty(usuario))
+        @if (!string.IsNullOrEmpty(NombreUsuario))
         {
-        <h1>Bienvenido, @usuario</h1>
+        <h1>Bienvenido, @NombreUsuario</h1>
         }else{
         <h1>No hay usuario en sesion</h1>
         }
