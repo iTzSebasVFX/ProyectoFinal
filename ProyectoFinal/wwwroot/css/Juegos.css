@@ -16,17 +16,13 @@ body {
     height: 100vh; 
     font-style: italic;
 }
-.decoracion{
-    text-decoration: none;
-    color:white;
-
-    >a{
+.pepe{
+    .decoracion{
+        text-decoration: none;
         color:white;
-
-
     }
-
 }
+
 .pepe {
     .button {
         font-style: italic;

@@ -25,7 +25,7 @@ public class HtmlController : Controller
         return View();
     }
 
-    public IActionResult RecuContraseña()
+    public IActionResult  RecuContraeña()
     {
         return View();
     }
@@ -45,7 +45,7 @@ public class HtmlController : Controller
     {
         return View();
     }
-
+    
     public HtmlController(ApplicationDbContext context)
     {
         _context = context;

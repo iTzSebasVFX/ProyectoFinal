@@ -6,25 +6,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/Rcont.css" asp-append-version="true">
     <title>RecuperacionContraseña</title>
 </head>
 
 <body>
-    <form asp-action="RecuContrasena" method="post">
-        <label asp-for="Email">Ingrese Correo Electronico</label>
-        <input type="email" asp-for="Email" required>
+    <div class="card">
 
-        <label asp-for="clave">Ingrese su clave</label>        
-        <input type="number" asp-for="clave" required>
+        <form class="form" asp-action="RecuContraseña" method="post">
+            <h3 id="heading">recuperacion de contraseña</h3>
+            <div class="field">
 
-        <label asp-for="contrasena">Ingrese la nueva contraseña</label>
-        <input type="password" asp-for="contrasena" required>
+                <input class="input-field" placeholder="ingrese correo" type="text" asp-for="Email" >
+            </div>
+            <div class="field">
+                <input placeholder="Ingrese su clave" type="number"class="input-field" asp-for="clave" required>
+            </div>
+            <div class="field">
+                <input placeholder="Ingrese la nueva contraseña" type="password" class="input-field" asp-for="contrasena" required>
+            </div>
+            <div class="field">
+                <input placeholder="Repita la contraseña" type="password" class="input-field" asp-for="contrasenaValidator" required>
+            </div>
+        
+            <div class="btn">
+                 <button class="button2" type="submit">Buscar usuario</button>
+            </div>
 
-        <label asp-for="contrasenaValidator">Repita la contraseña</label>
-        <input type="password" asp-for="contrasenaValidator" required>
+        </form>
 
-        <button type="submit">Buscar Usuario</button>
-    </form>
+
+
+    </div>
+
+
 
     @if (!ViewData.ModelState.IsValid)
     {
@@ -37,12 +53,14 @@
 </body>
 
 <script asp-append-version="true">
-        setTimeout(() => {
-            let alertElement = document.getElementById("alertError");
-            if (alertElement) {
-                alertElement.style.display = "none";
-            }
-        }, 10000); // Desaparece en 10 segundos
-    </script>
+    setTimeout(() => {
+        let alertElement = document.getElementById("alertError");
+        if (alertElement) {
+            alertElement.style.display = "none";
+        }
+    }, 10000); // Desaparece en 10 segundos
+</script>
+
+<script src="~/js/Tema.js"></script>
 
 </html>

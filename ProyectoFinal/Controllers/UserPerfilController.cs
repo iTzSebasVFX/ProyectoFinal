@@ -4,7 +4,7 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
-[SessionValidator]
+
 
 public class UserPerfilController : Controller
 {
