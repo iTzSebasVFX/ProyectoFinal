@@ -15,7 +15,7 @@ namespace ProyectoFinal.Models
         public string? contrasena { get; set; }
 
         [Required(ErrorMessage = "Porfavor confirma tu constraseña")]
-        [Compare("contrasenaValidator", ErrorMessage = "Las contraseñas no coinciden")]
+        [Compare("contrasena", ErrorMessage = "Las contraseñas no coinciden")]
         public string? contrasenaValidator { get; set; }
     }
 }

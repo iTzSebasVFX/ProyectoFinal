@@ -1,0 +1,87 @@
+@model ProyectoFinal.Models.UsuariosModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var NombreUsuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+</head>
+
+<body>
+    @if (NombreUsuario != null)
+    {
+        <h1>Perfil de @NombreUsuario</h1>
+    }
+    else
+    {
+        <h1>Perfil de Invitado</h1>
+    }
+
+    @if (Model != null)
+    {
+        <form asp-action="ActualizarPerfil" asp-controller="UserPerfil" method="post" enctype="multipart/form-data">
+
+            @if (!string.IsNullOrEmpty(Model.FotoRuta))
+            {
+                <img src="@Model.FotoRuta" alt="Foto de perfil" width="150" height="150" />
+            }
+            else
+            {
+                <p>No tienes una foto de perfil.</p>
+            }
+
+            <div>
+                <label for="FotoRuta">Foto Perfil</label>
+                <input type="file" id="" asp-for="FotoPerfil">
+            </div>
+            <div>
+                <label asp-for="nombreCompleto">Nombre Usuario</label>
+                <input type="text" id="" asp-for="@Model.nombreCompleto">
+            </div>
+            <div>
+                <label for="apellidoCompleto">Apellido Usuario</label>
+                <input type="text" id="" asp-for="@Model.apellidoCompleto">
+            </div>
+            <div>
+                <label for="Edad">Edad</label>
+                <input type="number" id="" asp-for="@Model.Edad">
+            </div>
+            <div>
+                <label for="numeroTelefono">Numero Telefono</label>
+                <input type="number" id="" asp-for="@Model.numeroTelefono">
+            </div>
+            <div>
+                <label for="pais">Pais Residencia</label>
+                <input type="" id="" asp-for="@Model.pais">
+            </div>
+            <div>
+                <label for="correoElectronico">Correo Electronico</label>
+                <input type="" id="" asp-for="@Model.correoElectronico" readonly>
+            </div>
+            <div>
+                <label for="contrasena">Contraseña</label>
+                <input type="" id="" asp-for="@Model.contrasena" readonly>
+            </div>
+            <div>
+                <label for="Genero">Genero</label>
+                <input type="" id="" asp-for="@Model.Genero">
+            </div>
+            <button type="submit">Guardar</button>
+            <a asp-action="Principal" asp-controller="UserPerfil">Regresar</a>
+        </form>
+
+    }
+    else
+    {
+        <h2>No se encontro informacion del Usuario</h2>
+    }
+</body>
+
+</html>
