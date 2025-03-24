@@ -1,0 +1,21 @@
+@model Dictionary<int, string>
+
+<h1>Grupos de Chat</h1>
+
+<p>
+    Estas en la zona de chat, puedes seleccionar uno de los grupos que se te muestran a continuacion
+    y chatear de manera global, luego agregaremos metodos más didacticos.
+</p>
+
+<div>
+<ul>
+    @foreach(var chat in Model)
+    {
+        <li>
+            <a asp-controller="Chat" asp-action="chat" asp-route-idChat="@chat.Key">@chat.Value</a>
+        </li>
+    }
+</ul>
+
+<a asp-action="Principal" asp-controller="UserPerfil">Volver Principal</a>
+</div>

@@ -1,4 +1,6 @@
-    using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using SignalRChat;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,8 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+ISignalRServerBuilder signalRServerBuilder = builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -47,6 +51,12 @@ app.UseAuthorization();
 app.UseSession();
 
 // app.MapRazorPages();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapHub<ChatHub>("/ChatHub"); // Mapea el Hub de SignalR
+});
 
 app.MapControllerRoute(
     name: "default",
