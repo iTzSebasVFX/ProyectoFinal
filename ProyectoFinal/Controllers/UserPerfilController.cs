@@ -36,6 +36,11 @@ public class UserPerfilController : Controller
         return View();
     }
 
+    public IActionResult ZonaChat()
+    {
+        return RedirectToAction("ListaChats", "Chat");
+    }
+
     public IActionResult ZonadeJuegos()
     {
 
