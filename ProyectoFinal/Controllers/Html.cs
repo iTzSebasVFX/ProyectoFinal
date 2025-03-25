@@ -200,6 +200,7 @@ public class HtmlController : Controller
             ModelState.AddModelError("Email", "Error no se encontro al usuario con ese correo electronico");
             return View("RecuContraseña", model);
         }
+
         Console.WriteLine("Paso por el error.");
         ModelState.AddModelError(string.Empty, "Por favor rellene los campo");
         return View("RecuContraseña", model);

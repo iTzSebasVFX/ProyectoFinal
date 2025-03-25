@@ -66,18 +66,17 @@
                                         {
                                             <p>No tienes una foto de perfil.</p>
                                         }
-
-                                        <div class="imagen">
+                                        @* <div class="imagen">
                                             <img src="@(string.IsNullOrEmpty(Model.FotoRuta) ? "https://preview.redd.it/8k1agmq8wpq51.jpg?width=640&crop=smart&auto=webp&s=fc00ce69600306ccbb1bc3eb63639dd062c38316" : Model.FotoRuta)"
                                                 alt="Foto de perfil" width="150" height="150" />
-                                        </div>
+                                        </div> *@
 
                                         <div class="media-body ml-4">
 
                                             <label class="btn btn-outline-primary">
                                                 Cambia tu foto de Perfil
-                                                <input type="file" asp-for="FotoPerfil" class="account-settings-fileinput">
                                             </label> &nbsp;
+                                            <input type="file" asp-for="@Model.FotoPerfil">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                             <button type="reset" class="btn btn-default1 md-btn-flat">Restablecer
                                                 icono</button>
@@ -92,14 +91,12 @@
                                         <div class="form-group">
 
                                             <label class="form-label" asp-for="nombreCompleto">Nombre</label>
-                                            <input type="text" asp-for="@Model.nombreCompleto" class="form-control mb-1"
-                                                value="">
+                                            <input type="text" asp-for="@Model.nombreCompleto" class="form-control mb-1">
                                         </div>
 
                                         <div class="form-group">
                                             <label class="form-label" for="apellidoCompleto">Apellidos</label>
-                                            <input type="text" class="form-control" asp-for="@Model.apellidoCompleto"
-                                                value="">
+                                            <input type="text" class="form-control" asp-for="@Model.apellidoCompleto">
                                         </div>
 
                                         <div class="form-group">
@@ -109,18 +106,17 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="pais">Pais de residencia</label>
-                                            <input type="text" class="form-control mb-1" value="" asp-for="@Model.pais">
+                                            <input type="text" class="form-control mb-1" asp-for="@Model.pais">
 
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="numeroTelefono">telefono</label>
-                                            <input type="number" class="form-control mb-1" asp-for="@Model.numeroTelefono"
-                                                value="">
+                                            <input type="number" class="form-control mb-1" asp-for="@Model.numeroTelefono">
 
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="Genero">Genero</label>
-                                            <input type="text" class="form-control mb-1" asp-for="@Model.Genero" value="">
+                                            <input type="text" class="form-control mb-1" asp-for="@Model.Genero">
 
                                         </div>
 
@@ -130,12 +126,12 @@
                                     <div class="card-body pb-2">
                                         <div class="form-group">
                                             <label class="form-label" for="contrasena">contraseña Actual</label>
-                                            <input type="password" class="form-control" asp-for="@Model.contrasena"
+                                            <input type="text" class="form-control" asp-for="@Model.contrasena"
                                                 readonly>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="correoElectronico">Correo</label>
-                                            <input type="text" class="form-control mb-1" value="nmaxwell@mail.com"
+                                            <input type="text" class="form-control mb-1"
                                                 asp-for="@Model.correoElectronico" readonly>
 
                                         </div>
@@ -144,7 +140,7 @@
 
 
                                 <div class="text-right mt-3">
-                                    <button type="button" class="btn btn-primary">Guardar</button>&nbsp;
+                                    <button type="submit" class="btn btn-primary" asp-action="ActualizarPerfil" asp-controller="UserPerfil">Guardar</button>&nbsp;
                                     <button type="button" class="btn btn-default">Volver</button>
                                 </div>
                             </div>

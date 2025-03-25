@@ -4,7 +4,7 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
-
+[SessionValidator]
 
 public class UserPerfilController : Controller
 {
@@ -106,6 +106,8 @@ public class UserPerfilController : Controller
                 UserSearch.Edad = datos.Edad;
                 UserSearch.numeroTelefono = datos.numeroTelefono;
                 UserSearch.pais = datos.pais;
+                UserSearch.correoElectronico = datos.correoElectronico;
+                UserSearch.contrasena = datos.contrasena;
                 UserSearch.Genero = datos.Genero;
                 UserSearch.FotoRuta = "/uploads/" + uniqueFileName;
 
