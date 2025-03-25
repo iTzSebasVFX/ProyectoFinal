@@ -46,7 +46,7 @@ public class HtmlController : Controller
     {
         return View();
     }
-
+    
     public HtmlController(ApplicationDbContext context)
     {
         _context = context;

@@ -11,6 +11,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/Perfil.css">
     <title>Perfil</title>
 </head>
 
@@ -26,62 +29,142 @@
 
     @if (Model != null)
     {
+
+
         <form asp-action="ActualizarPerfil" asp-controller="UserPerfil" method="post" enctype="multipart/form-data">
 
-            @if (!string.IsNullOrEmpty(Model.FotoRuta))
-            {
-                <img src="@Model.FotoRuta" alt="Foto de perfil" width="150" height="150" />
-            }
-            else
-            {
-                <p>No tienes una foto de perfil.</p>
-            }
+            <div class="container light-style flex-grow-1 container-p-y">
 
-            <div>
-                <label for="FotoRuta">Foto Perfil</label>
-                <input type="file" id="" asp-for="FotoPerfil">
-            </div>
-            <div>
-                <label asp-for="nombreCompleto">Nombre Usuario</label>
-                <input type="text" id="" asp-for="@Model.nombreCompleto">
-            </div>
-            <div>
-                <label for="apellidoCompleto">Apellido Usuario</label>
-                <input type="text" id="" asp-for="@Model.apellidoCompleto">
-            </div>
-            <div>
-                <label for="Edad">Edad</label>
-                <input type="number" id="" asp-for="@Model.Edad">
-            </div>
-            <div>
-                <label for="numeroTelefono">Numero Telefono</label>
-                <input type="number" id="" asp-for="@Model.numeroTelefono">
-            </div>
-            <div>
-                <label for="pais">Pais Residencia</label>
-                <input type="" id="" asp-for="@Model.pais">
-            </div>
-            <div>
-                <label for="correoElectronico">Correo Electronico</label>
-                <input type="" id="" asp-for="@Model.correoElectronico" readonly>
-            </div>
-            <div>
-                <label for="contrasena">Contraseña</label>
-                <input type="" id="" asp-for="@Model.contrasena" readonly>
-            </div>
-            <div>
-                <label for="Genero">Genero</label>
-                <input type="" id="" asp-for="@Model.Genero">
-            </div>
-            <button type="submit">Guardar</button>
-            <a asp-action="Principal" asp-controller="UserPerfil">Regresar</a>
+                <div class="card overflow-hidden">
+                    <div class="row no-gutters row-bordered row-border-light">
+                        <div class="col-md-3 pt-0">
+                            <div class="list-group list-group-flush account-settings-links">
+
+                                <div class=" pepe">
+                                    <button class="button type1">
+                                        <span class="btn-txt"><i class="fa-solid fa-caret-left fa-beat"></i><a
+                                                class="decoracion" asp-action="Principal"
+                                                asp-controller="UserPerfil">Volver</a></span>
+                                    </button>
+                                </div>
+                                <a class="list-group-item list-group-item-action active" data-toggle="list"
+                                    href="#account-general">General</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list"
+                                    href="#account-change-password">contraseña/Correo</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="tab-content">
+                                <div class="tab-pane fade active show" id="account-general">
+                                    <div class="card-body media align-items-center">
+
+                                        @if (!string.IsNullOrEmpty(Model.FotoRuta))
+                                        {
+                                            <img src="@Model.FotoRuta" alt="Foto de perfil" width="150" height="150" />
+                                        }
+                                        else
+                                        {
+                                            <p>No tienes una foto de perfil.</p>
+                                        }
+
+                                        <div class="imagen">
+                                            <img src="@(string.IsNullOrEmpty(Model.FotoRuta) ? "https://preview.redd.it/8k1agmq8wpq51.jpg?width=640&crop=smart&auto=webp&s=fc00ce69600306ccbb1bc3eb63639dd062c38316" : Model.FotoRuta)"
+                                                alt="Foto de perfil" width="150" height="150" />
+                                        </div>
+
+                                        <div class="media-body ml-4">
+
+                                            <label class="btn btn-outline-primary">
+                                                Cambia tu foto de Perfil
+                                                <input type="file" asp-for="FotoPerfil" class="account-settings-fileinput">
+                                            </label> &nbsp;
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <button type="reset" class="btn btn-default1 md-btn-flat">Restablecer
+                                                icono</button>
+                                            <div class="text-light small mt-1">Agrega JPG, GIF o PNG. Tamaño máximo de
+                                                800K</div>
+                                        </div>
+
+                                    </div>
+                                    <hr class="border-light m-0">
+                                    <div class="card-body">
+
+                                        <div class="form-group">
+
+                                            <label class="form-label" asp-for="nombreCompleto">Nombre</label>
+                                            <input type="text" asp-for="@Model.nombreCompleto" class="form-control mb-1"
+                                                value="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="apellidoCompleto">Apellidos</label>
+                                            <input type="text" class="form-control" asp-for="@Model.apellidoCompleto"
+                                                value="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="Edad">Edad</label>
+                                            <input type="number" class="form-control mb-1" asp-for="@Model.Edad">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="pais">Pais de residencia</label>
+                                            <input type="text" class="form-control mb-1" value="" asp-for="@Model.pais">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="numeroTelefono">telefono</label>
+                                            <input type="number" class="form-control mb-1" asp-for="@Model.numeroTelefono"
+                                                value="">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="Genero">Genero</label>
+                                            <input type="text" class="form-control mb-1" asp-for="@Model.Genero" value="">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="account-change-password">
+                                    <div class="card-body pb-2">
+                                        <div class="form-group">
+                                            <label class="form-label" for="contrasena">contraseña Actual</label>
+                                            <input type="password" class="form-control" asp-for="@Model.contrasena"
+                                                readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="correoElectronico">Correo</label>
+                                            <input type="text" class="form-control mb-1" value="nmaxwell@mail.com"
+                                                asp-for="@Model.correoElectronico" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="text-right mt-3">
+                                    <button type="button" class="btn btn-primary">Guardar</button>&nbsp;
+                                    <button type="button" class="btn btn-default">Volver</button>
+                                </div>
+                            </div>
+
         </form>
-
     }
     else
     {
         <h2>No se encontro informacion del Usuario</h2>
     }
+
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+    <script src="~/js/Tema.js"></script>
+
 </body>
 
 </html>

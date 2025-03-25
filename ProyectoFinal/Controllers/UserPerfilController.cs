@@ -4,7 +4,7 @@ using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
 
-[SessionValidator]
+
 
 public class UserPerfilController : Controller
 {
@@ -23,16 +23,16 @@ public class UserPerfilController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Perfil()
+  public async Task<IActionResult> Perfil()
     {
-        var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
+      var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
 
         var SearchUser = await _context.Usuarios.FirstOrDefaultAsync(model => model.correoElectronico == CorreoUsuario);
 
         if (SearchUser != null)
         {
             return View(SearchUser);
-        }
+        } 
         return View();
     }
 

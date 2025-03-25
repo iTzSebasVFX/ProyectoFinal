@@ -6,11 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/Rcont.css" asp-append-version="true">
     <title>RecuperacionContraseña</title>
 </head>
 
 <body>
-    <form asp-action="RecuContrasena" asp-controller="Html" method="post">
+    <form asp-action="RecuContrasena" method="post">
         <label asp-for="Email">Ingrese Correo Electronico</label>
         <input type="email" asp-for="Email" required>
 
@@ -26,6 +28,12 @@
         <button type="submit">Buscar Usuario</button>
     </form>
 
+
+
+    </div>
+
+
+
     @if (!ViewData.ModelState.IsValid)
     {
         <div id="alertError" class="alert alert-danger">
@@ -37,12 +45,14 @@
 </body>
 
 <script asp-append-version="true">
-        setTimeout(() => {
-            let alertElement = document.getElementById("alertError");
-            if (alertElement) {
-                alertElement.style.display = "none";
-            }
-        }, 10000); // Desaparece en 10 segundos
-    </script>
+    setTimeout(() => {
+        let alertElement = document.getElementById("alertError");
+        if (alertElement) {
+            alertElement.style.display = "none";
+        }
+    }, 10000); // Desaparece en 10 segundos
+</script>
+
+<script src="~/js/Tema.js"></script>
 
 </html>

@@ -155,7 +155,7 @@ h4 {
   gap: 10px;
   margin-left: 130px;
   /* Mueve el campo 20px hacia la derecha */
-  margin-top: 100px;
+  margin-top: 200px;
 }
 
 .input-icon {
@@ -177,4 +177,55 @@ h4 {
   justify-content: center;
   flex-direction: row;
   margin-top: 2.5em;
+}
+
+.DatosUsu {
+
+  position: relative;
+  margin-left: 800px;
+  top: -489px;
+  /* Mueve el contenedor hacia arriba */
+  margin-right: auto;
+
+}
+
+.Child {
+  width: 100%;
+  /* Asegura que los campos se ajusten */
+  max-width: 300px;
+  /* Define un ancho máximo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  border-radius: 25px;
+  padding: 0.6em;
+  background-color: #171717;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 130px;
+  /* Mueve el campo 20px hacia la derecha */
+  margin-top: 50px;
+
+}
+
+#toggle {
+  display: none;
+}
+
+#label_toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.dark {
+  background: #121212;
+  /* Fondo oscuro */
+  color: #FFFFFF;
+  /* Texto blanco */
 }

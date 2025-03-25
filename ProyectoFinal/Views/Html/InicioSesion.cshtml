@@ -58,7 +58,11 @@
         </path>
       </svg>
       <input asp-for="Password" placeholder="Contraseña" class="input-field" type="password">
+      
     </div>
+    <H4><a asp-action="RecuContraseña" asp-controller="Html">olvide mi contraseña</a></H4>
+
+    
 
     @if (!ViewData.ModelState.IsValid)
     {
@@ -70,7 +74,8 @@
     <div class="btn">
       <button class="button2">Ingresar</button>
     </div>
-    <button class="button3" asp-action="RecuContraseña" asp-controller="Html">Olvidé mi contraseña</button>
+     <button class="button3" asp-action="RecuContraeña" asp-controller="Html">Olvidé mi contraseña</button>
+   
   </form>
 
 

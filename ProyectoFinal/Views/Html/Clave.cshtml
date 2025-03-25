@@ -21,19 +21,6 @@
       <div class="field">
         <input placeholder="clave recuperacion" asp-for="clave" class="input-field" type="number" required>
       </div>
-      <div class="field">
-        <input class="input-field" type="text" asp-for="nombreCompleto" readonly>
-      </div>
-      <div class="field">
-        <input class="input-field" type="text" asp-for="apellidoCompleto" readonly>
-      </div>
-      <div class="field">
-        <input class="input-field" type="text" asp-for="correoElectronico" readonly>
-      </div>
-      <div class="field">
-        <input class="input-field" type="text" asp-for="contrasena" readonly>
-      </div>
-
       <div class="btn">
         <button class="button2" type="submit">Registrar Clave</button>
       </div>
@@ -51,6 +38,20 @@
     }
 
   </div>
+  <div class="DatosUsu"> 
+      <div class="Child">
+        <input class="input-field" type="text" asp-for="nombreCompleto" readonly>
+      </div>
+      <div class="Child">
+        <input class="input-field" type="text" asp-for="apellidoCompleto" readonly>
+      </div>
+      <div class="Child">
+        <input class="input-field" type="text" asp-for="correoElectronico" readonly>
+      </div>
+      <div class="Child">
+        <input class="input-field" type="text" asp-for="contrasena" readonly>
+      </div>
+    </div>
 
   <script asp-append-version="true">
     setTimeout(() => {
@@ -60,6 +61,7 @@
       }
     }, 10000); // Desaparece en 10 segundos
   </script>
+  <script src="~/js/Tema.js"></script>
 </body>
 
 </html>
