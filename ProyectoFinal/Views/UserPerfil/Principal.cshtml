@@ -4,7 +4,7 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
-    var usuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+    var NombreUsuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
 }
 
 <head>
@@ -27,7 +27,7 @@
 
 
             <button class="juegos">
-                <a class="ZonaJ" asp-action="Index" asp-controller="Html">Zona de Juegos</a>
+                <a class="ZonaJ" asp-action="Juegos" asp-controller="Html">Zona de Juegos</a>
             </button>
 
 
@@ -37,7 +37,6 @@
 
 
             <button class="perfil">
-                <img src="/imgs/cintia.webp" alt="Description of the image">
                 <a class="perfilsec" asp-action="Perfil" asp-controller="UserPerfil">Perfil</a>
             </button>
 
@@ -47,9 +46,9 @@
 
 
         <!-- Título superior -->
-        @if (!string.IsNullOrEmpty(usuario))
+        @if (!string.IsNullOrEmpty(NombreUsuario))
         {
-        <h1>Bienvenido, @usuario</h1>
+        <h1>Bienvenido, @NombreUsuario</h1>
         }else{
         <h1>No hay usuario en sesion</h1>
         }

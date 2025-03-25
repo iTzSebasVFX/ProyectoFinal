@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MySqlX.XDevAPI;
 using Org.BouncyCastle.Asn1.Mozilla;
 using ProyectoFinal.Models;
@@ -25,7 +26,7 @@ public class HtmlController : Controller
         return View();
     }
 
-    public IActionResult  RecuContraeña()
+    public IActionResult RecuContraseña()
     {
         return View();
     }
@@ -85,6 +86,7 @@ public class HtmlController : Controller
 
                     //Ahora crearemos un session que almacene el nombre del usuario
                     HttpContext.Session.SetString("NombreUser", usuario.nombreCompleto);
+                    HttpContext.Session.SetString("CorreoUsuario", usuario.correoElectronico);
 
                     // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
                     return RedirectToAction("Principal", "UserPerfil");
@@ -180,7 +182,7 @@ public class HtmlController : Controller
                 {
                     Console.WriteLine("Ey pasaste por el error en la clave");
                     ModelState.AddModelError("clave", "Error, la clave es incorrecta");
-                    return View(model);
+                    return View("RecuContraseña", model);
                 }
                 else
                 {
@@ -196,11 +198,11 @@ public class HtmlController : Controller
             }
             Console.WriteLine("Ey en el error del correo");
             ModelState.AddModelError("Email", "Error no se encontro al usuario con ese correo electronico");
-            return View(model);
+            return View("RecuContraseña", model);
         }
-
+        Console.WriteLine("Paso por el error.");
         ModelState.AddModelError(string.Empty, "Por favor rellene los campo");
-        return View(model);
+        return View("RecuContraseña", model);
     }
 
 }

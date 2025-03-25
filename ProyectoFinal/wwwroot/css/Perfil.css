@@ -1,0 +1,337 @@
+body {
+    background: linear-gradient(90deg, #442063, #1d3263);
+    margin-top: 20px;
+    font-style: italic;
+}
+
+h1 {
+    color: #fff;
+}
+.pepe{
+    .decoracion{
+        text-decoration: none;
+        color:white;
+    }
+}
+
+.pepe {
+    .button {
+        font-style: italic;
+        text-decoration: none;
+        margin-left: -11px;
+        margin-top: -100px;
+        top: -44px;
+        height: 50px;
+        width: 200px;
+        font-size: 20px;
+        position: relative;
+        background-color: transparent;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+        border: none;
+    }
+
+    .btn-txt {
+        z-index: 1;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .type1::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: all 0.5s ease-in-out;
+        background-color: #ffffff;
+        z-index: -1;
+    }
+
+    .button:hover {
+        color: #fff;
+        border: 2px solid #fff;
+        /* Borde visible al pasar el cursor */
+    }
+
+    .type1:hover::after {
+        visibility: visible;
+        color: #ffffff;
+        transform: scale(100) translateX(2px);
+    }
+
+
+}
+.list-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: .25rem;
+    position: relative; /* Añadido para que 'top' funcione */
+    top: 60px; /* Ajusta según sea necesario */
+}
+
+.imagen {
+    
+    img {
+        width: 200px;
+
+        height: 200px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+
+    }
+
+
+}
+
+.ui-w-80 {
+    width: 80px !important;
+    height: auto;
+}
+
+.btn-outline-primary {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
+}
+
+.btn-outline-primary:hover {
+    border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
+
+}
+
+.btn-default1 {
+
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
+    position: relative;  /* Para poder usar 'top' */
+    top: -112px;  /* Posición inicial */
+
+}s
+
+.btn-default1:hover {
+    border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
+
+}
+.btn-default {
+
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
+   
+}
+
+.btn-default:hover {
+    border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
+
+}
+.btn-primary {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
+}
+
+.btn-primary:hover {
+    border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
+
+}
+
+
+label.btn {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
+    margin-left: 265px;
+    position: relative;  /* Para poder usar 'top' */
+    top: -112px;  /* Posición inicial */
+    
+}
+
+
+
+
+
+.btn-outline-primary {
+    border-color: #26B4FF;
+    background: transparent;
+    color: #26B4FF;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.text-light {
+    color: #ffffff !important;
+}
+
+
+
+.card {
+    background-clip: padding-box;
+    box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
+}
+
+.row-bordered {
+    overflow: hidden;
+}
+
+.account-settings-fileinput {
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.account-settings-links .list-group-item.active {
+    font-weight: bold !important;
+}
+
+html:not(.dark-style) .account-settings-links .list-group-item.active {
+    background: transparent !important;
+}
+
+.account-settings-multiselect~.select2-container {
+    width: 100% !important;
+}
+
+.light-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+    color: #f6f2f2;
+
+}
+
+.light-style .account-settings-links .list-group-item.active {
+    color: #ffff !important;
+
+}
+
+.material-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+    color: #ffffff;
+
+}
+
+.material-style .account-settings-links .list-group-item.active {
+    color: #000000 !important;
+
+}
+
+.dark-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(255, 255, 255, 0.03) !important;
+
+}
+
+.dark-style .account-settings-links .list-group-item.active {
+    color: #ffffff !important;
+}
+
+
+.card {
+    background: linear-gradient(90deg, #442063, #1d3263);
+    box-shadow: 0 8px 12px rgba(251, 251, 251, 0.1);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.card-body {
+    color: #fafafa;
+}
+
+.col-md-3 pt-0 {
+
+    color: #ffffff;
+
+}
+
+.list-group-item {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #0000002b;
+    color: white;
+}
+
+
+
+.list-group-item:hover {
+    border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
+}
+#toggle {
+    display: none;
+  }
+  
+  #label_toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2em;
+    cursor: pointer;
+  }
+  
+  .dark {
+    background: #121212;  /* Fondo oscuro */
+    color: #FFFFFF;  /* Texto blanco */
+  }
+
+  .dark .container{
+    background: #121212; /* Fondo más oscuro para el formulario en modo oscuro */
+  }
