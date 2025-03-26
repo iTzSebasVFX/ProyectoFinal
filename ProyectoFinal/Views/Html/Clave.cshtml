@@ -25,20 +25,7 @@
         <button class="button2" type="submit">Registrar Clave</button>
       </div>
       <button class="button3">Terminos y condiciones</button>
-    </form>
-
-    @if (!ViewData.ModelState.IsValid)
-    {
-      <div id="alertError" class="alert alert-danger">
-        <strong>Error:</strong><br>
-        @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" }) <br>
-        @Html.ValidationMessageFor(model => model.correoElectronico, "", new { @class = "text-danger" }) <br>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-      </div>
-    }
-
-  </div>
-  <div class="DatosUsu"> 
+       <div class="DatosUsu"> 
       <div class="Child">
         <input class="input-field" type="text" asp-for="nombreCompleto" readonly>
       </div>
@@ -52,6 +39,20 @@
         <input class="input-field" type="text" asp-for="contrasena" readonly>
       </div>
     </div>
+    </form>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+      <div id="alertError" class="alert alert-danger">
+        <strong>Error:</strong><br>
+        @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" }) <br>
+        @Html.ValidationMessageFor(model => model.correoElectronico, "", new { @class = "text-danger" }) <br>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+      </div>
+    }
+
+  </div>
+ 
 
   <script asp-append-version="true">
     setTimeout(() => {

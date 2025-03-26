@@ -14,6 +14,36 @@ h1 {
     }
 }
 
+.imagen{
+    border-radius: 50%;
+
+}
+.custom-file-label {
+    margin-left: 300px;
+    position: relative;
+    top: -40x; 
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
+    cursor: pointer;
+}
+.custom-file-label:hover{
+    border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
+} 
+
+.custom-file-input {
+    display: none;
+}
+
 .pepe {
     .button {
         font-style: italic;
@@ -334,4 +364,10 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
   .dark .container{
     background: #121212; /* Fondo más oscuro para el formulario en modo oscuro */
+  }
+
+  .dark .card {
+    background: #121212;
+    /* Fondo más oscuro para el formulario en modo oscuro */
+    /* Cambiar el borde a un color más oscuro */
   }

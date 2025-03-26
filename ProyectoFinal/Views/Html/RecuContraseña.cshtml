@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    
     <form asp-action="RecuContrasena" asp-controller="Html" method="post">
         <label asp-for="Email">Ingrese Correo Electronico</label>
         <input type="email" asp-for="Email" required>
@@ -25,7 +26,7 @@
         <label asp-for="contrasenaValidator">Repita la contraseña</label>
         <input type="password" asp-for="contrasenaValidator" required>
 
-        <button type="submit">Buscar Usuario</button>
+        <button class="button2"  type="submit">Buscar Usuario</button>
     </form>
 
 
@@ -42,6 +43,8 @@
             @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })<br>
         </div>
     }
+
+ 
 </body>
 
 <script asp-append-version="true">
