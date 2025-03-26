@@ -6,22 +6,22 @@ body {
 
 
 .form {
-  font-style: italic;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  background: linear-gradient(90deg, #442063, #1d3263);
-  opacity: 100%;
-  padding: 0px;
-  border-radius: 38px;
-  max-width: 400px;
-  margin-right: -17px;
-  margin-top: 100px;
-  margin-left: 574px;
-  border-radius: 5px;
-  border: 1px solid #070707;
+  
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    opacity: 100%;
+    padding: 0px;
+    border-radius: 38px;
+    max-width: 400px;
+    margin-right: -17px;
+    margin-top: 48px;
+    margin-left: 436px;
+    border-radius: 5px;
+
 
 
   .container {
@@ -81,14 +81,6 @@ body {
     font-size: 2.5em;
   }
 
-  .img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Ajusta el contenido de la imagen */
-    border-radius: 12px;
-    /* Mantén las esquinas redondeadas */
-  }
 }
 
 .form h3 {
@@ -247,6 +239,46 @@ body {
 .dark .form {
   background: #121212;
   /* Fondo más oscuro para el formulario en modo oscuro */
-  border: 1px solid #000000;
   /* Cambiar el borde a un color más oscuro */
+}
+/* From Uiverse.io by andrew-demchenk0 */ 
+.error {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  width: 320px;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background: #EF665B;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px -3px #111;
+}
+
+.error__icon {
+  width: 20px;
+  height: 20px;
+  transform: translateY(-2px);
+  margin-right: 8px;
+}
+
+.error__icon path {
+  fill: #fff;
+}
+
+.error__title {
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+}
+
+.error__close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.error__close path {
+  fill: #fff;
 }

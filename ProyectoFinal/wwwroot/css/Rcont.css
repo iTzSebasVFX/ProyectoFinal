@@ -19,10 +19,8 @@ body {
       align-items: center;
       gap: 20px;
       padding: 20px 10px;
-      /* Esto ya cubre los padding-left y padding-right */
       border-radius: 15px;
-  
-      /* From Uiverse.io by codebykay101 */
+
       .container {
         display: flex;
         justify-content: center;
@@ -42,7 +40,7 @@ body {
         font-style: italic;
         transition: .12s;
         cursor: default;
-        /* Espaciado entre el título y el contenedor */
+       
       }
     }
   }
@@ -66,7 +64,6 @@ body {
   
   .card::after {
     content: '';
-    background-color: #181818;
     position: absolute;
     z-index: 1;
     transition: 0.3s ease;

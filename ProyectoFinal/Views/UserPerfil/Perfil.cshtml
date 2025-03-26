@@ -60,7 +60,7 @@
 
                                         @if (!string.IsNullOrEmpty(Model.FotoRuta))
                                         {
-                                            <img src="@Model.FotoRuta" alt="Foto de perfil" width="150" height="150" />
+                                            <img class="imagen" src="@Model.FotoRuta" alt="Foto de perfil" width="150" height="150" />
                                         }
                                         else
                                         {
@@ -70,19 +70,13 @@
                                             <img src="@(string.IsNullOrEmpty(Model.FotoRuta) ? "https://preview.redd.it/8k1agmq8wpq51.jpg?width=640&crop=smart&auto=webp&s=fc00ce69600306ccbb1bc3eb63639dd062c38316" : Model.FotoRuta)"
                                                 alt="Foto de perfil" width="150" height="150" />
                                         </div> *@
+<div class="media-body ml-4">
+    <label for="fotoPerfil" class="custom-file-label">Sube tu foto de perfil</label>
+    <input type="file" id="fotoPerfil" asp-for="@Model.FotoPerfil" class="custom-file-input">
+    <div class="text-muted small mt-1">Formatos permitidos: JPG, GIF o PNG. Tamaño máximo: 800 KB</div>
+</div>
 
-                                        <div class="media-body ml-4">
 
-                                            <label class="btn btn-outline-primary">
-                                                Cambia tu foto de Perfil
-                                            </label> &nbsp;
-                                            <input type="file" asp-for="@Model.FotoPerfil">
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
-                                            <button type="reset" class="btn btn-default1 md-btn-flat">Restablecer
-                                                icono</button>
-                                            <div class="text-light small mt-1">Agrega JPG, GIF o PNG. Tamaño máximo de
-                                                800K</div>
-                                        </div>
 
                                     </div>
                                     <hr class="border-light m-0">
@@ -127,10 +121,10 @@
                                         <div class="form-group">
                                             <label class="form-label" for="contrasena">contraseña Actual</label>
                                             <input type="text" class="form-control" asp-for="@Model.contrasena"
-                                                readonly>
+                                                >
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="correoElectronico">Correo</label>
+                                            <label class="form-label" for="correoElectronico">Correo</label>s
                                             <input type="text" class="form-control mb-1"
                                                 asp-for="@Model.correoElectronico" readonly>
 
@@ -140,8 +134,8 @@
 
 
                                 <div class="text-right mt-3">
-                                    <button type="submit" class="btn btn-primary" asp-action="ActualizarPerfil" asp-controller="UserPerfil">Guardar</button>&nbsp;
-                                    <button type="button" class="btn btn-default">Volver</button>
+                                    <button type="submit" class="btn btn-primary" asp-action="ActualizarPerfil" asp-controller="UserPerfil">Guardarrr</button>&nbsp;
+
                                 </div>
                             </div>
 

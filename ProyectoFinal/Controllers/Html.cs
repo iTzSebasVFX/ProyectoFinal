@@ -100,17 +100,25 @@ public class HtmlController : Controller
     [HttpPost]
     public IActionResult CapturarDatos(RegistroModel model)
     {
-        Console.WriteLine("Si paso por aqui");
-        if (ModelState.IsValid)
-        {
-            Console.WriteLine("Si eran validos");
-            return View("Clave", model);
-        }
-        else
-        {
-            Console.WriteLine("Tambien por aqui");
-            return RedirectToAction("Index");
-        }
+
+        
+         Console.WriteLine("Si paso por aqui");
+
+    if (ModelState.IsValid)
+    {
+        Console.WriteLine("Si eran validos");
+        return View("Clave", model);
+    }
+    else
+    {
+        Console.WriteLine("Tambien por aqui");
+        
+        // Agregar mensaje de error para mostrar en la vista
+        ViewData["ErrorMessage"] = "Error en el registro. Verifica los datos.";
+
+        // Enviar de vuelta a la vista de registro con el mensaje de error
+        return View("Registro", model);
+    }
     }
 
     [HttpPost]
