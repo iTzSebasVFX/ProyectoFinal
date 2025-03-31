@@ -16,12 +16,13 @@ h1 {
 
 .imagen{
     border-radius: 50%;
+    margin-top: 12px;
 
 }
 .custom-file-label {
     margin-left: 300px;
-    position: relative;
-    top: -40x; 
+    margin-top: -87px;
+    position: absolute;
     margin-bottom: 3em;
     padding: 0.5em;
     border-radius: 5px;

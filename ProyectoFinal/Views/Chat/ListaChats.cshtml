@@ -1,21 +1,29 @@
 @model Dictionary<int, string>
+<link rel="stylesheet" href="~/css/Lista_chat.css" asp-append-version="true">
+ <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
 
-<h1>Grupos de Chat</h1>
+<nav class="menu">
+     <div class=" pepe">
+        <button class="button type1">
+            <span class="btn-txt"><i class="fa-solid fa-caret-left fa-beat"></i><a class="decoracion"
+                    asp-action="Principal" asp-controller="UserPerfil">Volver</a></span>
+        </button>
 
-<p>
-    Estas en la zona de chat, puedes seleccionar uno de los grupos que se te muestran a continuacion
-    y chatear de manera global, luego agregaremos metodos más didacticos.
-</p>
-
+    </div>
+    <h3>Elite Chats</h3>
+</nav>
 <div>
-<ul>
-    @foreach(var chat in Model)
-    {
-        <li>
-            <a asp-controller="Chat" asp-action="chat" asp-route-idChat="@chat.Key">@chat.Value</a>
-        </li>
-    }
-</ul>
+    <ul>
+        @foreach (var chat in Model)
+        { 
+            <li class="ppe">
+                <a asp-controller="Chat" asp-action="chat" asp-route-idChat="@chat.Key">@chat.Value</a>
+            </li>
+        }
 
-<a asp-action="Principal" asp-controller="UserPerfil">Volver Principal</a>
+    </ul>
+
+
+
+
 </div>

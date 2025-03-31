@@ -219,21 +219,6 @@ body {
   border-radius: 10px;
 }
 
-.close {
-  position: absolute;
-  top: 26px;
-  left: 1051px;
-  color: aliceblue;
-  font-size: 31px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-}
 
 #toggle {
   display: none;
