@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ProyectoFinal.Models
 {
     public class AdminModel
