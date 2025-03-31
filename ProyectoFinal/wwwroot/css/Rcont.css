@@ -45,9 +45,12 @@ body {
     }
   }
   
-  h4 {
-    margin-top: 60px;
-    font-size: 18px;
+  h3{
+    color: #FFFFFF;
+    text-align: center;
+    position: relative;
+    top: 30px;
+    
   }
   
   .card {
@@ -55,27 +58,15 @@ body {
     margin-left: 360px;
     width: 550px;
     height: 600px;
-    background: rgb(255, 0, 179);
-    background: linear-gradient(137deg, rgb(255, 0, 179) 0%, rgba(0, 212, 255, 1) 100%);
+    background: linear-gradient(90deg, #442063, #1d3263);
     transition: 0.3s ease;
     border-radius: 30px;
-    filter: drop-shadow(0px 0px 30px rgba(209, 38, 197, 0.5));
+    filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.068));
   }
   
-  .card::after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    transition: 0.3s ease;
-    height: 98%;
-    width: 98%;
-    top: 1%;
-    left: 1%;
-    border-radius: 28px;
-  }
   
   .card:hover {
-    filter: drop-shadow(0px 0px 30px rgba(209, 38, 197, 1));
+    filter: drop-shadow(0px 0px 30px rgb(0, 0, 0));
   }
   
   .button2 {
@@ -123,17 +114,16 @@ body {
   }
   
   .button2 {
+    text-align: center;
+    position: relative;
+    top: 30px;
     margin-top: 10px;
     padding: 10px 20px;
     border-radius: 10px;
+    margin-left: 200px;
   
   }
   
-  .button3 {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border-radius: 10px;
-  }
   
   .field {
     width: 50%;
@@ -177,21 +167,16 @@ body {
     margin-top: 2.5em;
   }
 
-  #toggle {
-    display: none;
-  }
-  
-  #label_toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 2em;
-    cursor: pointer;
-  }
+ 
   
   .dark {
     background: #121212;
     /* Fondo oscuro */
     color: #FFFFFF;
     /* Texto blanco */
+  }
+  
+  .dark .card {
+    background: #121212;
+
   }

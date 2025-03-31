@@ -12,27 +12,35 @@
 </head>
 
 <body>
-    
-    <form asp-action="RecuContrasena" asp-controller="Html" method="post">
-        <label asp-for="Email">Ingrese Correo Electronico</label>
-        <input type="email" asp-for="Email" required>
 
-        <label asp-for="clave">Ingrese su clave</label>        
-        <input type="number" asp-for="clave" required>
+    <div class="card">
 
-        <label asp-for="contrasena">Ingrese la nueva contraseña</label>
-        <input type="password" asp-for="contrasena" required>
+        <h3 id="heading">Recuperar Contraseña </h3>
+        <form asp-action="RecuContrasena" asp-controller="Html" method="post">
 
-        <label asp-for="contrasenaValidator">Repita la contraseña</label>
-        <input type="password" asp-for="contrasenaValidator" required>
+            <div class="field">
+                <input type="email" placeholder="Ingrese Correo Electronico" asp-for="Email" class="input-field"
+                    required>
+            </div>
 
-        <button class="button2"  type="submit">Buscar Usuario</button>
-    </form>
+            <div class="field">
+                <input type="number" placeholder="Ingrese su clave" asp-for="clave" class="input-field" required>
+            </div>
 
+            <div class="field">
+                <input type="password" placeholder="Ingrese la nueva contraseña" asp-for="contrasena"
+                    class="input-field" required>
+            </div>
 
+            <div class="field">
+                <input type="password" placeholder="Repita la contraseña" asp-for="contrasenaValidator"
+                    class="input-field" required>
+            </div>
+
+            <button class="button2" type="submit">Buscar Usuario</button>
+        </form>
 
     </div>
-
 
 
     @if (!ViewData.ModelState.IsValid)
@@ -44,7 +52,7 @@
         </div>
     }
 
- 
+
 </body>
 
 <script asp-append-version="true">

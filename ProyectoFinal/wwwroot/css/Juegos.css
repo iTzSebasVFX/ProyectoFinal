@@ -260,6 +260,22 @@ body {
     font-size: 2em;
     cursor: pointer;
   }
+  */
+  .adminRe {
+    display: inline-block; 
+    width: auto; 
+    height: auto;
+    text-decoration: none; 
+}
+  
+  #admin_label{
+    position: absolute;
+    top: 10px;
+    right: 57px;
+    margin-left: 600px;
+    font-size: 2em;
+    cursor: pointer;
+  }
   
   .dark {
     background: #121212;  /* Fondo oscuro */

@@ -4,21 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="/css/Juegos.css">
+    <link rel="stylesheet" href="/css/Juegos.css">
     <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
-      <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
     <title>zona de juegos</title>
 </head>
 
 <body>
-     <label for="toggle" id="label_toggle">
-      <i class="fa-solid fa-palette" style="color: #ffffff;"></i>
+    <label for="toggle" id="label_toggle">
+        <i class="fa-solid fa-palette" style="color: #ffffff;"></i>
     </label>
     <input type="checkbox" id="toggle">
+    
+    <!-- redireccion hacia admin-->
+    <label class="admin" for="admin" id="admin_label">
+        <a class="adminRe" asp-action="Principal" asp-controller="UserPerfil">
+            <i class="fa-solid fa-pen-to-square" style="color: #fbfaff;"></i>
+        </a>
+    </label>
+
+
+
 
     <div class=" pepe">
         <button class="button type1">
-            <span class="btn-txt"><i class="fa-solid fa-caret-left fa-beat"></i><a class="decoracion" asp-action="Principal" asp-controller="UserPerfil">Volver</a></span>
+            <span class="btn-txt"><i class="fa-solid fa-caret-left fa-beat"></i><a class="decoracion"
+                    asp-action="Principal" asp-controller="UserPerfil">Volver</a></span>
         </button>
 
     </div>
