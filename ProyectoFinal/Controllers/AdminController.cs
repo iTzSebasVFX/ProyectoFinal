@@ -9,6 +9,7 @@ using ZstdSharp.Unsafe;
 
 namespace ProyectoFinal.Controllers
 {
+    [SVAdmin]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;

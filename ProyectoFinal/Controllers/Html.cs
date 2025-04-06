@@ -26,6 +26,11 @@ public class HtmlController : Controller
         return View();
     }
 
+    public IActionResult iniciarAdmin()
+    {
+        return View();
+    }
+
     public IActionResult RecuContraseña()
     {
         return View();
@@ -46,7 +51,7 @@ public class HtmlController : Controller
     {
         return View();
     }
-    
+
     public HtmlController(ApplicationDbContext context)
     {
         _context = context;
@@ -98,27 +103,56 @@ public class HtmlController : Controller
     }
 
     [HttpPost]
+    public IActionResult iniciarAdmin(LoginAdModel model)
+    {
+        Console.WriteLine(model.Email);
+        if (ModelState.IsValid)
+        {
+            var BuscarAd = _context.AdminUsers.FirstOrDefault(a => a.Email == model.Email);
+
+            if (BuscarAd != null)
+            {
+                bool contraEncrip = BCrypt.Net.BCrypt.Verify(model.Contraseña, BuscarAd.Contraseña);
+                Console.WriteLine(contraEncrip);
+                if (contraEncrip)
+                {
+                    Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
+                    HttpContext.Session.SetString("CorreoAdmin", model.Email);
+                    TempData["Valido"] = "Bienvenido Admin:" + model.Email;
+                    return RedirectToAction("principalAdmin", "Admin");
+                }
+                TempData["Error"] = "Contraseña incorrecta, intente de nuevo";
+                return RedirectToAction("iniciarAdmin");
+            }
+            TempData["Error"] = "Admin " + model.Email + " no encontrado";
+            return RedirectToAction("iniciarAdmin");
+        }
+        TempData["Error"] = "Porfavor ingresar datos validos";
+        return RedirectToAction("iniciarAdmin");
+    }
+
+    [HttpPost]
     public IActionResult CapturarDatos(RegistroModel model)
     {
 
-        
-         Console.WriteLine("Si paso por aqui");
 
-    if (ModelState.IsValid)
-    {
-        Console.WriteLine("Si eran validos");
-        return View("Clave", model);
-    }
-    else
-    {
-        Console.WriteLine("Tambien por aqui");
-        
-        // Agregar mensaje de error para mostrar en la vista
-        ViewData["ErrorMessage"] = "Error en el registro. Verifica los datos.";
+        Console.WriteLine("Si paso por aqui");
 
-        // Enviar de vuelta a la vista de registro con el mensaje de error
-        return View("Registro", model);
-    }
+        if (ModelState.IsValid)
+        {
+            Console.WriteLine("Si eran validos");
+            return View("Clave", model);
+        }
+        else
+        {
+            Console.WriteLine("Tambien por aqui");
+
+            // Agregar mensaje de error para mostrar en la vista
+            ViewData["ErrorMessage"] = "Error en el registro. Verifica los datos.";
+
+            // Enviar de vuelta a la vista de registro con el mensaje de error
+            return View("Registro", model);
+        }
     }
 
     [HttpPost]

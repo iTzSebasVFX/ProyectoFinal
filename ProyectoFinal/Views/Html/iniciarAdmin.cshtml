@@ -1,0 +1,37 @@
+@model ProyectoFinal.Models.LoginAdModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IngresarAdmin</title>
+</head>
+
+<body>
+    <div>
+        <form asp-action="iniciarAdmin" asp-controller="Html" method="post">
+            <Label asp-for="Email">Ingresar correo electronico de Admin</Label>
+            <input type="text" asp-for="Email">
+            <Label asp-for="Contraseña">Ingresar correo electronico de Admin</Label>
+            <input type="text" asp-for="Contraseña">
+
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+    @if (TempData["Error"] != null)
+    {
+        <div id="alertError" class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+    <script>
+        let alertError = document.getElementById('alertError');
+        setTimeout(function () {
+            alertError.style.display = 'none';
+        }, 5000);
+    </script>
+</body>
+
+</html>
