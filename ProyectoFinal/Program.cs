@@ -9,7 +9,8 @@ builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-if (string.IsNullOrEmpty(connectionString)){
+if (string.IsNullOrEmpty(connectionString))
+{
     throw new InvalidOperationException("Connection string no encontrado");
 }
 
@@ -61,7 +62,7 @@ app.UseEndpoints(endpoints =>
 app.MapControllerRoute(
     name: "default",
 
-    pattern: "{controller=Chat}/{action=Chat}/{id?}"
+       pattern: "{controller=Html}/{action=Index}/{id?}"
 
 );
 

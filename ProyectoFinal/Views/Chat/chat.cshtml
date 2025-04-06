@@ -1,13 +1,18 @@
 @model int;
 <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true">
 <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
-<nav> 
+<nav>
     <a asp-action="ListaChats" asp-controller="Chat" class="upload-icon" style="margin-left: 10px;">
-    <i class="fa-solid fa-left-long" style="color: #ffffff;"> volver</i>
-    <span class="tooltip">Lista de Chats</span>
-</a>
-<h1 class="textTitle">@ChatSignalR.controller.ChatController.Lista.GetValueOrDefault(Model)</h1>
- </nav>
+        <div class=" pepe">
+            <button class="button type1">
+                <span class="btn-txt"><i class="fa-solid fa-caret-left fa-beat"></i><a class="decoracion"
+                        asp-action="Principal" asp-controller="UserPerfil">Volver</a></span>
+            </button>
+        </div>
+        <span class="tooltip">Lista de Chats</span>
+    </a>
+    <h1 class="textTitle">@ChatSignalR.controller.ChatController.Lista.GetValueOrDefault(Model)</h1>
+</nav>
 
 <div>
     <div>
@@ -17,24 +22,19 @@
             <ul class="messageBoxStyled" id="messagesList"></ul>
             <div class="messageBox">
                 <div class="fileUploadWrapper">
+
                     <!-- Ícono de WhatsApp como botón independiente -->
                     <div id="whatsappBtn" style="cursor:pointer; display:flex; align-items:center; gap:5px;">
                         <i class="fa-brands fa-whatsapp" style="color: #63E6BE; font-size: 20px;"></i>
                         <span class="tooltip">Agregar WhatsApp</span>
                     </div>
 
-                    <!-- Caja oculta para ingresar el número -->
+                    <!-- Caja para ingresar el número -->
                     <div id="whatsappBox" style="display:none; margin-top: 10px;">
-                        <button id="sendPhone"><svg viewBox="0 0 664 663" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <i class="fa-regular fa-paper-plane" style="color: #ffffff;"></i>
-                            </svg></button>
-                    </div>
-                    <div id="whatsappBox" style="display:none; margin-top: 10px;">
-                        <button id="sendPhone"><svg viewBox="0 0 664 663" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <i class="fa-regular fa-paper-plane" style="color: #ffffff;"></i>
-                            </svg></button>
+                        <input id="phoneInput" type="text" placeholder="Número" />
+                        <button id="sendPhone">
+                        </button>
+                        <div id="phoneError" style="color: red; font-size: 12px; margin-top: 5px;"></div>
                     </div>
 
                     <!-- Input de archivo separado con su propio label -->
@@ -43,12 +43,10 @@
                         <span class="tooltip">Zona de juegos</span>
                     </a>
 
-
-
-
                     <input name="file" id="file" type="file" style="display: none;" />
                 </div>
 
+                <!-- Input de mensaje común -->
                 <input id="message" type="text" placeholder="Escribe tu mensaje..." />
                 <button id="sendButton">
                     <svg viewBox="0 0 664 663" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,8 +57,6 @@
 
         </div>
 
-
-
     </div>
 
     <div class="row justify-content-center">
@@ -69,6 +65,7 @@
             </ul>
         </div>
     </div>
+
 
 
 

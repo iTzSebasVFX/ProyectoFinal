@@ -1,54 +1,55 @@
-//limpieza del imput
-
 const input = document.getElementById("message");
-  const sendButton = document.getElementById(id="sendButton");
+const sendButton = document.getElementById("sendButton");
 
-  sendButton.addEventListener("click", () => {
-    const message = input.value.trim();
+const whatsappBtn = document.getElementById("whatsappBtn");
+const whatsappBox = document.getElementById("whatsappBox");
+const sendPhone = document.getElementById("sendPhone");
+const phoneInput = document.getElementById("phoneInput");
+const phoneError = document.getElementById("phoneError");
+const messagesList = document.getElementById("messagesList"); // Asegurate de tener este UL en tu HTML
 
-    if (message) {
-      // Acá podés hacer lo que necesites con el mensaje
-      console.log("Mensaje enviado:", message);
+// Enviar mensaje común
+sendButton.addEventListener("click", sendMessage);
+input.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") sendMessage();
+});
 
-      // Limpia el input
-      input.value = "";
-    }
-  });
+function sendMessage() {
+  const message = input.value.trim();
+  if (message) {
+    console.log("Mensaje enviado:", message);
+    input.value = "";
+  }
+}
 
-  //name
+// Mostrar caja para número de WhatsApp
+whatsappBtn.addEventListener("click", () => {
+  whatsappBox.style.display = "block";
+  phoneInput.focus();
+});
 
-  const userInput = document.getElementById("user");
+// Enviar número por botón o Enter
+sendPhone.addEventListener("click", sendPhoneNumber);
+phoneInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") sendPhoneNumber();
+});
 
-  userInput.addEventListener("change", function () {
-    if (userInput.value.trim() !== "") {
-      userInput.style.display = "none";
-    }
-  });
+function sendPhoneNumber() {
+  const phone = phoneInput.value.trim();
+  const numericPhone = phone.replace(/[^0-9]/g, "");
 
-// wsp
-  const whatsappBtn = document.getElementById("whatsappBtn");
-  const whatsappBox = document.getElementById("whatsappBox");
-  const sendPhone = document.getElementById("sendPhone");
-  const phoneInput = document.getElementById("message");
-  const messagesList = document.getElementById("messagesList");
+  if (numericPhone === "" || numericPhone.length < 6) {
+    phoneError.textContent = "Por favor ingresá un número válido.";
+    return;
+  }
 
-  // Mostrar input cuando se hace click en el botón
-  whatsappBtn.addEventListener("click", () => {
-    whatsappBox.style.display = "block";
-    phoneInput.focus();
-  });
+  phoneError.textContent = ""; // Limpiar error si todo bien
 
-  // Enviar número y mostrar link en el chat
-  sendPhone.addEventListener("click", () => {
-    const phone = phoneInput.value.trim();
-    if (phone !== "") {
-      const whatsappLink = `https://wa.me/${phone.replace(/[^0-9]/g, "")}`;
-      const li = document.createElement("li");
-      li.innerHTML = `🔗 <a href="${whatsappLink}" target="_blank">Ir a tu WhatsApp</a>`;
-      messagesList.appendChild(li);
+  const whatsappLink = `https://wa.me/${numericPhone}`;
+  const li = document.createElement("li");
+  li.innerHTML = `🔗 <a href="${whatsappLink}" target="_blank">Ir a tu WhatsApp</a>`;
+  messagesList.appendChild(li);
 
-      // Limpiar y ocultar el input
-      phoneInput.value = "";
-      whatsappBox.style.display = "none";
-    }
-  });
+  phoneInput.value = "";
+  whatsappBox.style.display = "none";
+}
