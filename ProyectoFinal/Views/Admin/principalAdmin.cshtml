@@ -1,0 +1,131 @@
+@model ProyectoFinal.Models.AdminViewModel
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrincipalAdmins</title>
+</head>
+
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nombre</td>
+                    <td>Email</td>
+                    <td>Contraseña</td>
+                    <td>Fecha Registro</td>
+                    <td>Activo</td>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListaAdmins)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Email</td>
+                        <td>@item.Contraseña</td>
+                        <td>@item.FechaRegistro</td>
+                        <td>@item.Activo</td>
+                        <td><a href="javascript:void(0);"
+                                onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>Editar</a></td>
+                        <td><a asp-action="EliminarUs" asp-route-id="@item.Id" asp-controller="Admin">BroIconoEliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <div id="formInsertar">
+            <form asp-action="InsertarUs" asp-controller="Admin" method="post">
+                <h2>formulario insercion</h2>
+
+                <label>Ingrese el nombre del Admin</label>
+                <input type="text" asp-for="NuevoAdmin.Nombre">
+
+                <label>Ingrese el email de Admin</label>
+                <input type="text" asp-for="NuevoAdmin.Email">
+
+                <label>Ingrese la contraseña de Admin</label>
+                <input type="text" asp-for="NuevoAdmin.Contraseña">
+
+                <label>Activo</label>
+                <input type="checkbox" asp-for="NuevoAdmin.Activo">
+
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+        <div id="formEditar" style="display: none;">
+            <form asp-action="EditarUs" asp-controller="Admin" method="post">
+                <h2>formulario Editar</h2>
+
+                <input type="hidden" id="editId" asp-for="NuevoAdmin.Id" />
+
+                <label>Ingrese el nombre del Admin</label>
+                <input type="text" id="editNombre" asp-for="NuevoAdmin.Nombre" />
+
+                <label>Ingrese el email de Admin</label>
+                <input type="text" id="editEmail" asp-for="NuevoAdmin.Email" />
+
+                <label>Ingrese la contraseña de Admin</label>
+                <input type="text" id="editContraseña" asp-for="NuevoAdmin.Contraseña" />
+
+                <label>Activo</label>
+                <input type="checkbox" id="editActivo" asp-for="NuevoAdmin.Activo" />
+
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+
+        <a asp-action="principalAdmin" asp-controller="Admin">Crear nuevo Usuario</a>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" id="alertError">
+                @TempData["Error"]
+            </div>
+        }
+        @if (TempData["Valido"] != null)
+        {
+            <div class="alert alert-success" id="alertValidacion">
+                @TempData["Valido"]
+            </div>
+        }
+    </footer>
+    <script>
+        let alertError = document.getElementById('alertError');
+        let alertValidacion = document.getElementById('alertValidacion');
+        setTimeout(function () {
+            alertError.style.display = 'none';
+        }, 5000);
+        setTimeout(function () {
+            alertValidacion.style.display = 'none';
+        }, 5000);
+    </script>
+    <script>
+        function mostrarEditar(admin) {
+            console.log(admin); // Para ver qué trae
+
+            // Mostrar el formulario
+            document.getElementById('formEditar').style.display = 'block';
+            document.getElementById('formInsertar').style.display = 'none';
+
+            // Rellenar los campos del formulario
+            document.getElementById('editNombre').value = admin.nombre;
+            document.getElementById('editEmail').value = admin.email;
+            document.getElementById('editContraseña').value = admin.contraseña;
+            document.getElementById('editActivo').checked = admin.activo;
+            document.getElementById('editId').value = admin.id;
+        }
+    </script>
+</body>
+
+</html>
