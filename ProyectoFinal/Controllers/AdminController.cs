@@ -69,6 +69,7 @@ namespace ProyectoFinal.Controllers
             TempData["Error"] = "Error los datos son invalidos";
             model.ListaAdmins = _context.AdminUsers.ToList();
             return View("PrincipalAdmin", model);
+            
         }
 
         [HttpPost]
@@ -149,8 +150,7 @@ namespace ProyectoFinal.Controllers
                 return View("UsuarioLista", model);
             }
             TempData["Error"] = "Datos incorrectos o no ingresados.";
-            model.ListaUsu = _context.Usuarios.ToList();
-            return View("UsuarioLista", model);
+            return RedirectToAction("UsuarioLista");
         }
 
         [HttpPost]
