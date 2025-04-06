@@ -58,8 +58,10 @@
                                 <div class="tab-pane fade active show" id="account-general">
                                     <div class="card-body media align-items-center">
 
-                                        <img class="imagen" src="@Model.FotoRuta" alt="Foto de perfil" width="150"
-                                            height="150" />
+                                        <img class="imagen"
+                                            src="@Url.Content(Model.FotoRuta ?? "~/uploads/fotosinfoto.png")"
+                                            alt="Foto de perfil" width="150" height="150"
+                                            onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" />
 
                                         <div class="media-body ml-4">
                                             <label for="fotoPerfil" class="custom-file-label">Sube tu foto de perfil</label>
@@ -131,8 +133,9 @@
 
 
                                 <div class="text-right mt-3">
-                                  
-                                    <button type="submit" class="btn btn-primary" asp-action="ActualizarPerfil" asp-controller="UserPerfil">Guardar</button>&nbsp;
+
+                                    <button type="submit" class="btn btn-primary" asp-action="ActualizarPerfil"
+                                        asp-controller="UserPerfil">Guardar</button>&nbsp;
 
                                 </div>
                             </div>

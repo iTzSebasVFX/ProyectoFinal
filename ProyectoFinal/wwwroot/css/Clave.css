@@ -190,11 +190,10 @@ h4 {
 }
 
 .Child {
-  width: 100%;
+  width: 500px;
   /* Asegura que los campos se ajusten */
   max-width: 300px;
   /* Define un ancho máximo */
-  display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.5em;
@@ -202,10 +201,9 @@ h4 {
   padding: 0.6em;
   background-color: #171717;
   box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
-  display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: 130px;
+  margin-left: 95px;
   /* Mueve el campo 20px hacia la derecha */
   margin-top: 50px;
 
@@ -228,4 +226,90 @@ h4 {
   /* Fondo oscuro */
   color: #FFFFFF;
   /* Texto blanco */
+}
+.errorclass{
+  margin-left: 300px;
+}
+
+.error {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  max-width: 200px;
+  padding: 0px;
+  font-size: 55px;
+  display: flex
+;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #ff4d4d, #d93030);
+  border-radius: 8px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  animation: fadeIn 0.5s ease-in-out;
+  position: fixed;
+  top: 175px;
+  left: 30%;
+  z-index: 9999;
+}
+
+.error__text {
+  text-align: center; /* Asegura que el texto esté centrado */
+  font-size: 12px; /* Tamaño adecuado */
+  padding: 5px;
+}
+
+.error__title {
+  font-weight: bold;
+  font-size: 14px; /* Título ligeramente más grande */
+}
+.error__icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  animation: shake 0.5s ease-in-out;
+}
+
+
+
+.error__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.error__list ul {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #ffe6e6;
+}
+
+.error__close {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.error__close:hover {
+  transform: scale(1.1);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+.text-danger {
+  --bs-text-opacity: 1;
+  color: rgb(234 234 234) !important;
 }

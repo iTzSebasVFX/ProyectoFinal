@@ -60,7 +60,9 @@ app.UseEndpoints(endpoints =>
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Admin}/{action=principalAdmin}/{id?}"
+
+    pattern: "{controller=Chat}/{action=Chat}/{id?}"
+
 );
 
 app.Run();
