@@ -1,0 +1,153 @@
+@model ProyectoFinal.Models.UsViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdministacionUsuarios</title>
+</head>
+
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>nombreCompleto</td>
+                    <td>apellidoCompleto</td>
+                    <td>Edad</td>
+                    <td>numeroTelefono</td>
+                    <td>pais</td>
+                    <td>correoElectronico</td>
+                    <td>contrasena</td>
+                    <td>clave</td>
+                    <td>Genero</td>
+                    <td>FotoRuta</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListaUsu)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.nombreCompleto</td>
+                        <td>@item.apellidoCompleto</td>
+                        <td>@item.Edad</td>
+                        <td>@item.numeroTelefono</td>
+                        <td>@item.pais</td>
+                        <td>@item.correoElectronico</td>
+                        <td>@item.contrasena</td>
+                        <td>@item.clave</td>
+                        <td>@item.Genero</td>
+                        <td><img src="@item.FotoRuta" alt="lol"></td>
+                        <td><a href="javascript:void[0];" onclick='mostrarEditar2(@Html.Raw(Json.Serialize(item)))'>Editar</a></td>
+                        <td><a asp-action="EliminarUs" asp-controller="Admin" asp-route-id="@item.id">Eliminar</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <footer>
+        <div id="formInsertar">
+            <form asp-action="InsertarUs" asp-controller="Admin" method="post">
+                <h2>formulario Insercion</h2>
+                
+                <label asp-for="NuevoUsuario.nombreCompleto">Nombre Usuario</label>
+                <input type="text" asp-for="NuevoUsuario.nombreCompleto">
+                <label asp-for="NuevoUsuario.apellidoCompleto">Apellido Usuario</label>
+                <input type="text" asp-for="NuevoUsuario.apellidoCompleto">
+                <label asp-for="NuevoUsuario.Edad">Edad Usuario</label>
+                <input type="number" asp-for="NuevoUsuario.Edad">
+                <label asp-for="NuevoUsuario.numeroTelefono">Teléfono Usuario</label>
+                <input type="text" asp-for="NuevoUsuario.numeroTelefono">
+                <label asp-for="NuevoUsuario.pais">País Usuario</label>
+                <input type="text" asp-for="NuevoUsuario.pais">
+                <label asp-for="NuevoUsuario.correoElectronico">Email Usuario</label>
+                <input type="text" asp-for="NuevoUsuario.correoElectronico">
+                <label asp-for="NuevoUsuario.contrasena">Contraseña Usuario</label>
+                <input type="text" asp-for="NuevoUsuario.contrasena">
+                <label asp-for="NuevoUsuario.clave">Clave Usuario</label>
+                <input type="number" asp-for="NuevoUsuario.clave">
+                <label asp-for="NuevoUsuario.Genero">Genero Usuario</label>
+                <input type="text" asp-for="NuevoUsuario.Genero">
+
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+        <div id="formEditar" style="display: none;">
+            <form asp-action="EditarUs" asp-controller="Admin" method="post">
+                <h2>formulario Edicion</h2>
+                <input type="hidden" id="editId" asp-for="NuevoUsuario.id" />
+
+                <label asp-for="NuevoUsuario.nombreCompleto">Nombre Usuario</label>
+                <input type="text" id="editNombre" asp-for="NuevoUsuario.nombreCompleto">
+                <label asp-for="NuevoUsuario.apellidoCompleto">Apellido Usuario</label>
+                <input type="text" id="editApellido" asp-for="NuevoUsuario.apellidoCompleto">
+                <label asp-for="NuevoUsuario.Edad">Edad Usuario</label>
+                <input type="number" id="editEdad" asp-for="NuevoUsuario.Edad">
+                <label asp-for="NuevoUsuario.numeroTelefono">Teléfono Usuario</label>
+                <input type="text" id="editTelefono" asp-for="NuevoUsuario.numeroTelefono">
+                <label asp-for="NuevoUsuario.pais">País Usuario</label>
+                <input type="text" id="editPais" asp-for="NuevoUsuario.pais">
+                <label asp-for="NuevoUsuario.correoElectronico">Email Usuario</label>
+                <input type="text" id="editEmail" asp-for="NuevoUsuario.correoElectronico" readonly>
+                <label asp-for="NuevoUsuario.contrasena">Contraseña Usuario</label>
+                <input type="text" id="editContrasena" asp-for="NuevoUsuario.contrasena" readonly>
+                <label asp-for="NuevoUsuario.clave">Clave Usuario</label>
+                <input type="number" id="editClave" asp-for="NuevoUsuario.clave">
+                <label asp-for="NuevoUsuario.Genero">Genero Usuario</label>
+                <input type="text" id="editgenero" asp-for="NuevoUsuario.Genero" />
+
+                <button type="submit">Guardar Cambios</button>
+            </form>
+            <a asp-action="UsuarioLista" asp-controller="Admin">Crear nuevo usuario</a>
+        </div>
+        @if(TempData["Error"] != null)
+        {
+            <div id="error" class="alert alert-danger">
+                @TempData["Error"]
+            </div>
+        }
+        @if(TempData["Valido"] != null)
+        {
+            <div id="valido" class="alert alert-success">
+                @TempData["Valido"]
+            </div>
+        }
+    </footer>
+    <script>
+        let error = document.getElementById('error');
+        let valido = document.getElementById('valido');
+        setTimeout(function () {
+            error.style.display = 'none';
+            valido.style.display = 'none';
+        }, 5000);
+    </script>
+    <script>
+        function mostrarEditar2(usuario)
+        {
+            console.log(usuario); // Para ver qué trae
+            console.log(Object.keys(usuario)); // para ver cómo vienen los nombres
+
+            // Mostrar el formulario
+            document.getElementById('formEditar').style.display = 'block';
+            document.getElementById('formInsertar').style.display = 'none';
+
+            // Rellenar los campos del formulario
+            document.getElementById('editId').value = usuario.id;
+            document.getElementById('editNombre').value = usuario.nombreCompleto;
+            document.getElementById('editApellido').value = usuario.apellidoCompleto;
+            document.getElementById('editEdad').value = usuario.edad;
+            document.getElementById('editTelefono').value = usuario.numeroTelefono;
+            document.getElementById('editPais').value = usuario.pais;
+            document.getElementById('editEmail').value = usuario.correoElectronico;
+            document.getElementById('editContrasena').value = usuario.contrasena;
+            document.getElementById('editClave').value = usuario.clave;
+            document.getElementById('editgenero').value = usuario.genero;
+        }
+    </script>
+</body>
+
+</html>
