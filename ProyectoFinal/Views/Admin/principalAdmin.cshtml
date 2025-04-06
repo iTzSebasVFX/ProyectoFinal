@@ -6,100 +6,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/admin.css">
     <title>PrincipalAdmins</title>
 </head>
 
 <body>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Nombre</td>
-                    <td>Email</td>
-                    <td>Contraseña</td>
-                    <td>Fecha Registro</td>
-                    <td>Activo</td>
-                    <td>Editar</td>
-                    <td>Eliminar</td>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="card" id="card">
+        <div class="content">
+            <div></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <td>Contraseña</th>
+                        <th>Fecha Registro</th>
+                        <th>Activo</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
                 @foreach (var item in Model.ListaAdmins)
                 {
                     <tr>
-                        <td>@item.Id</td>
+                        <td scope="row">@item.Id</td>
                         <td>@item.Nombre</td>
                         <td>@item.Email</td>
                         <td>@item.Contraseña</td>
                         <td>@item.FechaRegistro</td>
                         <td>@item.Activo</td>
                         <td><a href="javascript:void(0);"
-                                onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>Editar</a></td>
-                        <td><a asp-action="EliminarAd" asp-route-id="@item.Id" asp-controller="Admin">BroIconoEliminar</a>
+                                onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>Editar</a>
+                        </td>
+                        <td><a asp-action="EliminarUs" asp-route-id="@item.Id" asp-controller="Admin">BroIconoEliminar</a>
                         </td>
                     </tr>
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            <footer></footer>
+            <div id="formInsertar">
+                <form asp-action="InsertarUs" asp-controller="Admin" method="post">
+                    <h2>formulario insercion</h2>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese el nombre del Admin</label>
+                        <input type="text" class="form-control" arial-describedby="emailhelp"
+                            asp-for="NuevoAdmin.Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese el email de Admin</label>
+                        <input type="text" class="form-control" asp-for="NuevoAdmin.Email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese la contraseña de Admin</label>
+                        <input type="text" class="form-control" asp-for="NuevoAdmin.Contraseña">
+                    </div>
+
+                    <label class="form-label">Activo</label>
+                    <input type="checkbox" asp-for="NuevoAdmin.Activo">
+
+                    <button type="submit" class="button2">Registrar</button>
+                </form>
+            </div>
+            <div id="formEditar" style="display: none;">
+                <form asp-action="EditarUs" asp-controller="Admin" method="post">
+                    <h2>formulario Editar</h2>
+                    <div class="mb-3">
+                        <input type="hidden" id="editId" class="form-control" asp-for="NuevoAdmin.Id" />
+
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese el nombre del Admin</label>
+                        <input type="text" id="editNombre" class="form-control" asp-for="NuevoAdmin.Nombre" />
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese el email de Admin</label>
+                        <input type="text" id="editEmail" class="form-control" asp-for="NuevoAdmin.Email" />
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ingrese la contraseña de Admin</label>
+                        <input type="text" id="editContraseña" class="form-control" asp-for="NuevoAdmin.Contraseña" />
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Activo</label>
+                        <input type="checkbox" id="editActivo" asp-for="NuevoAdmin.Activo" />
+                    </div>
+                    <button class="button2" type="submit">Registrar Clave</button>
+                </form>
+            </div>
+
+            <a asp-action="principalAdmin" asp-controller="Admin">Crear nuevo Usuario</a>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger" id="alertError">
+                    @TempData["Error"]
+                </div>
+            }
+            @if (TempData["Valido"] != null)
+            {
+                <div class="alert alert-success" id="alertValidacion">
+                    @TempData["Valido"]
+                </div>
+            }
+            </footer>
+
+
+
+        </div>
+
     </div>
-    <footer>
-        <div id="formInsertar">
-            <form asp-action="InsertarAd" asp-controller="Admin" method="post">
-                <h2>formulario insercion</h2>
+    </div>
 
-                <label>Ingrese el nombre del Admin</label>
-                <input type="text" asp-for="NuevoAdmin.Nombre">
 
-                <label>Ingrese el email de Admin</label>
-                <input type="text" asp-for="NuevoAdmin.Email">
-
-                <label>Ingrese la contraseña de Admin</label>
-                <input type="text" asp-for="NuevoAdmin.Contraseña">
-
-                <label>Activo</label>
-                <input type="checkbox" asp-for="NuevoAdmin.Activo">
-
-                <button type="submit">Registrar</button>
-            </form>
-        </div>
-        <div id="formEditar" style="display: none;">
-            <form asp-action="EditarAd" asp-controller="Admin" method="post">
-                <h2>formulario Editar</h2>
-
-                <input type="hidden" id="editId" asp-for="NuevoAdmin.Id" />
-
-                <label>Ingrese el nombre del Admin</label>
-                <input type="text" id="editNombre" asp-for="NuevoAdmin.Nombre" />
-
-                <label>Ingrese el email de Admin</label>
-                <input type="text" id="editEmail" asp-for="NuevoAdmin.Email" />
-
-                <label>Ingrese la contraseña de Admin</label>
-                <input type="text" id="editContraseña" asp-for="NuevoAdmin.Contraseña" />
-
-                <label>Activo</label>
-                <input type="checkbox" id="editActivo" asp-for="NuevoAdmin.Activo" />
-
-                <button type="submit">Guardar Cambios</button>
-            </form>
-        </div>
-
-        <a asp-action="principalAdmin" asp-controller="Admin">Crear nuevo Usuario</a>
-
-        @if (TempData["Error"] != null)
-        {
-            <div class="alert alert-danger" id="alertError">
-                @TempData["Error"]
-            </div>
-        }
-        @if (TempData["Valido"] != null)
-        {
-            <div class="alert alert-success" id="alertValidacion">
-                @TempData["Valido"]
-            </div>
-        }
-    </footer>
     <script>
         let alertError = document.getElementById('alertError');
         let alertValidacion = document.getElementById('alertValidacion');
@@ -126,6 +159,10 @@
             document.getElementById('editId').value = admin.id;
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+    <script src="~/js/Tema.js"></script>
 </body>
 
 </html>
