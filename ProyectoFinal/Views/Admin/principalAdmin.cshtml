@@ -14,123 +14,146 @@
 </head>
 
 <body>
-    <div class="card" id="card">
-        <div class="content">
-            <div></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <td>Contraseña</th>
-                        <th>Fecha Registro</th>
-                        <th>Activo</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-                @foreach (var item in Model.ListaAdmins)
-                {
-                    <tr>
-                        <td scope="row">@item.Id</td>
-                        <td>@item.Nombre</td>
-                        <td>@item.Email</td>
-                        <td>@item.Contraseña</td>
-                        <td>@item.FechaRegistro</td>
-                        <td>@item.Activo</td>
-                        <td><a href="javascript:void(0);"
-                                onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>Editar</a>
-                        </td>
-                        <td><a asp-action="EliminarUs" asp-route-id="@item.Id" asp-controller="Admin">BroIconoEliminar</a>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-            <footer></footer>
-            <div id="formInsertar">
-                <form asp-action="InsertarUs" asp-controller="Admin" method="post">
-                    <h2>formulario insercion</h2>
+    <div class="cards-wrapper">
+        <div class="card" id="card">
+            <div class="content">
+                <div></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <td>Contraseña</th>
+                            <th>Fecha Registro</th>
+                            <th>Activo</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    @foreach (var item in Model.ListaAdmins)
+                    {
+                        <tr>
+                            <td scope="row">@item.Id</td>
+                            <td>@item.Nombre</td>
+                            <td>@item.Email</td>
+                            <td>@item.Contraseña</td>
+                            <td>@item.FechaRegistro</td>
+                            <td>@item.Activo</td>
+                            <td><a href="javascript:void(0);"
+                                    onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>Editar</a>
+                            </td>
+                            <td><a asp-action="EliminarAd" asp-route-id="@item.Id"
+                                    asp-controller="Admin">BroIconoEliminar</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
 
-                    <div class="mb-3">
-                        <label class="form-label">Ingrese el nombre del Admin</label>
-                        <input type="text" class="form-control" arial-describedby="emailhelp"
-                            asp-for="NuevoAdmin.Nombre">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Ingrese el email de Admin</label>
-                        <input type="text" class="form-control" asp-for="NuevoAdmin.Email">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Ingrese la contraseña de Admin</label>
-                        <input type="text" class="form-control" asp-for="NuevoAdmin.Contraseña">
-                    </div>
-
-                    <label class="form-label">Activo</label>
-                    <input type="checkbox" asp-for="NuevoAdmin.Activo">
-
-                    <button type="submit" class="button2">Registrar</button>
-                </form>
             </div>
-            <div id="formEditar" style="display: none;">
-                <form asp-action="EditarUs" asp-controller="Admin" method="post">
-                    <h2>formulario Editar</h2>
-                    <div class="mb-3">
-                        <input type="hidden" id="editId" class="form-control" asp-for="NuevoAdmin.Id" />
-
-                    </div>
-
-
-                    <div class="mb-3">
-                        <label class="form-label">Ingrese el nombre del Admin</label>
-                        <input type="text" id="editNombre" class="form-control" asp-for="NuevoAdmin.Nombre" />
-
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Ingrese el email de Admin</label>
-                        <input type="text" id="editEmail" class="form-control" asp-for="NuevoAdmin.Email" />
-
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Ingrese la contraseña de Admin</label>
-                        <input type="text" id="editContraseña" class="form-control" asp-for="NuevoAdmin.Contraseña" />
-
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Activo</label>
-                        <input type="checkbox" id="editActivo" asp-for="NuevoAdmin.Activo" />
-                    </div>
-                    <button class="button2" type="submit">Registrar Clave</button>
-                </form>
-            </div>
-
-            <a asp-action="principalAdmin" asp-controller="Admin">Crear nuevo Usuario</a>
-
-            @if (TempData["Error"] != null)
-            {
-                <div class="alert alert-danger" id="alertError">
-                    @TempData["Error"]
-                </div>
-            }
-            @if (TempData["Valido"] != null)
-            {
-                <div class="alert alert-success" id="alertValidacion">
-                    @TempData["Valido"]
-                </div>
-            }
-            </footer>
-
 
 
         </div>
 
+        <div class="card2" id="card2">
+            <div class="content2">
+                <footer>
+                    <div id="formInsertar">
+                        <form asp-action="InsertarAd" asp-controller="Admin" method="post">
+                            <h2>formulario insercion</h2>
+
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese el nombre del Admin</label>
+                                <input type="text" class="form-control" arial-describedby="emailhelp"
+                                    asp-for="NuevoAdmin.Nombre">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese el email de Admin</label>
+                                <input type="text" class="form-control" asp-for="NuevoAdmin.Email">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese la contraseña de Admin</label>
+                                <input type="text" class="form-control" asp-for="NuevoAdmin.Contraseña">
+                            </div>
+
+                            <label class="form-label">Activo</label>
+                            <input type="checkbox" asp-for="NuevoAdmin.Activo">
+
+                            <button type="submit" class="button2">Registrar</button>
+                        </form>
+                    </div>
+                    <div id="formEditar" style="display: none;">
+                        <form asp-action="EditarAd" asp-controller="Admin" method="post">
+                            <h2>formulario Editar</h2>
+                            <div class="mb-3">
+                                <input type="hidden" id="editId" class="form-control" asp-for="NuevoAdmin.Id" />
+
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese el nombre del Admin</label>
+                                <input type="text" id="editNombre" class="form-control" asp-for="NuevoAdmin.Nombre" />
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese el email de Admin</label>
+                                <input type="text" id="editEmail" class="form-control" asp-for="NuevoAdmin.Email" />
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Ingrese la contraseña de Admin</label>
+                                <input type="text" id="editContraseña" class="form-control"
+                                    asp-for="NuevoAdmin.Contraseña" />
+
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Activo</label>
+                                <input type="checkbox" id="editActivo" asp-for="NuevoAdmin.Activo" />
+                            </div>
+                            <button class="button3" type="submit">Confirmar</button>
+                            <div aria-label="User Login Button" tabindex="0" role="button" class="user-profile">
+                                <div class="user-profile-inner">
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <g data-name="Layer 2" id="Layer_2">
+                                            <path
+                                                d="m15.626 11.769a6 6 0 1 0 -7.252 0 9.008 9.008 0 0 0 -5.374 8.231 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 9.008 9.008 0 0 0 -5.374-8.231zm-7.626-4.769a4 4 0 1 1 4 4 4 4 0 0 1 -4-4zm10 14h-12a1 1 0 0 1 -1-1 7 7 0 0 1 14 0 1 1 0 0 1 -1 1z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <a class="red"  asp-action="principalAdmin" asp-controller="Admin">Crear nuevo admin</a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger" id="alertError">
+                            @TempData["Error"]
+                        </div>
+                    }
+                    @if (TempData["Valido"] != null)
+                    {
+                        <div class="alert alert-success" id="alertValidacion">
+                            @TempData["Valido"]
+                        </div>
+                    }
+                </footer>
+
+            </div>
+        </div>
     </div>
-    </div>
+
+
 
 
     <script>
