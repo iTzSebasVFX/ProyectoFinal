@@ -36,7 +36,7 @@
                         <td>@item.Activo</td>
                         <td><a href="javascript:void(0);"
                                 onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>Editar</a></td>
-                        <td><a asp-action="EliminarUs" asp-route-id="@item.Id" asp-controller="Admin">BroIconoEliminar</a>
+                        <td><a asp-action="EliminarAd" asp-route-id="@item.Id" asp-controller="Admin">BroIconoEliminar</a>
                         </td>
                     </tr>
                 }
@@ -45,7 +45,7 @@
     </div>
     <footer>
         <div id="formInsertar">
-            <form asp-action="InsertarUs" asp-controller="Admin" method="post">
+            <form asp-action="InsertarAd" asp-controller="Admin" method="post">
                 <h2>formulario insercion</h2>
 
                 <label>Ingrese el nombre del Admin</label>
@@ -64,7 +64,7 @@
             </form>
         </div>
         <div id="formEditar" style="display: none;">
-            <form asp-action="EditarUs" asp-controller="Admin" method="post">
+            <form asp-action="EditarAd" asp-controller="Admin" method="post">
                 <h2>formulario Editar</h2>
 
                 <input type="hidden" id="editId" asp-for="NuevoAdmin.Id" />
