@@ -1,58 +1,112 @@
 @model int;
-
-<h1 class="text-center">@ChatSignalR.controller.ChatController.Lista.GetValueOrDefault(Model)</h1>
+<link rel="stylesheet" href="~/css/chat.css" asp-append-version="true">
+<script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+<nav> 
+    <a asp-action="ListaChats" asp-controller="Chat" class="upload-icon" style="margin-left: 10px;">
+    <i class="fa-solid fa-left-long" style="color: #ffffff;"> volver</i>
+    <span class="tooltip">Lista de Chats</span>
+</a>
+<h1 class="textTitle">@ChatSignalR.controller.ChatController.Lista.GetValueOrDefault(Model)</h1>
+ </nav>
 
 <div>
     <div>
-       
-        <input class="form-control" type="text" placeholder="Introduzca su nombre de Usuario" id="user"></input>
-        <input class="form-control" type="text" placeholder="Introduzca el mensaje" id="message"></input>
-        <div>
-            <button class="btn btn-success" type="button" id="sendButton"></button>
+        <div class="card">
+            <input class="form-control" type="text" placeholder="Introduzca su nombre de Usuario" id="user">
+            <!-- tiene js-->
+            <ul class="messageBoxStyled" id="messagesList"></ul>
+            <div class="messageBox">
+                <div class="fileUploadWrapper">
+                    <!-- Ícono de WhatsApp como botón independiente -->
+                    <div id="whatsappBtn" style="cursor:pointer; display:flex; align-items:center; gap:5px;">
+                        <i class="fa-brands fa-whatsapp" style="color: #63E6BE; font-size: 20px;"></i>
+                        <span class="tooltip">Agregar WhatsApp</span>
+                    </div>
+
+                    <!-- Caja oculta para ingresar el número -->
+                    <div id="whatsappBox" style="display:none; margin-top: 10px;">
+                        <button id="sendPhone"><svg viewBox="0 0 664 663" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <i class="fa-regular fa-paper-plane" style="color: #ffffff;"></i>
+                            </svg></button>
+                    </div>
+                    <div id="whatsappBox" style="display:none; margin-top: 10px;">
+                        <button id="sendPhone"><svg viewBox="0 0 664 663" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <i class="fa-regular fa-paper-plane" style="color: #ffffff;"></i>
+                            </svg></button>
+                    </div>
+
+                    <!-- Input de archivo separado con su propio label -->
+                    <a asp-action="Juegos" asp-controller="Html" class="upload-icon" style="margin-left: 10px;">
+                        <i class="fa-solid fa-gamepad" style="color: #ffffff;"></i>
+                        <span class="tooltip">Zona de juegos</span>
+                    </a>
+
+
+
+
+                    <input name="file" id="file" type="file" style="display: none;" />
+                </div>
+
+                <input id="message" type="text" placeholder="Escribe tu mensaje..." />
+                <button id="sendButton">
+                    <svg viewBox="0 0 664 663" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <i class="fa-regular fa-paper-plane" style="color: #ffffff;"></i>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <ul class="list-group" id="messagesList">
+            </ul>
         </div>
     </div>
-</div>
-
-<div class="row justify-content-center">
-    <div class="col-10">
-        <ul class="list-group" id="messagesList">
-        </ul>
-    </div>
-</div>
 
 
-<a asp-action="ListaChats" asp-controller="Chat">Volver a la Lista de Chats</a>
- <a asp-action="Juegos" asp-controller="Html">Zona de juegos</a>
+
+
 
 @*Colocamos el escript de signalR*@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
-<script>
-    //Primero Creamos la conexion
-    const connection = new signalR.HubConnectionBuilder()
-        .withUrl("/chatHub")
-        .build();
-    connection.start().then(() => {
-        connection.invoke("AddGroup", "@Model");
-    }).catch(err => console.error(err.toString()));
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        // Inicializar conexión
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
 
+        connection.start().then(() => {
+            connection.invoke("AddGroup", "@Model");
+        }).catch(err => console.error(err.toString()));
 
-    //En el momento en que demos click, obtenemos los datos de los inputs y los enviamos mediante
-    //la funcion "SendMessage"
-    document.getElementById("sendButton").addEventListener("click", function (e) {
-        let room = @Model;
-        const user = document.getElementById("user").value;
-        const message = document.getElementById("message").value;
-        connection.invoke("SendMessage", room, user, message).catch(err => console.error(err.toString()));
-        $("message").value("");
-        $("message").focus;
+        // Enviar mensaje
+        document.getElementById("sendButton").addEventListener("click", function (e) {
+            let room = @Model;
+            const user = document.getElementById("user").value; // Asegúrate de tener este input si se usa
+            const messageInput = document.getElementById("message");
+            const message = messageInput.value;
 
-        //Para evitar la recarga de la pagina
-        e.preventDefault();
-    });
+            if (message.trim() !== "") {
+                connection.invoke("SendMessage", room, user, message).catch(err => console.error(err.toString()));
+                messageInput.value = "";
+                messageInput.focus();
+            }
 
-    connection.on("ReceiveMessage", function (user, message) {
-        const li = document.createElement("li");
-        li.textContent = `${user}: ${message}`;
-        document.getElementById("messagesList").appendChild(li);
-    });
-</script>
+            e.preventDefault(); // Evita recarga
+        });
+
+        connection.on("ReceiveMessage", function (user, message) {
+            const li = document.createElement("li");
+            li.textContent = `${user}: ${message}`;
+            document.getElementById("messagesList").appendChild(li);
+        });
+    </script>
+    <script src="~/js/ChatNumber.js"></script>
+    <script src="~/js/Tema.js"></script>

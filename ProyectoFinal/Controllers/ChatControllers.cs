@@ -5,9 +5,9 @@ namespace ChatSignalR.controller
     public class ChatController : Controller
     {
         public static Dictionary<int, string> Lista = new Dictionary<int, string>{
-            {1, "Pedro"},
-            {2, "Juan"},
-            {3, "carlos"}
+            {1, "Musica"},
+            {2, "Juegos"},
+            {3, "Peliculas"}
         };
 
         public IActionResult ListaChats()
