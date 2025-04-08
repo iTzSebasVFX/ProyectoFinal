@@ -6,27 +6,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="~/css/Registrojuegos.css" asp-append-version="true">
     <title>FormEditarJuegos</title>
 </head>
 
-<body>
-    <form asp-action="ModificarJuegos" asp-controller="UserPerfil">
-        <input type="hidden" id="JuegoId" asp-for="Id">
+<body>  
+    <div class="card">
+   
+    <form class="form" method="post" asp-action="ModificarJuegos" asp-controller="UserPerfil">
+         <input type="hidden" id="JuegoId" asp-for="Id">
+      <h3 id="heading">Editar juegos</h3>
+      <div class="field">
+        <input placeholder="Nombre" type="text" id="Nombre" asp-for="@Model.Nombre" class="input-field">
+      </div>
 
-        <label asp-for="Nombre">Editar Nombre</label>
-        <input type="text" id="Nombre" asp-for="@Model.Nombre">
+       <div class="field">
+         <textarea  placeholder="descripción del juego" id="Descripcion" asp-for="@Model.Descripcion" class="input-field"></textarea>
+      </div>
 
-        <label asp-for="Descripcion">Editar Descripcion</label>
-        <textarea id="Descripcion" asp-for="@Model.Descripcion"></textarea>
+      <div class="field">
+        <input placeholder="Imagen del juego" type="text" id="ImagenFondoUrl" asp-for="@Model.ImagenFondoUrl" class="input-field">
+      </div>
 
-        <label asp-for="ImagenFondoUrl">Editar ImagenFondo: Ingrese la url de la imagen</label>
-        <input type="text" id="ImagenFondoUrl" asp-for="@Model.ImagenFondoUrl">
-
-        <label asp-for="UrlJuego">Editar Redireccion: Ingrese url de la pagina del juego</label>
-        <input type="text" id="UrlJuego" asp-for="@Model.UrlJuego">
-
-        <button type="submit">Guardar Cambios</button>
+      <div class="field">
+        <input placeholder="Url del juego" type="text" id="UrlJuego" asp-for="@Model.UrlJuego" class="input-field">
+      </div>
+      <div class="btn">
+        <button class="button2" type="submit">Guardar cambios</button>
+      </div>
+      <button class="button3">Terminos y condiciones</button>
+    
     </form>
+ 
+
+  </div>
 
     @if(TempData["Error"] != null)
     {
