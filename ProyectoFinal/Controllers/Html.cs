@@ -47,11 +47,6 @@ public class HtmlController : Controller
         return View(model);
     }
 
-    public IActionResult Juegos()
-    {
-        return View();
-    }
-
     public HtmlController(ApplicationDbContext context)
     {
         _context = context;
@@ -70,8 +65,28 @@ public class HtmlController : Controller
             // Si el usuario no existe
             if (usuario == null)
             {
-                ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
-                return View(model); // Si no se encuentra el usuario, se muestra un mensaje de error.
+                var admin = await _context.AdminUsers.FirstOrDefaultAsync(a => a.Email == model.Email);
+
+                if (admin == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
+                    return View("InicioSesion", model); // Si no se encuentra el usuario, se muestra un mensaje de error.
+                }
+                Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
+                bool isPasswordValid = BCrypt.Net.BCrypt.Verify(model.Password, admin.Contraseña);
+
+                if (!isPasswordValid)
+                {
+                    ModelState.AddModelError(string.Empty, "Contraseña Incorrecta, Intente de nuevo");
+                    return View("InicioSesion", model);
+                }
+
+                HttpContext.Session.SetString("NombreUser", admin.Nombre);
+                HttpContext.Session.SetString("CorreoUsuario", admin.Email);
+                HttpContext.Session.SetString("ContraAdmin", admin.Contraseña);
+
+                return RedirectToAction("Principal", "UserPerfil");
+
             }
             else
             {
@@ -89,9 +104,12 @@ public class HtmlController : Controller
                     // Si las credenciales son correctas, agregar un mensaje en la terminal
                     Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
 
-                    //Ahora crearemos un session que almacene el nombre del usuario
-                    HttpContext.Session.SetString("NombreUser", usuario.nombreCompleto);
-                    HttpContext.Session.SetString("CorreoUsuario", usuario.correoElectronico);
+                    if (usuario != null && !string.IsNullOrEmpty(usuario.nombreCompleto) && !string.IsNullOrEmpty(usuario.correoElectronico))
+                    {
+                        //Ahora crearemos un session que almacene el nombre del usuario
+                        HttpContext.Session.SetString("NombreUser", usuario.nombreCompleto);
+                        HttpContext.Session.SetString("CorreoUsuario", usuario.correoElectronico);
+                    }
 
                     // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
                     return RedirectToAction("Principal", "UserPerfil");
