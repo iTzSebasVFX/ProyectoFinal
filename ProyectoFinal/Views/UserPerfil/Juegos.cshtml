@@ -1,0 +1,78 @@
+@model List<ProyectoFinal.Models.Juego>
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    int Verificador = Convert.ToInt32(HttpContextAccessor.HttpContext?.Session.GetString("Verificador"));
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Juegos.css">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <title>zona de juegos</title>
+</head>
+
+<body>
+    <label for="toggle" id="label_toggle">
+        <i class="fa-solid fa-palette" style="color: #ffffff;"></i>
+    </label>
+    <input type="checkbox" id="toggle">
+
+    <div class=" pepe">
+        <button class="button type1">
+            <span class="btn-txt"><i class="fa-solid fa-caret-left fa-beat"></i><a class="decoracion"
+                    asp-action="Principal" asp-controller="UserPerfil">Volver</a></span>
+        </button>
+
+    </div>
+    <nav class="panel">
+
+
+        <h2>zona de juegos</h2>
+
+    </nav>
+
+    <div class="container">
+
+        <div class="slider">
+            @foreach (var juegos in Model)
+            {
+                <div class="item" style="background-image: url('@juegos.ImagenFondoUrl'); ">
+                    <div class="content">
+                        <div class="name">@juegos.Nombre</div>
+                        <div class="des">@juegos.Descripcion</div>
+                        <button><a href="@juegos.UrlJuego">jugar</a></button>
+                    </div>
+                    <!-- Mostrar el formulario de modificación -->
+                    @if (Verificador == 1)
+                    {
+                        <label class="admin" for="admin" id="admin_label">
+                            <a asp-action="PagFormEditar" asp-controller="UserPerfil" asp-route-id="@juegos.Id">
+                                <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i>
+                            </a>
+                        </label>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="button">
+            <button class=prev><i class="fa-solid fa-arrow-left"></i></button>
+
+            <button class=next> <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+    </div>
+
+    <script src="~/js/juegos.js"></script>
+    <script src="~/js/Tema.js"></script>
+</body>
+
+
+</html>

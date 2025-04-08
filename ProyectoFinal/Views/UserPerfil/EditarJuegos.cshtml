@@ -1,0 +1,46 @@
+@model ProyectoFinal.Models.Juego
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormEditarJuegos</title>
+</head>
+
+<body>
+    <form asp-action="ModificarJuegos" asp-controller="UserPerfil">
+        <input type="hidden" id="JuegoId" asp-for="Id">
+
+        <label asp-for="Nombre">Editar Nombre</label>
+        <input type="text" id="Nombre" asp-for="@Model.Nombre">
+
+        <label asp-for="Descripcion">Editar Descripcion</label>
+        <textarea id="Descripcion" asp-for="@Model.Descripcion"></textarea>
+
+        <label asp-for="ImagenFondoUrl">Editar ImagenFondo: Ingrese la url de la imagen</label>
+        <input type="text" id="ImagenFondoUrl" asp-for="@Model.ImagenFondoUrl">
+
+        <label asp-for="UrlJuego">Editar Redireccion: Ingrese url de la pagina del juego</label>
+        <input type="text" id="UrlJuego" asp-for="@Model.UrlJuego">
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    @if(TempData["Error"] != null)
+    {
+        <div class="alert alert-danger" id="alertError">
+            @TempData["Error"]
+        </div>
+    }
+    <script>
+        let alertError = document.getElementById('alertError');
+        
+        setTimeout(function (){
+            alertError.style.display = 'none';
+        }, 5000);
+    </script>
+</body>
+
+</html>

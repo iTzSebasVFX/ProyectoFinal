@@ -48,13 +48,14 @@ namespace ProyectoFinal.Controllers
         public IActionResult InsertarAd(AdminViewModel model)
         {
             model.NuevoAdmin.FechaRegistro = DateTime.Now;
+            model.NuevoAdmin.Contraseña = BCrypt.Net.BCrypt.HashPassword(model.NuevoAdmin.Contraseña);
             Console.WriteLine(model.NuevoAdmin.FechaRegistro);
             Console.WriteLine(model.NuevoAdmin.Activo);
             if (ModelState.IsValid)
             {
-                var BuscarUs = _context.AdminUsers.FirstOrDefault(a => a.Email == model.NuevoAdmin.Email);
+                var BuscarAd = _context.AdminUsers.FirstOrDefault(a => a.Email == model.NuevoAdmin.Email);
 
-                if (BuscarUs == null)
+                if (BuscarAd == null)
                 {
                     _context.AdminUsers.Add(model.NuevoAdmin);
                     _context.SaveChanges();
@@ -77,27 +78,30 @@ namespace ProyectoFinal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var BuscarUs = _context.AdminUsers.FirstOrDefault(a => a.Id == model.NuevoAdmin.Id);
-
-                if (BuscarUs == null)
+                var BuscarAd = _context.AdminUsers.FirstOrDefault(a => a.Id == model.NuevoAdmin.Id);
+                if (BuscarAd == null)
                 {
                     TempData["Error"] = "Error Admin no encontrado";
                     model.ListaAdmins = _context.AdminUsers.ToList();
                     return View("PrincipalAdmin", model);
                 }
-                BuscarUs.Id = model.NuevoAdmin.Id;
-                BuscarUs.Nombre = model.NuevoAdmin.Nombre;
-                BuscarUs.Email = model.NuevoAdmin.Email;
-                BuscarUs.Contraseña = model.NuevoAdmin.Contraseña;
-                BuscarUs.Activo = model.NuevoAdmin.Activo;
+                BuscarAd.Id = model.NuevoAdmin.Id;
+                BuscarAd.Nombre = model.NuevoAdmin.Nombre;
+                BuscarAd.Email = model.NuevoAdmin.Email;
+                BuscarAd.Activo = model.NuevoAdmin.Activo;
+                var verificar = model.NuevoAdmin.Contraseña == BuscarAd.Contraseña;
+                Console.WriteLine(verificar);
+                if (verificar == false)
+                {
+                    BuscarAd.Contraseña = BCrypt.Net.BCrypt.HashPassword(model.NuevoAdmin.Contraseña);
+                }
 
-                Console.WriteLine(BuscarUs);
-                _context.AdminUsers.Update(BuscarUs);
+                Console.WriteLine(BuscarAd);
+                _context.AdminUsers.Update(BuscarAd);
                 _context.SaveChanges();
 
                 TempData["Valido"] = "Datos actualizados correctamente";
-                model.ListaAdmins = _context.AdminUsers.ToList();
-                return View("PrincipalAdmin", model);
+                return RedirectToAction("PrincipalAdmin");
             }
             TempData["Error"] = "Error campos no rellenado";
             model.ListaAdmins = _context.AdminUsers.ToList();
@@ -107,12 +111,12 @@ namespace ProyectoFinal.Controllers
         public IActionResult EliminarAd(int Id)
         {
             Console.WriteLine(Id);
-            var BuscarUs = _context.AdminUsers.FirstOrDefault(a => a.Id == Id);
+            var BuscarAd = _context.AdminUsers.FirstOrDefault(a => a.Id == Id);
 
-            if (BuscarUs != null)
+            if (BuscarAd != null)
             {
-                Console.WriteLine(BuscarUs.Nombre);
-                _context.AdminUsers.Remove(BuscarUs);
+                Console.WriteLine(BuscarAd.Nombre);
+                _context.AdminUsers.Remove(BuscarAd);
                 _context.SaveChanges();
                 TempData["Valido"] = "Admin eliminado corr  ectamente";
                 return RedirectToAction("principalAdmin");

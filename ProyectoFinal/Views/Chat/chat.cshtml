@@ -1,4 +1,11 @@
 @model int;
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var NombreUsuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+}
+
 <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true">
 <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
 <nav>
@@ -17,7 +24,7 @@
 <div>
     <div>
         <div class="card">
-            <input class="form-control" type="text" placeholder="Introduzca su nombre de Usuario" id="user">
+            <input class="form-control" type="text" id="user" value="@NombreUsuario" readonly>
             <!-- tiene js-->
             <ul class="messageBoxStyled" id="messagesList"></ul>
             <div class="messageBox">
