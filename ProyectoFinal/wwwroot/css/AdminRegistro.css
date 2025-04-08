@@ -15,6 +15,7 @@ body {
 
 }
 
+
 .scroll-box {
   max-height: 600px; /* o cualquier altura deseada */
   overflow-y: auto;
@@ -514,6 +515,8 @@ a.button:active {
 
 }
 
+
+
 .user-profile {
   margin-top: -18%;
   margin-left: -33%;
@@ -555,4 +558,15 @@ a.button:active {
   fill: #fff;
 }
 
+.dark {
+  background: #121212;
+  /* Fondo oscuro */
+  color: #FFFFFF;
+  /* Texto blanco */
+}
 
+.dark .form {
+  background: #121212;
+  /* Fondo más oscuro para el formulario en modo oscuro */
+  /* Cambiar el borde a un color más oscuro */
+}

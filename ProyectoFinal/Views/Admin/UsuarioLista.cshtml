@@ -14,9 +14,19 @@
 </head>
 
 <body>
+
+
     <div class="cards-wrapper">
+
         <div class="container">
-            <h3>Tabla de administradores</h3>
+            <a class="red" asp-action="PrincipalAdmin" asp-controller="Admin" style="text-decoration: none;">
+            <h3>
+                <i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i>
+                Volver 
+            </h3>
+            </a>
+            <h3>Tabla de Usuarios</h3>
+
             <div class="scroll-box">
                 <div class="box">
                     @foreach (var item in Model.ListaUsu)
@@ -27,8 +37,8 @@
                                 <img src="~/uploads/fotosinfoto.png" alt="Admin">
 
                                 <!-- <img src="@Url.Content(item.FotoRuta ?? "~/uploads/fotosinfoto.png")" alt="Foto de perfil"
-                                                                                    width="150" height="150"
-                                                                                    onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" /> -->
+                                                                                                            width="150" height="150"
+                                                                                                            onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" /> -->
                             </div>
                             <!-- Contenido del usuario -->
                             <div class="content">
@@ -288,6 +298,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
+    <script src="~/js/Tema.js"></script>
 </body>
 
 </html>

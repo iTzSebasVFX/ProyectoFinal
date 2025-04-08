@@ -90,6 +90,12 @@ nav {
     display: flex;
 
 }
+
+.form-control{
+  display: none;
+
+
+}
 .chat-list {
     display: flex;
     flex-wrap: nowrap; 
