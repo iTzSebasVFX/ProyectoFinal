@@ -15,47 +15,51 @@
 
 <body>
     <div class="cards-wrapper">
-        <div class="card" id="card">
-            <div class="content">
-                <div></div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <td>Contraseña</th>
-                            <th>Fecha Registro</th>
-                            <th>Activo</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
+        <div class="container">
+            <h3> Tabla de administradores</h3>
+            <div class="scroll-boxl">
+                <div class="box">
                     @foreach (var item in Model.ListaAdmins)
                     {
-                        <tr>
-                            <td scope="row">@item.Id</td>
-                            <td>@item.Nombre</td>
-                            <td>@item.Email</td>
-                            <td>@item.Contraseña</td>
-                            <td>@item.FechaRegistro</td>
-                            <td>@item.Activo</td>
-                            <td><a href="javascript:void(0);"
-                                    onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>Editar</a>
-                            </td>
-                            <td><a asp-action="EliminarAd" asp-route-id="@item.Id"
-                                    asp-controller="Admin">BroIconoEliminar</a>
-                            </td>
-                        </tr>
+                        <div class="list">
+                            <div class="imgBx">
+                                <img src="~/uploads/fotosinfoto.png" alt="Admin">
+                            </div>
+
+                            <div class="content">
+                                <h2 class="rank"><small>#</small>@item.Id</h2>
+                                <h4>@item.Nombre</h4>
+                                <p>Correo: @item.Email</p>
+                                <p>Fecha de Registro: @item.FechaRegistro.ToShortDateString()</p>
+                                <p>Estado: @(item.Activo ? "Activo" : "Inactivo")</p>
+                            </div>
+                            <div class="actions" style="display:flex; flex-direction: column; gap:5px; margin-left:auto;">
+                                <button class="Btn" onclick='mostrarEditar(@Html.Raw(Json.Serialize(item)))'>
+                                    <span>Editar</span>
+                                    <svg class="svg" viewBox="0 0 512 512">
+                                        <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 
+                                                    0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                                    </svg>
+                                </button>
+
+                                <a asp-action="EliminarAd" asp-route-id="@item.Id" asp-controller="Admin"
+                                    class="button delete-btn">
+                                    <span>Eliminar</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-miterlimit="2"
+                                        stroke-linejoin="round" fill-rule="evenodd" clip-rule="evenodd" width="20"
+                                        height="20">
+                                        <path fill-rule="nonzero"
+                                            d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 1.5c-4.69 0-8.497 3.807-8.497 8.497s3.807 8.498 8.497 8.498 8.498-3.808 8.498-8.498-3.808-8.497-8.498-8.497zm0 7.425 2.717-2.718c.146-.146.339-.219.531-.219.404 0 .75.325.75.75 0 .193-.073.384-.219.531l-2.717 2.717 2.727 2.728c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.384-.073-.53-.219l-2.729-2.728-2.728 2.728c-.146.146-.338.219-.53.219-.401 0-.751-.323-.751-.75 0-.192.073-.384.22-.531l2.728-2.728-2.722-2.722c-.146-.147-.219-.338-.219-.531 0-.425.346-.749.75-.749.192 0 .385.073.531.219z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     }
-                    </tbody>
-                </table>
-
+                </div>
             </div>
-
-
         </div>
+
 
         <div class="card2" id="card2">
             <div class="content2">
@@ -63,6 +67,7 @@
                     <div id="formInsertar">
                         <form asp-action="InsertarAd" asp-controller="Admin" method="post">
                             <h2>formulario insercion</h2>
+
 
                             <div class="mb-3">
                                 <label class="form-label">Ingrese el nombre del Admin</label>
@@ -91,44 +96,45 @@
                             <div class="mb-3">
                                 <input type="hidden" id="editId" class="form-control" asp-for="NuevoAdmin.Id" />
 
-                            </div>
 
 
-                            <div class="mb-3">
-                                <label class="form-label">Ingrese el nombre del Admin</label>
-                                <input type="text" id="editNombre" class="form-control" asp-for="NuevoAdmin.Nombre" />
+                                <div class="mb-3">
+                                    <label class="form-label">Ingrese el nombre del Admin</label>
+                                    <input type="text" id="editNombre" class="form-control"
+                                        asp-for="NuevoAdmin.Nombre" />
 
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Ingrese el email de Admin</label>
-                                <input type="text" id="editEmail" class="form-control" asp-for="NuevoAdmin.Email" />
-
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Editar Contraseña</label>
-                                <input type="text" id="editContraseña" class="form-control"
-                                    asp-for="NuevoAdmin.Contraseña" />
-
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Activo</label>
-                                <input type="checkbox" id="editActivo" asp-for="NuevoAdmin.Activo" />
-                            </div>
-                            <button class="button3" type="submit">Confirmar</button>
-                            <div aria-label="User Login Button" tabindex="0" role="button" class="user-profile">
-                                <div class="user-profile-inner">
-                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <g data-name="Layer 2" id="Layer_2">
-                                            <path
-                                                d="m15.626 11.769a6 6 0 1 0 -7.252 0 9.008 9.008 0 0 0 -5.374 8.231 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 9.008 9.008 0 0 0 -5.374-8.231zm-7.626-4.769a4 4 0 1 1 4 4 4 4 0 0 1 -4-4zm10 14h-12a1 1 0 0 1 -1-1 7 7 0 0 1 14 0 1 1 0 0 1 -1 1z">
-                                            </path>
-                                        </g>
-                                    </svg>
-                                    <a class="red"  asp-action="principalAdmin" asp-controller="Admin">Crear nuevo admin</a>
                                 </div>
-                            </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ingrese el email de Admin</label>
+                                    <input type="text" id="editEmail" class="form-control" asp-for="NuevoAdmin.Email" />
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Ingrese la contraseña de Admin</label>
+                                    <input type="text" id="editContraseña" class="form-control"
+                                        asp-for="NuevoAdmin.Contraseña" />
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Activo</label>
+                                    <input type="checkbox" id="editActivo" asp-for="NuevoAdmin.Activo" />
+                                </div>
+                                <button class="button3" type="submit">Confirmar</button>
+                                <div aria-label="User Login Button" tabindex="0" role="button" class="user-profile">
+                                    <div class="user-profile-inner">
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <g data-name="Layer 2" id="Layer_2">
+                                                <path
+                                                    d="m15.626 11.769a6 6 0 1 0 -7.252 0 9.008 9.008 0 0 0 -5.374 8.231 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 9.008 9.008 0 0 0 -5.374-8.231zm-7.626-4.769a4 4 0 1 1 4 4 4 4 0 0 1 -4-4zm10 14h-12a1 1 0 0 1 -1-1 7 7 0 0 1 14 0 1 1 0 0 1 -1 1z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                        <a class="red" asp-action="principalAdmin" asp-controller="Admin">Crear
+                                            nuevo admin</a>
+                                    </div>
+                                </div>
 
                         </form>
                     </div>
