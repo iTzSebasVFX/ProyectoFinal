@@ -1,3 +1,5 @@
+@model List<ProyectoFinal.Models.UsuariosModel>;
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,8 +20,8 @@
 <body>
     <div class="container">
         <nav class="menu">
-           
-    <input type="checkbox" id="toggle">
+
+            <input type="checkbox" id="toggle">
 
             <button class="Chat">
                 <a class="ChatT" asp-action="ZonaChat" asp-controller="UserPerfil">Chat</a>
@@ -27,7 +29,7 @@
 
 
             <button class="juegos">
-                <a class="ZonaJ" asp-action="ValidarAdmin" asp-controller="UserPerfil">Zona de Juegos</a>
+                <a class="ZonaJ" asp-action="Juegos" asp-controller="UserPerfil">Zona de Juegos</a>
             </button>
 
 
@@ -42,15 +44,17 @@
 
 
         </nav>
-        
+
 
 
         <!-- Título superior -->
         @if (!string.IsNullOrEmpty(NombreUsuario))
         {
-        <h1>Bienvenido, @NombreUsuario</h1>
-        }else{
-        <h1>No hay usuario en sesion</h1>
+            <h1>Bienvenido, @NombreUsuario</h1>
+        }
+        else
+        {
+            <h1>No hay usuario en sesion</h1>
         }
         <div class="title">
             Personas con las que podrías interactuar
@@ -63,8 +67,8 @@
             </video>
         </div>
         <div class="image-container" id="imageContainer">
-            <img id="displayImage" class="visible" src="https://via.placeholder.com/400/FF0000/FFFFFF?text=Imagen+1"
-                 alt="Imagen">
+            <img id="displayImage" class="visible" src=""
+                alt="Imagen">
             <div id="feedback" class="feedback"></div>
         </div>
         <div class="buttons">
@@ -84,18 +88,15 @@
     <script>
         // Lista de URLs de imágenes y sus detalles
         const images = [
+        @foreach (var i in Model)
+        {
+            <text>
             {
-                src: "https://imgs.search.brave.com/EgOkCRC2PzugfV34VZTvaxPi6snCuAHkFNlRI_sj4u8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzA2Lzlj/L2U2LzA2OWNlNjlj/OWEyMDE2NzhiODNk/NjA0ZDY2MTk0ZTQx/LmpwZw",
-                details: "soy juan, reposao."
+                src: "@i.FotoRuta",
+                details: "@i.nombreCompleto + @i.correoElectronico"
             },
-            {
-                src: "https://imgs.search.brave.com/es7UbOwLSwEho5VLvXzOhGCawbt2GpaZZSPawmNDkoU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLmNo/emJnci5jb20vZnVs/bC85MjI0MDk3MDI0/L2hDNDcyODg5NC93/ZWlyZC1tZW1lLWZh/Y2Utd3ctZQ.jpeg",
-                details: "bart, 22 años solo bandidas ."
-            },
-            {
-                src: "https://imgs.search.brave.com/SFvaAd8zBSzK_N1_fnSsAAHUnTXG5S2F1qPxyZW4gGA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wcm9z/ZXR0aW5ncy5uZXQv/Y2RuLWNnaS9pbWFn/ZS9kcHI9MSxmPWF1/dG8sZml0PWNvbnRh/aW4sZ3Jhdml0eT10/b3AsaGVpZ2h0PTIw/MCxxPTk5LHNoYXJw/ZW49MSx3aWR0aD0y/MDAvd3AtY29udGVu/dC91cGxvYWRzL2hv/cmN1cy5wbmc",
-                details: "sebas quiceno, edy mamaguevo."
-            }
+            </text>
+        }
         ];
 
         let currentIndex = 0;
@@ -155,7 +156,7 @@
         // Inicializar la imagen
         updateImage();
     </script>
-        <script src="~/js/Tema.js"></script>
+    <script src="~/js/Tema.js"></script>
 </body>
 
 </html>
