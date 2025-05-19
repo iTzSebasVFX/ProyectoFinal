@@ -1,0 +1,96 @@
+@model ProyectoFinal.Models.JuViewModel
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="~/css/Registrojuegos.css" asp-append-version="true">
+  <title>FormEditarJuegos</title>
+</head>
+
+<body>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripcion</th>
+          <th>ImagenFondoUrl</th>
+          <th>UrlJuego</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+      @foreach (var listaJuegos in Model.ListaJuegos)
+      {
+        <tbody>
+          <tr>
+            <td>@listaJuegos.Id</td>
+            <td>@listaJuegos.Nombre</td>
+            <td>@listaJuegos.Descripcion</td>
+            <td><img src="@listaJuegos.ImagenFondoUrl" width="200px" alt="imagen"></td>
+            <td>@listaJuegos.UrlJuego</td>
+            <td><a asp-action="BuscarJuego" asp-controller="Admin" asp-route-id="@listaJuegos.Id"><i
+                  class="fa-solid fa-pencil" style="color: #000000;"></i></a></td>
+          </tr>
+        </tbody>
+      }
+    </table>
+  </div>
+
+  <div class="card">
+
+    <form class="form" method="post" asp-action="ModificarJuegos" asp-controller="Admin">
+      <input type="hidden" id="JuegoId" asp-for="EditarJuego.Id">
+      <h3 id="heading">Editar juegos</h3>
+      <div>
+        <img src="@Model.EditarJuego.ImagenFondoUrl" width="200px" alt="">
+      </div>
+      <div class="field">
+        <input placeholder="Nombre" type="text" id="Nombre" asp-for="EditarJuego.Nombre" class="input-field">
+      </div>
+
+      <div class="field">
+        <textarea placeholder="descripción del juego" id="Descripcion" asp-for="EditarJuego.Descripcion"
+          class="input-field"></textarea>
+      </div>
+
+      <div class="field">
+        <input placeholder="Imagen del juego" type="text" id="ImagenFondoUrl" asp-for="EditarJuego.ImagenFondoUrl"
+          class="input-field">
+      </div>
+
+      <div class="field">
+        <input placeholder="Url del juego" type="text" id="UrlJuego" asp-for="EditarJuego.UrlJuego" class="input-field">
+      </div>
+      <div class="btn">
+        <input type="submit">
+      </div>
+      <button class="button3">Terminos y condiciones</button>
+
+    </form>
+
+
+  </div>
+
+  @if (TempData["Error"] != null)
+  {
+    <div class="alert alert-danger" id="alertError">
+      @TempData["Error"]
+    </div>
+  }
+  <script>
+    let alertError = document.getElementById('alertError');
+
+    setTimeout(function () {
+      alertError.style.display = 'none';
+    }, 5000);
+  </script>
+</body>
+
+</html>

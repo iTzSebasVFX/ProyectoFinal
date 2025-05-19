@@ -42,6 +42,17 @@ namespace ProyectoFinal.Controllers
             return View("UsuarioLista", viewModel);
         }
 
+        public IActionResult JuegosLista()
+        {
+            var viewModel = new JuViewModel
+            {
+                ListaJuegos = _context.Juegos.ToList(),
+                EditarJuego = new Juego()
+            };
+
+            return View("EditarJuegos", viewModel);
+        }
+
         /*------------------------Zona Admins---------------------------------------*/
 
         [HttpPost]
@@ -70,7 +81,7 @@ namespace ProyectoFinal.Controllers
             TempData["Error"] = "Error los datos son invalidos";
             model.ListaAdmins = _context.AdminUsers.ToList();
             return View("PrincipalAdmin", model);
-            
+
         }
 
         [HttpPost]
@@ -197,7 +208,7 @@ namespace ProyectoFinal.Controllers
             model.ListaUsu = _context.Usuarios.ToList();
             return View("UsuarioLista", model);
         }
-    
+
         public IActionResult EliminarUs(int id)
         {
             Console.WriteLine(id);
@@ -212,6 +223,60 @@ namespace ProyectoFinal.Controllers
             }
             TempData["Error"] = "Error usuario no encontrado";
             return RedirectToAction("UsuarioLista");
+        }
+
+        /*------------------------Zona Modificar Juegos---------------------------------*/
+
+
+        public IActionResult BuscarJuego(int Id)
+        {
+            Console.WriteLine(Id);
+            var BuscarJuego = _context.Juegos.FirstOrDefault(j => j.Id == Id);
+            if (BuscarJuego != null)
+            {
+                Console.WriteLine("Pasa por aqui");
+                var viewJuego = new JuViewModel{
+                    ListaJuegos = _context.Juegos.ToList(),
+                    EditarJuego = new Juego()
+                };
+
+                viewJuego.EditarJuego.Id = BuscarJuego.Id;
+                viewJuego.EditarJuego.Nombre = BuscarJuego.Nombre;
+                viewJuego.EditarJuego.Descripcion = BuscarJuego.Descripcion;
+                viewJuego.EditarJuego.ImagenFondoUrl = BuscarJuego.ImagenFondoUrl;
+                viewJuego.EditarJuego.UrlJuego = BuscarJuego.UrlJuego;
+
+                return View("EditarJuegos", viewJuego);
+            }
+            TempData["Error"] = "Usuario con Id no encontrado";
+            return RedirectToAction("EditarJuegos", TempData);
+        }
+
+        [HttpPost]
+        [ActionName("ModificarJuegos")]
+        public async Task<IActionResult> ModificarJuegosAsync(JuViewModel model)
+        {
+            Console.WriteLine(model.EditarJuego.Nombre);
+            if (ModelState.IsValid)
+            {
+                var BuscarDatos = await _context.Juegos.FirstOrDefaultAsync(j => j.Id == model.EditarJuego.Id);
+                if (BuscarDatos == null)
+                {
+                    TempData["Error"] = "Error datos no encontrados";
+                    return View("EditarJuegos", model);
+                }
+                BuscarDatos.Nombre = model.EditarJuego.Nombre;
+                BuscarDatos.Descripcion = model.EditarJuego.Descripcion;
+                BuscarDatos.ImagenFondoUrl = model.EditarJuego.ImagenFondoUrl;
+                BuscarDatos.UrlJuego = model.EditarJuego.UrlJuego;
+
+                _context.Juegos.Update(BuscarDatos);
+                _context.SaveChanges();
+
+                return RedirectToAction("JuegosLista", "Admin");
+            }
+            TempData["Error"] = "Error datos incorrectos";
+            return View("EditarJuegos", model);
         }
     }
 }

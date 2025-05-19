@@ -24,7 +24,8 @@
 <div>
     <div>
         <div class="card">
-            <input class="form-control" type="text" id="user" value="@NombreUsuario" readonly style="visibility: hidden;">
+            <input class="form-control" type="text" id="user" value="@NombreUsuario" readonly
+                style="visibility: hidden;">
             <!-- tiene js-->
             <ul class="messageBoxStyled" id="messagesList"></ul>
             <div class="messageBox">
@@ -83,7 +84,7 @@
     <script>
         // Inicializar conexión
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/chatHub")
+            .withUrl("/ChatHub")
             .build();
 
         connection.start().then(() => {
@@ -98,6 +99,8 @@
             const message = messageInput.value;
 
             if (message.trim() !== "") {
+                console.log("Anda por aqui en chat.cshtml");
+                console.log(typeof(room) + typeof(user) + typeof(message));
                 connection.invoke("SendMessage", room, user, message).catch(err => console.error(err.toString()));
                 messageInput.value = "";
                 messageInput.focus();
@@ -106,9 +109,22 @@
             e.preventDefault(); // Evita recarga
         });
 
-        connection.on("ReceiveMessage", function (user, message) {
+        connection.on("ReceiveMessageHistory", function (messages) {
+            messages.forEach(msg => {
+                const li = document.createElement("li");
+
+                // Formatear hora
+                const hora = new Date(msg.createdAt).toLocaleTimeString();
+
+                li.textContent = `[${hora}] ${msg.user}: ${msg.message}`;
+                document.getElementById("messagesList").appendChild(li);
+            });
+        });
+
+        connection.on("ReceiveMessage", function (user, message, createdAt) {
+            const hora = new Date(createdAt).toLocaleTimeString();
             const li = document.createElement("li");
-            li.textContent = `${user}: ${message}`;
+            li.textContent = `[${hora}] ${user}: ${message}`;
             document.getElementById("messagesList").appendChild(li);
         });
     </script>

@@ -21,6 +21,14 @@
     @if (NombreUsuario != null)
     {
         <h1>Perfil de @NombreUsuario</h1>
+
+
+        @if (TempData["ErrorDatos"] != null)
+        {
+            <div id="alertError" class="alert alert-danger">
+                @TempData["ErrorDatos"]
+            </div>
+        }
     }
     else
     {
@@ -58,10 +66,18 @@
                                 <div class="tab-pane fade active show" id="account-general">
                                     <div class="card-body media align-items-center">
 
-                                        <img class="imagen"
-                                            src="@Url.Content(Model.FotoRuta ?? "~/uploads/fotosinfoto.png")"
-                                            alt="Foto de perfil" width="150" height="150"
-                                            onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" />
+                                        @if (string.IsNullOrEmpty(Model.FotoRuta))
+                                        {
+                                            <img class="imagen" src="/uploads/fotosinfoto.png" alt="Foto de perfil" width="150"
+                                                height="150" />
+                                        }
+                                        else
+                                        {
+                                            <img class="imagen"
+                                                src="@Url.Content(Model.FotoRuta ?? "~/uploads/fotosinfoto.png")"
+                                                alt="No funciono" width="150" height="150"
+                                                onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" />
+                                        }
 
                                         <div class="media-body ml-4">
                                             <label for="fotoPerfil" class="custom-file-label">Sube tu foto de perfil</label>
@@ -70,13 +86,6 @@
                                             <div class="text-muted small mt-1">Formatos permitidos: JPG, GIF o PNG. Tamaño
                                                 máximo: 800 KB</div>
                                         </div>
-
-                                        @if (!ViewData.ModelState.IsValid)
-                                        {
-                                            <div id="alertError" class="alert alert-danger">
-                                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                                            </div>
-                                        }
 
                                     </div>
                                     <hr class="border-light m-0">
@@ -94,22 +103,22 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="form-label" for="Edad">Edad</label>
+                                            <label class="form-label" for="Edad">Edad*</label>
                                             <input type="number" class="form-control mb-1" asp-for="@Model.Edad">
 
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="pais">Pais de residencia</label>
+                                            <label class="form-label" for="pais">Pais de residencia*</label>
                                             <input type="text" class="form-control mb-1" asp-for="@Model.pais">
 
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="numeroTelefono">telefono</label>
+                                            <label class="form-label" for="numeroTelefono">telefono*</label>
                                             <input type="number" class="form-control mb-1" asp-for="@Model.numeroTelefono">
 
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="Genero">Genero</label>
+                                            <label class="form-label" for="Genero">Genero*</label>
                                             <input type="text" class="form-control mb-1" asp-for="@Model.Genero">
 
                                         </div>
@@ -119,11 +128,11 @@
                                 <div class="tab-pane fade" id="account-change-password">
                                     <div class="card-body pb-2">
                                         <div class="form-group">
-                                            <label class="form-label" for="contrasena">contraseña Actual</label>
+                                            <label class="form-label" for="contrasena">contraseña Actual*</label>
                                             <input type="text" class="form-control" asp-for="@Model.contrasena">
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="correoElectronico">Correo</label>s
+                                            <label class="form-label" for="correoElectronico">Correo*</label>
                                             <input type="text" class="form-control mb-1" asp-for="@Model.correoElectronico"
                                                 readonly>
 
@@ -160,9 +169,8 @@
             if (alertElement) {
                 alertElement.style.display = "none";
             }
-        }, 10000); // Desaparece en 10 segundos
+        }, 5000); // Desaparece en 10 segundos
     </script>
-
 </body>
 
 </html>

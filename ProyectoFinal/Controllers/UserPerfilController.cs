@@ -21,7 +21,8 @@ public class UserPerfilController : Controller
 
     public IActionResult Principal()
     {
-        return View();
+        var ListaUsuario = _context.Usuarios.ToList();
+        return View("Principal", ListaUsuario);
     }
 
     public async Task<IActionResult> Perfil()
@@ -43,11 +44,6 @@ public class UserPerfilController : Controller
         return View("Juegos", ListaJuego);
     }
 
-    public IActionResult EditarJuegos()
-    {
-        return View();
-    }
-
     public IActionResult ZonaChat()
     {
         return RedirectToAction("ListaChats", "Chat");
@@ -57,46 +53,6 @@ public class UserPerfilController : Controller
     {
         HttpContext.Session.Clear();
         return RedirectToAction("Index", "Html");
-    }
-
-    public async Task<IActionResult> ValidarAdmin()
-    {
-        Console.WriteLine("Si paso por aqui");
-        var NombreAdmin = HttpContext.Session.GetString("NombreUser");
-        var Email = HttpContext.Session.GetString("CorreoUsuario");
-        var Contraseña = HttpContext.Session.GetString("ContraAdmin");
-        Console.WriteLine(Contraseña);
-
-        var BuscarAd = await _context.AdminUsers.FirstOrDefaultAsync(a => a.Email == Email);
-
-        if (BuscarAd != null)
-        {
-            bool VeriNombre = BuscarAd.Nombre == NombreAdmin;
-            bool VeriEmail = BuscarAd.Email == Email;
-            bool VeriContraseña = BuscarAd.Contraseña == Contraseña;
-            if (VeriNombre && VeriEmail && VeriContraseña == true)
-            {
-                int Verificador = 1;
-                Console.WriteLine("Acceso correcto", Verificador);
-                HttpContext.Session.SetString("Verificador", Verificador.ToString());
-                return RedirectToAction("Juegos");
-            }
-            Console.WriteLine("Paso Por error 2");
-            return RedirectToAction("Juegos");
-        }
-        Console.WriteLine("Paso Por error 1");
-        return RedirectToAction("Juegos");
-    }
-
-    public async Task<IActionResult> PagFormEditar(int id)
-    {
-        Console.WriteLine(id);
-        var BuscarDatos = await _context.Juegos.FirstOrDefaultAsync(j => j.Id == id);
-        if (BuscarDatos != null)
-        {
-            return View("EditarJuegos", BuscarDatos);
-        }
-        return RedirectToAction("Juegos");
     }
 
     [HttpPost]
@@ -171,33 +127,7 @@ public class UserPerfilController : Controller
         }
         Console.WriteLine("Datos no cambiados");
 
-        ModelState.AddModelError(string.Empty, "Rellene los campos");
+        TempData["ErrorDatos"] = "Rellene todos los campos antes de presionar el boton de guardar.";
         return RedirectToAction("Perfil", "UserPerfil");
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> ModificarJuegosAsync(Juego model)
-    {
-        Console.WriteLine(model.Nombre);
-        if (ModelState.IsValid)
-        {
-            var BuscarDatos = await _context.Juegos.FirstOrDefaultAsync(j => j.Id == model.Id);
-            if (BuscarDatos == null)
-            {
-                TempData["Error"] = "Error datos no encontrados";
-                return View("EditarJuegos", model);
-            }
-            BuscarDatos.Nombre = model.Nombre;
-            BuscarDatos.Descripcion = model.Descripcion;
-            BuscarDatos.ImagenFondoUrl = model.ImagenFondoUrl;
-            BuscarDatos.UrlJuego = model.UrlJuego;
-
-            _context.Juegos.Update(BuscarDatos);
-            _context.SaveChanges();
-
-            return RedirectToAction("Juegos");
-        }
-        TempData["Error"] = "Error datos incorrectos";
-        return View("EditarJuegos", model);
     }
 }
