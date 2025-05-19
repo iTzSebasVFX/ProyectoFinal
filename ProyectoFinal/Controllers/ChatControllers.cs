@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChatSignalR.controller
 {
+    [SessionValidator]
     public class ChatController : Controller
     {
         public static Dictionary<int, string> Lista = new Dictionary<int, string>{
@@ -12,6 +13,7 @@ namespace ChatSignalR.controller
 
         public IActionResult ListaChats()
         {
+            Lista.Add(4, "Jose");
             return View("ListaChats", Lista);
         }
 

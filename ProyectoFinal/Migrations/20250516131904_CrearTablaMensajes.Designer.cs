@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250516131904_CrearTablaMensajes")]
+    partial class CrearTablaMensajes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,9 +54,9 @@ namespace ProyectoFinal.Migrations
                         {
                             Id = 1,
                             Activo = true,
-                            Contraseña = "$2a$11$EdM4LHp8PODf9seCPOLPVuPmyou2N08LKZH0soood3Xc5IAYvQ9e6",
+                            Contraseña = "$2a$11$7SdRgfx6l9n1IBGSIC7Oo.HsuFCjHc5O/I2/dvapKhNwsrHowawJq",
                             Email = "admin@example.com",
-                            FechaRegistro = new DateTime(2025, 5, 16, 15, 15, 28, 123, DateTimeKind.Utc).AddTicks(3409),
+                            FechaRegistro = new DateTime(2025, 5, 16, 13, 19, 3, 476, DateTimeKind.Utc).AddTicks(3394),
                             Nombre = "Administrador"
                         });
                 });
@@ -63,9 +66,6 @@ namespace ProyectoFinal.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("message")
                         .IsRequired()

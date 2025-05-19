@@ -285,7 +285,3 @@ body {
     background: #121212; /* Fondo más oscuro para el formulario en modo oscuro */
      
 }
-
-.container .slider .item i.fa-pen-to-square {
-    display: none;
-}
