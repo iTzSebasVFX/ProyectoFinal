@@ -56,7 +56,7 @@ app.UseSession();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    endpoints.MapHub<ChatHub>("/ChatHub"); // Mapea el Hub de SignalR
+    endpoints.MapHub<ChatHub>("/ChatHub"); /*encabezado de letras ára eñ index */
 });
 
 app.MapControllerRoute(
