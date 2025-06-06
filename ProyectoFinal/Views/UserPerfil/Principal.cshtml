@@ -59,104 +59,45 @@
         <div class="title">
             Personas con las que podrías interactuar
         </div>
-
-        <div class="video-border">
-            <video autoplay loop muted>
-                <source src="https://www.videezy.com/download/24070" type="video/mp4">
-                Your browser does not support HTML5 video.
-            </video>
-        </div>
-        <div class="image-container" id="imageContainer">
-            <img id="displayImage" class="visible" src="" alt="Imagen">
-            <div id="feedback" class="feedback"></div>
-        </div>
-        <div class="buttons">
-            <button onclick="prevImage()">Anterior</button>
-            <a asp-action="Invitar" asp-controller="Chat">Me Gusta</a>
-            <button onclick="deleteImage()">Eliminar</button>
-            <button onclick="nextImage()">Siguiente</button>
-        </div>
-    </div>
-
-    <!-- Contenedor de detalles -->
-    <div class="details-container">
-        <h3>informacion</h3>
-        <p id="imageDetails">Cargando detalles...</p>
-    </div>
-
-    <script>
-        // Creamos una lista que almacene la lista que viene del controlador con la informacion de usuarios.
-        const images = [
-        @foreach (var i in Model.ListaUsu)
+        @if (Model.NuevoUsuario.Edad >= 18)
+        {
+            <!-- Animacion -->
+            @foreach (var item in Model.ListaUsu)
             {
-                <text>
-                    {
-                        src: "@i.FotoRuta",
-                    details: "@i.nombreCompleto + @i.correoElectronico",
-                    idUser: "@i.id"
-                    },
-                </text>
-        }
-        ];
-
-        let currentIndex = 0;
-
-        // Función para actualizar la imagen actual con animación llamativa
-        function updateImage() {
-            const displayImage = document.getElementById("displayImage");
-            const imageDetails = document.getElementById("imageDetails");
-
-            displayImage.classList.remove("visible"); // Desaparecer la imagen actual
-            setTimeout(() => {
-                displayImage.src = images[currentIndex].src;
-                imageDetails.textContent = images[currentIndex].details;
-                displayImage.classList.add("visible"); // Mostrar la nueva imagen
-            }, 500);
-        }
-
-        // Cambiar a la imagen anterior
-        function prevImage() {
-            currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
-            updateImage();
-        }
-
-        // Cambiar a la siguiente imagen
-        function nextImage() {
-            currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
-            updateImage();
-        }
-
-        // Mostrar mensaje de "Me gusta"
-        @* function likeImage() {
-            const feedback = document.getElementById("feedback");
-            feedback.textContent = "✔";
-            feedback.style.color = "#28a745";
-            feedback.classList.add("show");
-            setTimeout(() => feedback.classList.remove("show"), 2000);
-        } *@
-
-            // Eliminar la imagen actual
-            function deleteImage() {
-                const feedback = document.getElementById("feedback");
-                feedback.textContent = "✘";
-                feedback.style.color = "#dc3545";
-                feedback.classList.add("show");
-                setTimeout(() => feedback.classList.remove("show"), 2000);
-
-                images.splice(currentIndex, 1);
-                if (images.length === 0) {
-                    alert("No hay más imágenes disponibles.");
-                    document.getElementById("displayImage").src = "";
-                } else {
-                    currentIndex = currentIndex % images.length;
-                    updateImage();
+                @if (string.IsNullOrEmpty(item.FotoRuta))
+                {
+                    <img class="image-container" id="imageContainer" src="/uploads/fotosinfoto.png" alt="Foto de perfil" width="150"
+                        height="150" />
                 }
-            }
+                else
+                {
+                    <img class="image-container" id="imageContainer"
+                        src="@Url.Content(item.FotoRuta ?? " ~/uploads/fotosinfoto.png")" alt="No funciono" width="150" height="150"
+                        onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" />
+                }
+                <br>
+                <br>
+                <a >Invitar a Room</a>
+                <br>
+                <br>
+                <div class="details-container">
+                    <h3>Informacion Usuario</h3>
+                    @if (string.IsNullOrEmpty(item.nombreCompleto) || string.IsNullOrEmpty(item.Genero))
+                    {
+                        <p id="imageDetails">Cargando Detalles...</p>
+                    } else {
+                        <p id="imageDetails">Nombre = @item.nombreCompleto</p>
+                        <p id="imageDetails">Edad = @item.Edad</p>
+                        <p id="imageDetails">Genero = @item.Genero</p>
+                    }
+                </div>
 
-        // Inicializar la imagen
-        updateImage();
-    </script>
-    <script src="~/js/Tema.js"></script>
+            }
+        } else {
+            <p>Su edad no es lo suficiente para conocer personas, Presione el boton para modificar su perfil</p>
+            <a asp-action="Perfil" asp-controller="UserPerfil">Editar Perfil</a>
+        }
+        <script src="~/js/Tema.js"></script>
 </body>
 
 </html>
