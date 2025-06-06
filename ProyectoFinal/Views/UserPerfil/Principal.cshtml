@@ -1,4 +1,4 @@
-@model List<ProyectoFinal.Models.UsuariosModel>;
+@model ProyectoFinal.Models.UsViewModel
 
 <!DOCTYPE html>
 <html lang="es">
@@ -67,13 +67,12 @@
             </video>
         </div>
         <div class="image-container" id="imageContainer">
-            <img id="displayImage" class="visible" src=""
-                alt="Imagen">
+            <img id="displayImage" class="visible" src="" alt="Imagen">
             <div id="feedback" class="feedback"></div>
         </div>
         <div class="buttons">
             <button onclick="prevImage()">Anterior</button>
-            <button onclick="likeImage()">Me Gusta</button>
+            <a asp-action="Invitar" asp-controller="Chat">Me Gusta</a>
             <button onclick="deleteImage()">Eliminar</button>
             <button onclick="nextImage()">Siguiente</button>
         </div>
@@ -86,16 +85,17 @@
     </div>
 
     <script>
-        // Lista de URLs de imágenes y sus detalles
+        // Creamos una lista que almacene la lista que viene del controlador con la informacion de usuarios.
         const images = [
-        @foreach (var i in Model)
-        {
-            <text>
+        @foreach (var i in Model.ListaUsu)
             {
-                src: "@i.FotoRuta",
-                details: "@i.nombreCompleto + @i.correoElectronico"
-            },
-            </text>
+                <text>
+                    {
+                        src: "@i.FotoRuta",
+                    details: "@i.nombreCompleto + @i.correoElectronico",
+                    idUser: "@i.id"
+                    },
+                </text>
         }
         ];
 
@@ -127,31 +127,31 @@
         }
 
         // Mostrar mensaje de "Me gusta"
-        function likeImage() {
+        @* function likeImage() {
             const feedback = document.getElementById("feedback");
             feedback.textContent = "✔";
             feedback.style.color = "#28a745";
             feedback.classList.add("show");
             setTimeout(() => feedback.classList.remove("show"), 2000);
-        }
+        } *@
 
-        // Eliminar la imagen actual
-        function deleteImage() {
-            const feedback = document.getElementById("feedback");
-            feedback.textContent = "✘";
-            feedback.style.color = "#dc3545";
-            feedback.classList.add("show");
-            setTimeout(() => feedback.classList.remove("show"), 2000);
+            // Eliminar la imagen actual
+            function deleteImage() {
+                const feedback = document.getElementById("feedback");
+                feedback.textContent = "✘";
+                feedback.style.color = "#dc3545";
+                feedback.classList.add("show");
+                setTimeout(() => feedback.classList.remove("show"), 2000);
 
-            images.splice(currentIndex, 1);
-            if (images.length === 0) {
-                alert("No hay más imágenes disponibles.");
-                document.getElementById("displayImage").src = "";
-            } else {
-                currentIndex = currentIndex % images.length;
-                updateImage();
+                images.splice(currentIndex, 1);
+                if (images.length === 0) {
+                    alert("No hay más imágenes disponibles.");
+                    document.getElementById("displayImage").src = "";
+                } else {
+                    currentIndex = currentIndex % images.length;
+                    updateImage();
+                }
             }
-        }
 
         // Inicializar la imagen
         updateImage();

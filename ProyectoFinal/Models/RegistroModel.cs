@@ -15,7 +15,7 @@ namespace ProyectoFinal.Models
         public string? apellidoCompleto {get; set;} = string.Empty;
 
         [Required(ErrorMessage = "Porfavor Ingrese un Email")]
-        public string? correoElectronico {get; set;} = string.Empty;
+        public string correoElectronico {get; set;} = string.Empty;
 
         [Required(ErrorMessage = "Porfavor Ingrese un Contrasena")] 
         public string? contrasena {get; set;} = string.Empty;

@@ -1,0 +1,24 @@
+@model ProyectoFinal.Models.RoomModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Room</title>
+</head>
+<body>
+    <article>
+        <form asp-action="NuevoRoom" asp-controller="Chat" method="post">
+            <label for="roomName">Nombre Room</label>
+            <input type="text" asp-for="@Model.RoomName">
+            <label for="creadorName">Nombre Creador</label>
+            <input type="text" asp-for="@Model.CreadorName">
+            <label for="participantes">Participantes</label>
+            <input type="text" asp-for="@Model.Participantes">
+
+            <button type="submit">Crear</button>
+        </form>
+    </article>
+</body>
+</html>

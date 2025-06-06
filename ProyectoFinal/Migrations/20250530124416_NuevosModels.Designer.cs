@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250530124416_NuevosModels")]
+    partial class NuevosModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +48,17 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AdminUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Activo = true,
+                            Contraseña = "$2a$11$MOk/k3OC12lLkyGgBs.qTOBQf9hx/xjOnhiKXdyeV.DhVLh5NHz0y",
+                            Email = "admin@example.com",
+                            FechaRegistro = new DateTime(2025, 5, 30, 12, 44, 15, 328, DateTimeKind.Utc).AddTicks(8483),
+                            Nombre = "Administrador"
+                        });
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.ChatModel", b =>
@@ -73,34 +87,6 @@ namespace ProyectoFinal.Migrations
                     b.ToTable("Mensajes");
                 });
 
-            modelBuilder.Entity("ProyectoFinal.Models.Invitaciones", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Aceptada")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Destinatario")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateOnly>("Fecha")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Remitente")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("invitaciones");
-                });
-
             modelBuilder.Entity("ProyectoFinal.Models.Juego", b =>
                 {
                     b.Property<int>("Id")
@@ -126,57 +112,6 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Juegos");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.RoomModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreadorName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RoomName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("fechaCreacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Room");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.UsRoomModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdRoom")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdUsuario")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Usuarioid")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoomId");
-
-                    b.HasIndex("Usuarioid");
-
-                    b.ToTable("UsuariosRoom");
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.UsuariosModel", b =>
@@ -220,26 +155,6 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.UsRoomModel", b =>
-                {
-                    b.HasOne("ProyectoFinal.Models.RoomModel", "Room")
-                        .WithMany("Participantes")
-                        .HasForeignKey("RoomId");
-
-                    b.HasOne("ProyectoFinal.Models.UsuariosModel", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("Usuarioid");
-
-                    b.Navigation("Room");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.RoomModel", b =>
-                {
-                    b.Navigation("Participantes");
                 });
 #pragma warning restore 612, 618
         }
