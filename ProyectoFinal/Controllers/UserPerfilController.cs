@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
@@ -21,8 +23,20 @@ public class UserPerfilController : Controller
 
     public IActionResult Principal()
     {
-        var ListaUsuario = _context.Usuarios.ToList();
-        return View("Principal", ListaUsuario);
+        var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
+
+        var SearchUser = _context.Usuarios.FirstOrDefault(u => u.correoElectronico == CorreoUsuario);
+        if (SearchUser != null)
+        {
+            var datos = new UsViewModel
+            {
+                ListaUsu = _context.Usuarios.Where(u => u.id != SearchUser.id).ToList(),
+                NuevoUsuario = new UsuariosModel()
+            };
+            return View("Principal", datos);
+        }
+        TempData["Error"] = "No hay un usuario en sesion";
+        return View("Principal");
     }
 
     public async Task<IActionResult> Perfil()
@@ -62,17 +76,10 @@ public class UserPerfilController : Controller
 
         if (ModelState.IsValid)
         {
-
-            Console.WriteLine("Aqui en la busqueda de usuario");
-
             var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
-
             var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == CorreoUsuario);
-
             if (UserSearch == null)
             {
-                Console.WriteLine("Paso por el error de busqueda");
-
                 ModelState.AddModelError(string.Empty, "Error usuario no encontrado");
                 return RedirectToAction("Principal", "UserPerfil");
             }
@@ -126,8 +133,7 @@ public class UserPerfilController : Controller
 
         }
         Console.WriteLine("Datos no cambiados");
-
         TempData["ErrorDatos"] = "Rellene todos los campos antes de presionar el boton de guardar.";
-        return RedirectToAction("Perfil", "UserPerfil");
+        return View("Perfil", datos);
     }
 }

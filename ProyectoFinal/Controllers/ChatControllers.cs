@@ -13,13 +13,18 @@ namespace ChatSignalR.controller
 
         public IActionResult ListaChats()
         {
-            Lista.Add(4, "Jose");
             return View("ListaChats", Lista);
         }
 
         public IActionResult chat(int idChat)
         {
             return View("chat", idChat);
+        }
+
+        public IActionResult Invitar(int itemid)
+        {
+            Console.WriteLine(itemid);
+            return View("NewRoom");
         }
     }
 }

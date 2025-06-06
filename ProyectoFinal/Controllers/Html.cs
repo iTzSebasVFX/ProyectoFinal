@@ -43,8 +43,7 @@ public class HtmlController : Controller
 
     public IActionResult Clave(RegistroModel model)
     {
-
-        return View(model);
+        return View("Clave", model);
     }
 
     public HtmlController(ApplicationDbContext context)
@@ -225,21 +224,36 @@ public class HtmlController : Controller
     [HttpPost]
     public IActionResult CapturarDatos(RegistroModel model)
     {
-
-
         Console.WriteLine("Si paso por aqui");
-
         if (ModelState.IsValid)
         {
-            Console.WriteLine("Si eran validos");
-            return View("Clave", model);
+            var emailSpliteado = model.correoElectronico.Split("@");
+            if (emailSpliteado.Length > 2)
+            {
+                ModelState.AddModelError("email", "El correo es invalido, no puede tener mas de dos '@'");
+                ViewData["ErrorMessage"] = "El correo es invalido, no puede tener mas de dos '@'";
+                return View("Registro", model);
+            }
+            else
+            {
+                if (emailSpliteado[0].Contains('.'))
+                {
+                    ViewData["ErrorMessage"] = "El correo electronico es invalido, no puede tener un punto antes del '@'";
+                    return View("Registro", model);
+                }
+                else
+                {
+                    Console.WriteLine("Si eran validos");
+                    return View("Clave", model);
+                }
+            }
         }
         else
         {
             Console.WriteLine("Tambien por aqui");
 
             // Agregar mensaje de error para mostrar en la vista
-            ViewData["ErrorMessage"] = "Error en el registro. Verifica los datos.";
+            ViewData["ErrorMessage"] = "Error en el registro. Rellena los campos.";
 
             // Enviar de vuelta a la vista de registro con el mensaje de error
             return View("Registro", model);
