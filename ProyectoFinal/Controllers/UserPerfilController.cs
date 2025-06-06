@@ -31,7 +31,7 @@ public class UserPerfilController : Controller
             var datos = new UsViewModel
             {
                 ListaUsu = _context.Usuarios.Where(u => u.id != SearchUser.id).ToList(),
-                NuevoUsuario = new UsuariosModel()
+                NuevoUsuario = SearchUser
             };
             return View("Principal", datos);
         }
