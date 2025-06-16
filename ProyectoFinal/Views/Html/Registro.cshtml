@@ -6,20 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro</title>
     <link rel="stylesheet" href="~/css/Registro.css" asp-append-version="true">
     <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+
 </head>
 
-<body>
+<body transition-style="in:diamond:hesitate">
+
     <label for="toggle" id="label_toggle">
         <i class="fa-solid fa-palette" style="color: #ffffff;"></i>
     </label>
     <input type="checkbox" id="toggle">
 
     <form class="form" method="post" asp-controller="Html" asp-action="CapturarDatos">
-        <h3 id="heading">Registro</h3>
-
+        <h3 id="heading">Registro De Usuario</h3>
         @if (ViewData["ErrorMessage"] != null)
         {
             <div id="alertError">
@@ -71,7 +72,6 @@
             <input asp-for="correoElectronico" autocomplete="off" placeholder="Correo" class="input-field" type="text">
         </div>
         @* 7*@
-
         <div class="field">
             <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 viewBox="0 0 16 16">
@@ -85,12 +85,11 @@
         <div class="btn">
             <button type="submit" class="button2">Registrar</button>
         </div>
-        <button class="button3">terninos y condiciones</button>
     </form>
     </div>
     </main>
 
-    <!-- wnd main  -->
+    <!--Alerta de error-->
     <script src="js/registro.js" asp-append-version="true"></script>
     <script asp-append-version="true">
         setTimeout(() => {
@@ -102,6 +101,8 @@
     </script>
 
     <script src="~/js/Tema.js"></script>
+    <script src="~/js/salida.js"></script>
+  
 </body>
 
 </html>

@@ -45,7 +45,7 @@ body {
     .btn-txt {
         z-index: 1;
         font-weight: 800;
-        color: #fff;
+        color: #ebebeb;
     }
 
     .type1::after {
@@ -165,6 +165,15 @@ body {
     transform: translate(0, -50%);
     font-family: system-ui;
     display: none;
+}
+.item button{
+opacity:70px;
+
+}
+.item a{
+    text-decoration: none;
+color: #fff;
+
 }
 
 .slider .item:nth-child(2) .content {

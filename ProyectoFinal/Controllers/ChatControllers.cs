@@ -13,7 +13,6 @@ namespace ChatSignalR.controller
 
         public IActionResult ListaChats()
         {
-            Lista.Add(4, "Jose");
             return View("ListaChats", Lista);
         }
 

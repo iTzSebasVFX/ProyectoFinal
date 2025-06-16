@@ -14,69 +14,94 @@
 </head>
 
 <body>
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>ImagenFondoUrl</th>
-          <th>UrlJuego</th>
-          <th>Editar</th>
-        </tr>
-      </thead>
-      @foreach (var listaJuegos in Model.ListaJuegos)
-      {
-        <tbody>
-          <tr>
-            <td>@listaJuegos.Id</td>
-            <td>@listaJuegos.Nombre</td>
-            <td>@listaJuegos.Descripcion</td>
-            <td><img src="@listaJuegos.ImagenFondoUrl" width="200px" alt="imagen"></td>
-            <td>@listaJuegos.UrlJuego</td>
-            <td><a asp-action="BuscarJuego" asp-controller="Admin" asp-route-id="@listaJuegos.Id"><i
-                  class="fa-solid fa-pencil" style="color: #000000;"></i></a></td>
-          </tr>
-        </tbody>
-      }
-    </table>
-  </div>
-
-  <div class="card">
-
-    <form class="form" method="post" asp-action="ModificarJuegos" asp-controller="Admin">
-      <input type="hidden" id="JuegoId" asp-for="EditarJuego.Id">
-      <h3 id="heading">Editar juegos</h3>
+  <div class="container">
+    <div class="item">
       <div>
-        <img src="@Model.EditarJuego.ImagenFondoUrl" width="200px" alt="">
-      </div>
-      <div class="field">
-        <input placeholder="Nombre" type="text" id="Nombre" asp-for="EditarJuego.Nombre" class="input-field">
-      </div>
 
-      <div class="field">
-        <textarea placeholder="descripción del juego" id="Descripcion" asp-for="EditarJuego.Descripcion"
-          class="input-field"></textarea>
-      </div>
+        <h3> Editar Juegos</h3>
+        <div class="scroll-boxl">
+          <div class="box">
+            @foreach (var listaJuegos in Model.ListaJuegos)
+            {
+              <div class="list">
+                <div class="imgBX">
+                  <td><img src="@listaJuegos.ImagenFondoUrl" width="200px" alt="imagen"></td>
+                </div>
+                <div class="content">
+                  <h2 class="rank"><small>#</small>@listaJuegos.Id</h2>
+                  <p>Nombre: @listaJuegos.Nombre</p>
+                  <p>Descripccion: @listaJuegos.Descripcion</p>
+                  <p>Url: @listaJuegos.UrlJuego</p>
+                </div>
+                <div class="actions" style="display:flex; flex-direction: column; gap:5px; margin-left:auto;">
+                  <a class="Btn" asp-action="BuscarJuego" asp-controller="Admin" asp-route-id="@listaJuegos.Id">
+                     <span>Editar</span>
+                    <svg class="svg" viewBox="0 0 512 512">
+                      <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 
+                                                            0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
+                      </path>
+                    </svg>
+                  </a>      
 
-      <div class="field">
-        <input placeholder="Imagen del juego" type="text" id="ImagenFondoUrl" asp-for="EditarJuego.ImagenFondoUrl"
-          class="input-field">
-      </div>
+                </div>
 
-      <div class="field">
-        <input placeholder="Url del juego" type="text" id="UrlJuego" asp-for="EditarJuego.UrlJuego" class="input-field">
-      </div>
-      <div class="btn">
-        <input type="submit">
-      </div>
-      <button class="button3">Terminos y condiciones</button>
 
-    </form>
+              </div>
+
+            }
+          </div>
+
+        </div>
+
+      </div>
+    </div>
 
 
   </div>
+  <div class="item">
+    <div class="card">
+
+      <form class="form" method="post" asp-action="ModificarJuegos" asp-controller="Admin">
+
+        <input type="hidden" id="JuegoId" asp-for="EditarJuego.Id">
+        <h3 id="heading">Editar juegos</h3>
+        <div>
+          <img src="@Model.EditarJuego.ImagenFondoUrl" width="200px" alt="">
+        </div>
+        <div class="field">
+          <input placeholder="Nombre" type="text" id="Nombre" asp-for="EditarJuego.Nombre" class="input-field">
+        </div>
+
+        <div class="field">
+          <textarea placeholder="descripción del juego" id="Descripcion" asp-for="EditarJuego.Descripcion"
+            class="input-field"></textarea>
+        </div>
+
+        <div class="field">
+          <input placeholder="Imagen del juego" type="text" id="ImagenFondoUrl" asp-for="EditarJuego.ImagenFondoUrl"
+            class="input-field">
+        </div>
+
+        <div class="field">
+          <input placeholder="Url del juego" type="text" id="UrlJuego" asp-for="EditarJuego.UrlJuego"
+            class="input-field">
+        </div>
+        <button class="btn" type="submit">enviar</button>
+
+      </form>
+
+
+    </div>
+
+
+
+  </div>
+
+
+  </div>
+
+
+
 
   @if (TempData["Error"] != null)
   {

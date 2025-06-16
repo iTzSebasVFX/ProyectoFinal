@@ -1,21 +1,20 @@
+/*estilo de pagina*/
 HEAD * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
 }
-
 body {
     background: linear-gradient(90deg, #442063, #1d3263);
-    padding: auto;
+    padding: 0;
+    margin: 0;
 
 }
-
-
+/*menu*/
 .menu {
     width: 100%;
     height: 80px;
-
     display: flex;
 
     * {
@@ -55,29 +54,20 @@ body {
                     height: 40px;
                     opacity: 20;
                 }
-
             }
-
             >ul {
                 width: 230px;
                 height: 0;
                 opacity: 0;
-
                 transition: .12s;
                 position: absolute;
-
                 z-index: 1;
-
-
-
                 >li {
                     width: 100%;
                     height: 100%;
                     font-style: italic;
                     list-style: none;
                     border-bottom: 1px solid wheat;
-
-
                     >a {
                         width: 100%;
                         height: 100%;
@@ -97,11 +87,8 @@ body {
                             border-radius: 20px;
                         }
                     }
-
-
                 }
             }
-
             >a {
                 display: flex;
                 justify-content: center;
@@ -115,7 +102,6 @@ body {
                 /* background-color: #ce8080; */
                 font-size: 20px;
                 transition: .5s;
-
                 &:hover {
                     font-size: 25px;
                     background-color: #0000000a;
@@ -123,24 +109,19 @@ body {
             }
         }
     }
-
 }
-
+/*
 #Registro {
     cursor: pointer;
-}
-
+}*/
 .main {
     width: 103%;
     height: 77vh;
-    /* border: 1px solid rgb(45, 15, 210); */
     display: flex;
-
     >div {
         width: 40%;
         height: 100%;
         position: relative;
-
         ::after {
             content: '';
             width: 5px;
@@ -150,7 +131,6 @@ body {
             left: 15%;
             top: 15%;
         }
-
         >h1 {
             width: 90%;
             margin: 90px 110px 0;
@@ -160,7 +140,6 @@ body {
             font-style: italic;
 
         }
-
         >p {
             font-family: sans-serif;
             font-size: 150%;
@@ -169,25 +148,16 @@ body {
             color: #ffff;
             margin: 15px 110px 10px;
         }
-
     }
-
     >figure {
         width: 60%;
         height: 100%;
-
-        /* border: 1px solid rgb(30, 255, 0); */
         >img {
             width: 100%;
             height: 90%;
             object-fit: contain;
-
-
         }
-
     }
-
-
 }
 
 .wrapper {
@@ -255,9 +225,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Ajusta el contenido de la imagen */
     border-radius: 12px;
-    /* Mantén las esquinas redondeadas */
 }
 
 /*Tema del index */
@@ -272,12 +240,12 @@ body {
     font-size: 2em;
     cursor: pointer;
 }
+/* Texto blanco */
+/* Fondo oscuro */
 
 .dark {
     background: #121212;
-    /* Fondo oscuro */
     color: #FFFFFF;
-    /* Texto blanco */
 }
 
 footer {
@@ -289,7 +257,6 @@ footer {
 }
 .dark footer {
     background: #121212;
-
   }
 
 footer p {
@@ -307,4 +274,39 @@ footer a {
 
 footer a:hover {
     color: #ffffff;
+}
+
+/* animacion de entrada */
+@keyframes diamond-in-hesitate {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+  }
+  50% {
+    clip-path: polygon(45% 50%, 50% 25%, 55% 50%, 50% 75%);
+  }
+  100% {
+    clip-path: polygon(-50% 50%, 50% -50%, 150% 50%, 50% 150%);
+  }
+}
+
+[transition-style="in:diamond:hesitate"] {
+  animation: 1.5s cubic-bezier(.25, 1, .30, 1) diamond-in-hesitate both;
+}
+
+/* salida*/
+
+@keyframes diamond-out-hesitate {
+  0% {
+    clip-path: polygon(-50% 50%, 50% -50%, 150% 50%, 50% 150%);
+  }
+  50% {
+    clip-path: polygon(45% 50%, 50% 25%, 55% 50%, 50% 75%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+  }
+}
+
+[transition-style="out:diamond:hesitate"] {
+  animation: 1.5s cubic-bezier(.25, 1, .30, 1) diamond-out-hesitate both;
 }
