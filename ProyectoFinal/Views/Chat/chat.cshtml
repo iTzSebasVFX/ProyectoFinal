@@ -4,21 +4,21 @@
 
 @{
     var NombreUsuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+    var idUser = HttpContextAccessor.HttpContext?.Session.GetString("idUser");
 }
 
 <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true">
 <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
 <nav>
-    <a asp-action="ListaChats" asp-controller="Chat" class="upload-icon" style="margin-left: 10px;">
+    <a asp-action="PruebasChatPriv" asp-controller="Chat" class="upload-icon" style="margin-left: 10px;">
         <div class=" pepe">
             <button class="button type1">
                 <span class="btn-txt"><i class="fa-solid fa-caret-left fa-beat"></i><a class="decoracion"
                         asp-action="Principal" asp-controller="UserPerfil">Volver</a></span>
             </button>
         </div>
-        <span class="tooltip">Lista de Chats</span>
     </a>
-    <h1 class="textTitle">@ChatSignalR.controller.ChatController.Lista.GetValueOrDefault(Model)</h1>
+    <h1 class="textTitle"></h1>
 </nav>
 
 <div>
@@ -86,9 +86,8 @@
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("/ChatHub")
             .build();
-
         connection.start().then(() => {
-            connection.invoke("AddGroup", "@Model");
+            connection.invoke("AddGroup", "@Model", "@idUser");
         }).catch(err => console.error(err.toString()));
 
         // Enviar mensaje
@@ -100,7 +99,7 @@
 
             if (message.trim() !== "") {
                 console.log("Anda por aqui en chat.cshtml");
-                console.log(typeof(room) + typeof(user) + typeof(message));
+                console.log(typeof (room) + typeof (user) + typeof (message));
                 connection.invoke("SendMessage", room, user, message).catch(err => console.error(err.toString()));
                 messageInput.value = "";
                 messageInput.focus();
@@ -126,6 +125,12 @@
             const li = document.createElement("li");
             li.textContent = `[${hora}] ${user}: ${message}`;
             document.getElementById("messagesList").appendChild(li);
+        });
+
+        connection.on("AccessDenied", function (mensaje) {
+            alert(mensaje); // Muestra "No autenticado" o el mensaje que envíes desde el Hub
+            // También podrías redireccionar o cerrar el chat
+            window.location.href = "/Chat/PruebasChatPriv"; // por ejemplo
         });
     </script>
     <script src="~/js/ChatNumber.js"></script>

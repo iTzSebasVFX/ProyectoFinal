@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Controllers;
@@ -21,8 +23,66 @@ public class UserPerfilController : Controller
 
     public IActionResult Principal()
     {
-        var ListaUsuario = _context.Usuarios.ToList();
-        return View("Principal", ListaUsuario);
+        var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
+
+        var SearchUser = _context.Usuarios.FirstOrDefault(u => u.correoElectronico == CorreoUsuario);
+        if (SearchUser != null)
+        {
+            var datos = new UsViewModel
+            {
+                ListaUsu = _context.Usuarios.Where(u => u.id != SearchUser.id).ToList(),
+                NuevoUsuario = SearchUser
+            };
+            return View("Principal", datos);
+        }
+        TempData["Error"] = "No hay un usuario en sesion";
+        return View("Principal");
+    }
+
+    public async Task<IActionResult> PrincipalFiltrado(string? genero, string? pais, string? edad)
+    {
+        var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
+
+        var SearchUser = _context.Usuarios.FirstOrDefault(u => u.correoElectronico == CorreoUsuario);
+        if (SearchUser != null)
+        {
+            var query = _context.Usuarios.AsQueryable();
+
+            if (!string.IsNullOrEmpty(genero))
+            {
+                query = query.Where(u => u.Genero == genero);
+            }
+            if (!string.IsNullOrEmpty(pais))
+            {
+                query = query.Where(u => u.pais == pais);
+            }
+            if (!string.IsNullOrEmpty(edad))
+            {
+                switch (edad)
+                {
+                    case "18-25":
+                        query = query.Where(u => u.Edad >= 18 && u.Edad <= 25);
+                        break;
+                    case "26-35":
+                        query = query.Where(u => u.Edad >= 26 && u.Edad <= 35);
+                        break;
+                    case "36-45":
+                        query = query.Where(u => u.Edad >= 36 && u.Edad <= 45);
+                        break;
+                    case "46+":
+                        query = query.Where(u => u.Edad >= 46);
+                        break;
+                }
+            }
+            var datos = new UsViewModel
+            {
+                ListaUsu = await query.ToListAsync(),
+                NuevoUsuario = SearchUser
+            };
+            return View("Principal", datos);
+        }
+        TempData["Error"] = "No hay un usuario en sesion";
+        return View("Principal");
     }
 
     public async Task<IActionResult> Perfil()
@@ -49,10 +109,70 @@ public class UserPerfilController : Controller
         return RedirectToAction("ListaChats", "Chat");
     }
 
+    public async Task<IActionResult> ListaInvi()
+    {
+        var correoUsuario = HttpContext.Session.GetString("CorreoUsuario");
+        var SearchActualUser = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == correoUsuario);
+        if (SearchActualUser == null)
+        {
+            return RedirectToAction("Principal", "UserPerfil");
+        }
+
+        var ListaInvitaciones = await _context.invitaciones.Where(i => i.Destinatario == SearchActualUser.id.ToString()).ToListAsync();
+        return View("Invitaciones", ListaInvitaciones);
+    }
+
     public IActionResult CerrarSesion()
     {
         HttpContext.Session.Clear();
         return RedirectToAction("Index", "Html");
+    }
+
+    public async Task<IActionResult> InvitarUs(int idChat)
+    {
+        // Buscar el usuario y el room
+        var idUser = Convert.ToInt32(HttpContext.Session.GetString("itemid"));
+        if (idUser == 0)
+        {
+            TempData["Error"] = "Error no selecciono ningun usuario";
+            return RedirectToAction("Principal", "UserPerfil");
+        }
+        // Obtener el usuario actual
+        var correoUsuario = HttpContext.Session.GetString("CorreoUsuario");
+
+        var SearchRoom = await _context.Room.FirstOrDefaultAsync(r => r.Id == idChat);
+        var SearchActualUser = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == correoUsuario);
+        if (SearchRoom == null)
+        {
+            return RedirectToAction("Principal", "UserPerfil");
+        }
+        if (SearchActualUser == null)
+        {
+            TempData["Error"] = "No hay una sesion actual";
+            return RedirectToAction("Principal", "UserPerfil");
+        }
+
+        var UsuInvi = await _context.invitaciones.AnyAsync(i => i.Destinatario == idUser.ToString() && i.RoomId == SearchRoom.Id);
+        if (UsuInvi)
+        {
+            TempData["Error"] = "Este usuario ya fue invitado a ese room";
+            return RedirectToAction("Principal", "UserPerfil");
+        }
+
+        var newInvitacion = new Invitaciones
+        {
+            RoomId = SearchRoom.Id,
+            Remitente = SearchActualUser.nombreCompleto,
+            Destinatario = idUser.ToString(),
+            Aceptada = false
+        };
+        HttpContext.Session.Remove("itemid");
+
+        await _context.invitaciones.AddAsync(newInvitacion);
+        await _context.SaveChangesAsync();
+
+        TempData["Exito"] = "Invitacion enviada exitonsamente";
+        return RedirectToAction("Principal", "UserPerfil");
     }
 
     [HttpPost]
@@ -62,17 +182,10 @@ public class UserPerfilController : Controller
 
         if (ModelState.IsValid)
         {
-
-            Console.WriteLine("Aqui en la busqueda de usuario");
-
             var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
-
             var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == CorreoUsuario);
-
             if (UserSearch == null)
             {
-                Console.WriteLine("Paso por el error de busqueda");
-
                 ModelState.AddModelError(string.Empty, "Error usuario no encontrado");
                 return RedirectToAction("Principal", "UserPerfil");
             }
@@ -126,8 +239,7 @@ public class UserPerfilController : Controller
 
         }
         Console.WriteLine("Datos no cambiados");
-
         TempData["ErrorDatos"] = "Rellene todos los campos antes de presionar el boton de guardar.";
-        return RedirectToAction("Perfil", "UserPerfil");
+        return View("Perfil", datos);
     }
 }

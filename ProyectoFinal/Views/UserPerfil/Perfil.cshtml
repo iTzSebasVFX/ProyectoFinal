@@ -21,13 +21,17 @@
     @if (NombreUsuario != null)
     {
         <h1>Perfil de @NombreUsuario</h1>
-
-
-        @if (TempData["ErrorDatos"] != null)
+        @if (!ViewData.ModelState.IsValid)
         {
             <div id="alertError" class="alert alert-danger">
-                @TempData["ErrorDatos"]
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </div>
+            @if (TempData["ErrorDatos"] != null)
+            {
+                <div id="alertError" class="alert alert-danger">
+                    @TempData["ErrorDatos"]
+                </div>
+            }
         }
     }
     else
@@ -169,7 +173,7 @@
             if (alertElement) {
                 alertElement.style.display = "none";
             }
-        }, 5000); // Desaparece en 10 segundos
+        }, 5000); // Desaparece en 5 segundos
     </script>
 </body>
 

@@ -1,0 +1,41 @@
+@model List<ProyectoFinal.Models.RoomViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Chats</title>
+</head>
+
+<body>
+    <a asp-action="Principal" asp-controller="UserPerfil">Volver</a>
+    <h1>Bienvenido: Tu Lista de chats</h1>
+    @{
+        var count = 1;
+        var habilitar = Convert.ToInt32(TempData?["Habilitar"] ?? 0);
+    }
+    @foreach (var item in Model)
+    {
+        <li>Chat numero: @count</li>
+        count++;
+        <li>Nombre del Chat: @item.RoomUsuario.Room.RoomName</li>
+        <li>Participantes: @item.TotalUsuariosEnRoom</li>
+        <li>Creación: @item.RoomUsuario.Room.fechaCreacion</li>
+        if (habilitar == 1)
+        {
+            <a asp-controller="UserPerfil" asp-action="InvitarUs" asp-route-idChat="@item.RoomUsuario.Room.Id">
+                <button>Seleccionar</button>
+            </a>
+        }
+        else
+        {
+            <a asp-controller="Chat" asp-action="chat" asp-route-idChat="@item.RoomUsuario.Room.Id">
+                <button>Ingresar</button>
+            </a>
+        }
+    }
+</body>
+
+</html>

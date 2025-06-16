@@ -14,6 +14,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<AdminModel> AdminUsers { get; set; }
     public DbSet<Juego> Juegos { get; set; }
     public DbSet<ChatModel> Mensajes { get; set; }
+    public DbSet<RoomModel> Room { get; set; }
+    public DbSet<UsRoomModel> UsuariosRoom { get; set; }
+    public DbSet<Invitaciones> invitaciones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
