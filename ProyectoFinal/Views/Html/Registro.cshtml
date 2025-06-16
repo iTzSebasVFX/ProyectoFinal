@@ -17,7 +17,7 @@
     </label>
     <input type="checkbox" id="toggle">
 
-    <form class="form" method="post" asp-controller="Html" asp-action="CapturarDatos">
+    <form class="form" method="post" asp-controller="Html" asp-action="Registrar">
         <h3 id="heading">Registro</h3>
 
         @if (ViewData["ErrorMessage"] != null)
@@ -31,7 +31,10 @@
                             </path>
                         </svg>
                     </div>
-                    <div class="error__title">@ViewData["ErrorMessage"]</div>
+                    <div class="error__title">
+                        @ViewData["ErrorMessage"]
+                        @Html.ValidationSummary(false, "", new { @class = "text-white" })<br>
+                    </div>
                 </div>
 
             </div>
@@ -80,6 +83,17 @@
                 </path>
             </svg>
             <input asp-for="contrasena" placeholder="Contraseña" class="input-field" type="password">
+        </div>
+
+        @* 8*@
+        <div class="field"></div>
+        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            viewBox="0 0 16 16">
+            <path
+                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+            </path>
+        </svg>
+        <input asp-for="clave" placeholder="Clave Recuperación" class="input-field" type="number">
         </div>
 
         <div class="btn">

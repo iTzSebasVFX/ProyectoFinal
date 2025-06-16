@@ -1,0 +1,29 @@
+@model List<ProyectoFinal.Models.Invitaciones>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitaciones</title>
+</head>
+
+<body>
+    <h1>Tus Invitaciones</h1>
+    <ul>
+        @foreach (var item in Model)
+        {
+            if (!item.Aceptada)
+            {
+                <li>Usted fue invitado a un chat por: @item.Remitente / <a asp-action="Añadir" asp-controller="Chat" asp-route-inviId="@item.Id"><button>Aceptar</button></a></li>
+            }
+            else 
+            {
+                <li>No tiene invitaciones</li>
+            }
+        }
+    </ul>
+</body>
+
+</html>

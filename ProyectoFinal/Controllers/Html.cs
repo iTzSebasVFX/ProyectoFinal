@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MySqlX.XDevAPI;
 using Org.BouncyCastle.Asn1.Mozilla;
 using ProyectoFinal.Models;
+using ProyectoFinal.Pages;
 
 namespace ProyectoFinal.Controllers;
 
@@ -15,6 +16,13 @@ public class HtmlController : Controller
 {
     private readonly ApplicationDbContext _context;
 
+    public HtmlController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    // Vistas
+
     public IActionResult Index()
     {
         return View();
@@ -22,7 +30,6 @@ public class HtmlController : Controller
 
     public IActionResult InicioSesion()
     {
-
         return View();
     }
 
@@ -41,83 +48,7 @@ public class HtmlController : Controller
         return View();
     }
 
-    public IActionResult Clave(RegistroModel model)
-    {
-        return View("Clave", model);
-    }
-
-    public HtmlController(ApplicationDbContext context)
-    {
-        _context = context;
-    }
-
-
-    // [HttpPost]
-    // public async Task<IActionResult> InicioSesion(LoginModel model)
-    // {
-    //     if (ModelState.IsValid)
-    //     {
-    //         // Buscar el usuario en la base de datos por email
-    //         var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == model.Email);
-    //         Console.WriteLine("Hola aqui andamos en verificacion de correo");
-
-    //         // Si el usuario no existe
-    //         if (usuario == null)
-    //         {
-    //             var admin = await _context.AdminUsers.FirstOrDefaultAsync(a => a.Email == model.Email);
-
-    //             if (admin == null)
-    //             {
-    //                 ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
-    //                 return View("InicioSesion", model); // Si no se encuentra el usuario, se muestra un mensaje de error.
-    //             }
-    //             Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
-    //             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(model.Password, admin.Contraseña);
-
-    //             if (!isPasswordValid)
-    //             {
-    //                 ModelState.AddModelError(string.Empty, "Contraseña Incorrecta, Intente de nuevo");
-    //                 return View("InicioSesion", model);
-    //             }
-
-    //             HttpContext.Session.SetString("NombreUser", admin.Nombre);
-    //             HttpContext.Session.SetString("CorreoUsuario", admin.Email);
-    //             HttpContext.Session.SetString("ContraAdmin", admin.Contraseña);
-
-    //             return RedirectToAction("Principal", "UserPerfil");
-
-    //         }
-    //         else
-    //         {
-    //             // Verificar la contraseña (asumiendo que la contraseña está almacenada de forma segura, por ejemplo, hash)
-    //             bool isPasswordValid = usuario.contrasena == model.Password; // Aquí se debe usar un hashing en un caso real
-    //             Console.WriteLine("Hola aqui ya anda en la validacion de contraseña");
-
-    //             if (!isPasswordValid)
-    //             {
-    //                 ModelState.AddModelError(string.Empty, "Contraseña Incorrecta, Intente de nuevo");
-    //                 return View(model); // Si la contraseña no es válida, se muestra un mensaje de error.
-    //             }
-    //             else
-    //             {
-    //                 // Si las credenciales son correctas, agregar un mensaje en la terminal
-    //                 Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
-
-    //                 if (usuario != null && !string.IsNullOrEmpty(usuario.nombreCompleto) && !string.IsNullOrEmpty(usuario.correoElectronico))
-    //                 {
-    //                     //Ahora crearemos un session que almacene el nombre del usuario
-    //                     HttpContext.Session.SetString("NombreUser", usuario.nombreCompleto);
-    //                     HttpContext.Session.SetString("CorreoUsuario", usuario.correoElectronico);
-    //                 }
-
-    //                 // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
-    //                 return RedirectToAction("Principal", "UserPerfil");
-    //             }
-    //         }
-    //     }
-
-    //     return View(model);
-    // }
+    // Logica de Inicio y Registro de usuarios
 
     [HttpPost]
     public async Task<IActionResult> InicioSesion(LoginModel model)
@@ -125,188 +56,88 @@ public class HtmlController : Controller
         if (ModelState.IsValid)
         {
             // Buscar el usuario en la base de datos por email
-            var admin = await _context.AdminUsers.FirstOrDefaultAsync(a => a.Email == model.Email);
-            Console.WriteLine("Hola aqui andamos en verificacion de correo");
+            var User = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == model.Email);
+            var UserPass = await _context.Usuarios.FirstOrDefaultAsync(u => u.contrasena == model.Password);
+            var UserName = await _context.Usuarios.FirstOrDefaultAsync(u => u.nombreCompleto == model.nombreCompleto);
 
-            // Si el admin no existe
-            if (admin == null)
+            if (User == null)
             {
-
-                var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == model.Email);
-
-                if (usuario == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
-                    return View("InicioSesion", model); // Si no se encuentra el usuario, se muestra un mensaje de error.
-                }
-
-                // Verificar la contraseña (asumiendo que la contraseña está almacenada de forma segura, por ejemplo, hash)
-                bool isPasswordValid = usuario.contrasena == model.Password; // Aquí se debe usar un hashing en un caso real
-                Console.WriteLine("Hola aqui ya anda en la validacion de contraseña");
-
-                if (!isPasswordValid)
-                {
-                    ModelState.AddModelError(string.Empty, "Contraseña Incorrecta, Intente de nuevo");
-                    return View(model); // Si la contraseña no es válida, se muestra un mensaje de error.
-                }
-                else
-                {
-                    // Si las credenciales son correctas, agregar un mensaje en la terminal
-                    Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
-
-                    if (usuario != null && !string.IsNullOrEmpty(usuario.nombreCompleto) && !string.IsNullOrEmpty(usuario.correoElectronico))
-                    {
-                        //Ahora crearemos un session que almacene el nombre del usuario
-                        HttpContext.Session.SetString("NombreUser", usuario.nombreCompleto);
-                        HttpContext.Session.SetString("CorreoUsuario", usuario.correoElectronico);
-                    }
-
-                    // Redirigir al usuario a otra acción (por ejemplo, a la página principal)
-                    return RedirectToAction("Principal", "UserPerfil");
-                }
+                ModelState.AddModelError(string.Empty, "Correo Incorrecto, Intente de nuevo");
+                return View("InicioSesion", model);
             }
-            else
+            bool isPasswordValid = User.contrasena == model.Password;
+
+            if (!isPasswordValid)
             {
-                var ValExist = await _context.Usuarios.FirstOrDefaultAsync(u => u.contrasena == admin.Contraseña);
-                if (ValExist == null)
-                {
-                    Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
-                    bool isPasswordValid = BCrypt.Net.BCrypt.Verify(model.Password, admin.Contraseña);
-
-                    if (!isPasswordValid)
-                    {
-                        ModelState.AddModelError(string.Empty, "Contraseña Incorrecta, Intente de nuevo");
-                        return View("InicioSesion", model);
-                    }
-
-                    HttpContext.Session.SetString("NombreUser", admin.Nombre);
-                    HttpContext.Session.SetString("CorreoUsuario", admin.Email);
-                    HttpContext.Session.SetString("ContraAdmin", admin.Contraseña);
-
-                    return RedirectToAction("Principal", "UserPerfil");
-                }
-
+                ModelState.AddModelError(string.Empty, "Contraseña Incorrecta, Intente de nuevo");
+                return View("InicioSesion", model);
             }
+
+            HttpContext.Session.SetString("NombreUser", User.nombreCompleto);
+            HttpContext.Session.SetString("CorreoUsuario", User.correoElectronico);
+
+            return RedirectToAction("Principal", "UserPerfil");
         }
 
         return View(model);
     }
 
     [HttpPost]
-    public IActionResult iniciarAdmin(LoginAdModel model)
+    public async Task<IActionResult> Registrar(RegistroModel model)
     {
-        Console.WriteLine(model.Email);
-        if (ModelState.IsValid)
+        // Metodo Para capturar los datos del primer registro
+        if (!ModelState.IsValid)
         {
-            var BuscarAd = _context.AdminUsers.FirstOrDefault(a => a.Email == model.Email);
-
-            if (BuscarAd != null)
-            {
-                bool contraEncrip = BCrypt.Net.BCrypt.Verify(model.Contraseña, BuscarAd.Contraseña);
-                Console.WriteLine(contraEncrip);
-                if (contraEncrip)
-                {
-                    Console.WriteLine("Bienvenido a la pagina principal " + model.Email);
-                    HttpContext.Session.SetString("CorreoAdmin", model.Email);
-                    TempData["Valido"] = "Bienvenido Admin:" + model.Email;
-                    return RedirectToAction("principalAdmin", "Admin");
-                }
-                TempData["Error"] = "Contraseña incorrecta, intente de nuevo";
-                return RedirectToAction("iniciarAdmin");
-            }
-            TempData["Error"] = "Admin " + model.Email + " no encontrado";
-            return RedirectToAction("iniciarAdmin");
+            // Agregar mensaje de error para mostrar en la vista
+            ViewData["ErrorMessage"] = "Error en el registro. Rellena los campos.";
+            // Enviar de vuelta a la vista de registro con el mensaje de error
+            return View("Registro", model);
         }
-        TempData["Error"] = "Porfavor ingresar datos validos";
-        return RedirectToAction("iniciarAdmin");
-    }
 
-    [HttpPost]
-    public IActionResult CapturarDatos(RegistroModel model)
-    {
-        Console.WriteLine("Si paso por aqui");
-        if (ModelState.IsValid)
+        var emailSpliteado = model.correoElectronico.Split("@");
+        if (emailSpliteado.Length > 2)
         {
-            var emailSpliteado = model.correoElectronico.Split("@");
-            if (emailSpliteado.Length > 2)
+            ViewData["ErrorMessage"] = "El correo es invalido, no puede tener mas de dos '@'";
+            return View("Registro", model);
+        }
+        else
+        {
+            if (emailSpliteado[0].Contains('.'))
             {
-                ModelState.AddModelError("email", "El correo es invalido, no puede tener mas de dos '@'");
-                ViewData["ErrorMessage"] = "El correo es invalido, no puede tener mas de dos '@'";
+                ViewData["ErrorMessage"] = "El correo electronico es invalido, no puede tener un punto antes del '@'";
                 return View("Registro", model);
             }
             else
             {
-                if (emailSpliteado[0].Contains('.'))
+                var correoExiste = await _context.Usuarios.AnyAsync(u => u.correoElectronico == model.correoElectronico);
+                if (correoExiste)
                 {
-                    ViewData["ErrorMessage"] = "El correo electronico es invalido, no puede tener un punto antes del '@'";
+                    ViewData["ErrorMessage"] = "Ya hay una cuenta asociada a este correo electronico";
                     return View("Registro", model);
                 }
-                else
+
+                if (model.clave > 100000 && model.clave < 999999)
                 {
                     Console.WriteLine("Si eran validos");
-                    return View("Clave", model);
-                }
-            }
-        }
-        else
-        {
-            Console.WriteLine("Tambien por aqui");
+                    var usuario = new UsuariosModel
+                    {
+                        nombreCompleto = model.nombreCompleto,
+                        apellidoCompleto = model.apellidoCompleto,
+                        correoElectronico = model.correoElectronico,
+                        contrasena = model.contrasena,
+                        clave = model.clave
+                    };
 
-            // Agregar mensaje de error para mostrar en la vista
-            ViewData["ErrorMessage"] = "Error en el registro. Rellena los campos.";
-
-            // Enviar de vuelta a la vista de registro con el mensaje de error
-            return View("Registro", model);
-        }
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Registrar(RegistroModel nuevoRegistro)
-    {
-
-        if (ModelState.IsValid)
-        {
-
-            var usuario = new UsuariosModel
-            {
-                nombreCompleto = nuevoRegistro.nombreCompleto,
-                apellidoCompleto = nuevoRegistro.apellidoCompleto,
-                correoElectronico = nuevoRegistro.correoElectronico,
-                contrasena = nuevoRegistro.contrasena,
-                clave = nuevoRegistro.clave
-            };
-
-            if (usuario.clave < 100000 || usuario.clave > 999999)
-            {
-                ModelState.AddModelError("clave", "La clave debe tener exactamente 6 dígitos");
-                return View("Clave", nuevoRegistro);
-            }
-            else
-            {
-                var UserSearch = await _context.Usuarios.FirstOrDefaultAsync(u => u.correoElectronico == usuario.correoElectronico);
-
-                if (UserSearch == null)
-                {
-                    Console.WriteLine("Opa pasate por aqui");
-
-                    _context.Add(usuario);
+                    await _context.Usuarios.AddAsync(usuario);
                     await _context.SaveChangesAsync();
-                    ModelState.AddModelError("correoElectronico", "Usuario registrado correctamente");
+                    TempData["RegistroExitoso"] = "Se ha registrado exitosamente";
                     return RedirectToAction("Index", "Html");
-
                 }
-                ModelState.AddModelError("correoElectronico", "El correo electrónico ya está en uso.");
-                return View("Clave", nuevoRegistro);
+                ViewData["ErrorMessage"] = "La clave debe de ser de 6 digitos";
+                return View("Registro", model);
+
             }
         }
-
-        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-        {
-            Console.WriteLine(error.ErrorMessage);
-        }
-
-        ModelState.AddModelError(string.Empty, "Ingrese datos porfavor");
-        return View("Clave", nuevoRegistro);
     }
 
     [HttpPost]
@@ -334,8 +165,7 @@ public class HtmlController : Controller
                 {
                     Console.WriteLine("Ey clave confirmada, se debio actualizar correctamente");
 
-                    UserSearch.contrasena = model.contrasena;
-
+                    if (model.contrasena != null) UserSearch.contrasena = model.contrasena;
                     _context.Usuarios.Update(UserSearch);
                     await _context.SaveChangesAsync();
                     ModelState.AddModelError("contrasena", "La contraseña ha sido cambiada exitosamente");
@@ -352,4 +182,33 @@ public class HtmlController : Controller
         return View("RecuContraseña", model);
     }
 
+    // Inicio Sesion Admins
+
+    [HttpPost]
+    public IActionResult iniciarAdmin(LoginAdModel model)
+    {
+        Console.WriteLine(model.Email);
+        if (ModelState.IsValid)
+        {
+            var BuscarAd = _context.AdminUsers.FirstOrDefault(a => a.Email == model.Email);
+
+            if (BuscarAd != null)
+            {
+                bool contraEncrip = BCrypt.Net.BCrypt.Verify(model.Contraseña, BuscarAd.Contraseña);
+                Console.WriteLine(contraEncrip);
+                if (contraEncrip)
+                {
+                    HttpContext.Session.SetString("CorreoAdmin", model.Email);
+                    TempData["Valido"] = "Bienvenido Admin:" + model.Email;
+                    return RedirectToAction("principalAdmin", "Admin");
+                }
+                TempData["Error"] = "Contraseña incorrecta, intente de nuevo";
+                return RedirectToAction("iniciarAdmin");
+            }
+            TempData["Error"] = "Admin " + model.Email + " no encontrado";
+            return RedirectToAction("iniciarAdmin");
+        }
+        TempData["Error"] = "Porfavor ingresar datos validos";
+        return RedirectToAction("iniciarAdmin");
+    }
 }

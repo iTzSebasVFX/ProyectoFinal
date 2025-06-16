@@ -15,7 +15,7 @@ namespace ProyectoFinal.Models
         public string Destinatario { get; set; } = string.Empty;
 
         public bool Aceptada { get; set; }
-        public DateOnly Fecha { get; set; }
+        public DateTime Fecha { get; set; } = DateTime.Now;
 
     }
 }
