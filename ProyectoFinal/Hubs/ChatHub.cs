@@ -35,19 +35,34 @@ namespace SignalRChat
 			await Clients.Group(room.ToString()).SendAsync("ReceiveMessage", user, message, chatMessage.CreatedAt);
 		}
 
-		public async Task AddGroup(string room)
+		public async Task AddGroup(string room, string idUser)
 		{
-			//Añadimos a la persona a una sala
-			await Groups.AddToGroupAsync(Context.ConnectionId, room);
+			if (idUser == null)
+			{
+				await Clients.Caller.SendAsync("AccessDenied", "No autenticado");
+				return;
+			}
+			var acceso = _context.UsuariosRoom.Any(ur => ur.IdRoom == int.Parse(room) && ur.IdUsuario == int.Parse(idUser));
 
-			// 🔁 Obtener historial de mensajes
-			var mensajes = await _context.Mensajes
-				.Where(m => m.room == room)
-				.OrderBy(m => m.CreatedAt)
-				.ToListAsync();
+			if (!acceso)
+			{
+				await Clients.Caller.SendAsync("AccessDenied", "No tienes acceso a este chat");
+				return;
+			}
+			else
+			{
+				//Añadimos a la persona a una sala
+				await Groups.AddToGroupAsync(Context.ConnectionId, room);
 
-			// 🔁 Enviar historial solo al usuario que se conectó
-			await Clients.Caller.SendAsync("ReceiveMessageHistory", mensajes);
+				// 🔁 Obtener historial de mensajes
+				var mensajes = await _context.Mensajes
+					.Where(m => m.room == room)
+					.OrderBy(m => m.CreatedAt)
+					.ToListAsync();
+
+				// 🔁 Enviar historial solo al usuario que se conectó
+				await Clients.Caller.SendAsync("ReceiveMessageHistory", mensajes);
+			}
 		}
 	}
 }

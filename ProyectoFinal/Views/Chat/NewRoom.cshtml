@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var NombreUsuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,11 +22,18 @@
                 @TempData["Error"]
             </div>
         }
+        @if (TempData["Hecho"] != null)
+        {
+            <div class="alert alert-succes" id="alertError">
+                @TempData["Hecho"]
+            </div>
+        }
         <form asp-action="InsertarRoom" asp-controller="Chat" method="post">
             <label for="roomName">Nombre Room</label>
             <input type="text" asp-for="@Model.RoomName">
-            <label for="creadorName">Creador</label>
-            <input type="text" asp-for="@Model.CreadorName">
+            <label for="creadorName">Creador: </label>
+            <input type="text" asp-for="@Model.CreadorName" hidden>
+            <label for="">@NombreUsuario</label>
 
             <button type="submit">Crear</button>
         </form>

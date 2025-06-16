@@ -27,6 +27,9 @@
                 <a class="ChatT" asp-action="ZonaChat" asp-controller="UserPerfil">Chat</a>
             </button>
 
+            <button class="Chat">
+                <a class="ChatT" asp-action="PruebasChatPriv" asp-controller="Chat">Lista Chats</a>
+            </button>
 
             <button class="juegos">
                 <a class="ZonaJ" asp-action="Juegos" asp-controller="UserPerfil">Zona de Juegos</a>
@@ -37,15 +40,16 @@
                 <a class="cerrar" asp-action="CerrarSesion" asp-controller="UserPerfil">Cerrar Sesion</a>
             </button>
 
-
             <button class="perfil">
                 <a class="perfilsec" asp-action="Perfil" asp-controller="UserPerfil">Perfil</a>
             </button>
-
-
         </nav>
 
+        <button class="perfil">
+            <a class="perfilsec" asp-action="ListaInvi" asp-controller="UserPerfil">Invitaciones</a>
+        </button>
 
+        <button onclick="mostrarFiltros()">Filtrar</button>
 
         <!-- Título superior -->
         @if (!string.IsNullOrEmpty(NombreUsuario))
@@ -58,6 +62,51 @@
         }
         <div class="title">
             Personas con las que podrías interactuar
+        </div>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" id="alertError">
+                @TempData["Error"]
+            </div>
+        }
+        @if (TempData["Exito"] != null)
+        {
+            <div class="alert alert-success" id="alertError">
+                @TempData["Exito"]
+            </div>
+        }
+        <div class="modalFiltros" id="ocultar" style="display: none;">
+            <button onclick="ocultarFiltros()">✖️</button>
+            <form asp-action="PrincipalFiltrado" asp-controller="UserPerfil" method="get" class="row g-2">
+                <div class="col-md-3">
+                    <select name="Genero" class="form-select">
+                        <option value="">Todos los géneros</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="Pais" class="form-select">
+                        <option value="">Todos los países</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="México">México</option>
+                        <option value="Argentina">Argentina</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="Edad" class="form-select">
+                        <option value="">Todas las edades</option>
+                        <option value="18-25">18 a 25 años</option>
+                        <option value="26-35">26 a 35 años</option>
+                        <option value="36-45">36 a 45 años</option>
+                        <option value="46+">46 años o más</option>
+                    </select>
+                </div>
+                <div class="col-md-12 text-end">
+                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                </div>
+            </form>
         </div>
         @if (Model.NuevoUsuario.Edad >= 18)
         {
@@ -77,27 +126,45 @@
                 }
                 <br>
                 <br>
-                <a >Invitar a Room</a>
+                <a asp-action="PruebasChatPriv" asp-controller="Chat" asp-route-itemid="@item.id">Invitar a Room</a>
                 <br>
                 <br>
                 <div class="details-container">
                     <h3>Informacion Usuario</h3>
                     @if (string.IsNullOrEmpty(item.nombreCompleto) || string.IsNullOrEmpty(item.Genero))
                     {
-                        <p id="imageDetails">Cargando Detalles...</p>
-                    } else {
+                        <p id="imageDetails">Usuario con datos incompletos...</p>
+                    }
+                    else
+                    {
                         <p id="imageDetails">Nombre = @item.nombreCompleto</p>
-                        <p id="imageDetails">Edad = @item.Edad</p>
                         <p id="imageDetails">Genero = @item.Genero</p>
                     }
                 </div>
 
             }
-        } else {
+        }
+        else
+        {
             <p>Su edad no es lo suficiente para conocer personas, Presione el boton para modificar su perfil</p>
             <a asp-action="Perfil" asp-controller="UserPerfil">Editar Perfil</a>
         }
         <script src="~/js/Tema.js"></script>
+        <script asp-append-version="true">
+            formFiltros = document.getElementById("ocultar");
+            function mostrarFiltros() {
+                formFiltros.style.display = "block";
+            }
+            function ocultarFiltros() {
+                formFiltros.style.display = "none";
+            }
+            setTimeout(() => {
+                let alertElement = document.getElementById("alertError");
+                if (alertElement) {
+                    alertElement.style.display = "none";
+                }
+            }, 5000); // Desaparece en 5 segundos
+        </script>
 </body>
 
 </html>

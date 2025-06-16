@@ -10,10 +10,10 @@ namespace ProyectoFinal.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "El RoomName no puede ir vacio")]
-        public string? RoomName { get; set; } = string.Empty;
+        public string RoomName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El nombre del creador no puede ir vacio")]
-        public string CreadorName { get; set; } = string.Empty;
+        public string? CreadorName { get; set; } = string.Empty;
 
         public DateTime fechaCreacion { get; set; } = DateTime.UtcNow;
 
