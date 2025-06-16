@@ -14,7 +14,57 @@ body {
     min-height: 100vh;
 
 }
+.menu {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+}
 
+.menu .nav-button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.menu .nav-button:hover {
+    background-color: #090909;
+}
+
+.menu h3 {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 0;
+    font-style: italic;
+    flex-grow: 1;
+    text-align: center;
+}
+
+#label_toggle {
+    cursor: pointer;
+    font-size: 22px;
+    color: #ffffff;
+    padding: 8px;
+    transition: transform 0.2s;
+}
+
+#label_toggle:hover {
+    transform: scale(1.1);
+}
+
+#toggle {
+    display: none;
+}
 
 .scroll-box {
   max-height: 600px; /* o cualquier altura deseada */
@@ -128,8 +178,9 @@ h3 {
 
 /*card 2*/
 .card2 {
+  top: 15%;
     width: 100%;
-    height: 524px;
+    height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,18 +189,18 @@ h3 {
     cursor: pointer;
 }
 .card2 .content2 {
-  border-radius: 44px;
-  background: #000000;
-  width: 702px;
-  height: 97%;
-  z-index: 1;
-  padding: 14px;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  align-items: start;
-  justify-content: space-between;
-  gap: 22px;
+    border-radius: 44px;
+    background: #000000;
+    width: 80%;
+    height: 108%;
+    z-index: 1;
+    padding: 240px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    gap: 21px;
 }
 
 .medium {
@@ -167,13 +218,13 @@ h3 {
   transform: translate(-50%, -50%);
   text-align: center;
 }
-.card2 .content2 .fila1 {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  margin-left: -24%;
+card2 .content2 {
+    width: 125%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    margin-left: 0%;
 }
 .med {
   margin-top: 0;
@@ -181,26 +232,6 @@ h3 {
   position: relative;
   top: -213px;
   left: 80px;
-}
-
-.card2 .content2 .fila2 {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  margin-left: 81%;
-  margin-top: -147%;
-}
-
-
-.card2 .content2 .fila3 {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  margin-left: -38%;
 }
 
 .med2 {
@@ -211,15 +242,6 @@ h3 {
   left: 73px;
 }
 
-.card2 .content2 .fila4 {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  margin-left: 90%;
-  margin-top: -165%;
-}
 .content2::before {
     opacity: 0;
     transition: opacity 300ms;
@@ -383,6 +405,26 @@ a.button:active {
     }
   }
   
+  .button1 button {
+    width: 40px;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border: solid #00000033;
+    transition: 0.03s;
+
+
+}
+.form-slide {
+    display: none;
+}
+
+.form-slide.active {
+    display: block;
+}
+
 
   .cards-wrapper {
     display: flex;
@@ -464,8 +506,8 @@ a.button:active {
 
 
   .button2 {
-    margin-left: 7%;
-    margin-top: -4%;
+    margin-left: 5%;
+    margin-top: 8%;
     padding: 0.5em;
     padding-left: 2.3em;
     padding-right: 2.3em;
@@ -569,4 +611,13 @@ a.button:active {
   background: #121212;
   /* Fondo más oscuro para el formulario en modo oscuro */
   /* Cambiar el borde a un color más oscuro */
+}
+
+.estilo{
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.estilo:hover{
+  color: #FFFFFF;
 }

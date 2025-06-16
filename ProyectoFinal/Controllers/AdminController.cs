@@ -190,8 +190,8 @@ namespace ProyectoFinal.Controllers
 
                     if (BuscarUs.clave > 99999 && BuscarUs.clave < 1000000)
                     {
-                        // _context.Usuarios.Update(BuscarUs);
-                        // _context.SaveChanges();
+                         _context.Usuarios.Update(BuscarUs);
+                         _context.SaveChanges();
                         TempData["Valido"] = "Usuario actualizado correctamente";
                         model.ListaUsu = _context.Usuarios.ToList();
                         return View("UsuarioLista", model);

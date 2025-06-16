@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body {
 
   background: linear-gradient(90deg, #442063, #1d3263);
@@ -237,4 +244,19 @@ body {
   /* Fondo oscuro */
   color: #FFFFFF;
   /* Texto blanco */
+}
+
+@keyframes fade-in-zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in-zoom {
+  animation: fade-in-zoom 1s ease-out both;
 }
