@@ -20,36 +20,19 @@
 <body>
     <div class="container">
         <nav class="menu">
-
-            <input type="checkbox" id="toggle">
-
-            <button class="Chat">
-                <a class="ChatT" asp-action="ZonaChat" asp-controller="UserPerfil">Chat</a>
-            </button>
-
-            <button class="Chat">
-                <a class="ChatT" asp-action="PruebasChatPriv" asp-controller="Chat">Lista Chats</a>
-            </button>
-
-            <button class="juegos">
-                <a class="ZonaJ" asp-action="Juegos" asp-controller="UserPerfil">Zona de Juegos</a>
-            </button>
+    <ul>
+        <li><a class="ChatT" asp-action="ZonaChat" asp-controller="UserPerfil">Chat</a></li>
+        <li><a class="ChatT" asp-action="PruebasChatPriv" asp-controller="Chat">Lista Chats</a></li>
+        <li><a class="ZonaJ" asp-action="Juegos" asp-controller="UserPerfil">Zona de Juegos</a></li>
+        <li><a class="cerrar" asp-action="CerrarSesion" asp-controller="UserPerfil">Cerrar Sesión</a></li>
+        <li><a class="perfilsec" asp-action="Perfil" asp-controller="UserPerfil">Perfil</a></li>
+        <li><a class="perfilsec" asp-action="ListaInvi" asp-controller="UserPerfil">Invitaciones</a></li>
+        <li><button onclick="mostrarFiltros()">Filtrar</button></li>
+    </ul>
+</nav>
 
 
-            <button class="Sesion">
-                <a class="cerrar" asp-action="CerrarSesion" asp-controller="UserPerfil">Cerrar Sesion</a>
-            </button>
-
-            <button class="perfil">
-                <a class="perfilsec" asp-action="Perfil" asp-controller="UserPerfil">Perfil</a>
-            </button>
-        </nav>
-
-        <button class="perfil">
-            <a class="perfilsec" asp-action="ListaInvi" asp-controller="UserPerfil">Invitaciones</a>
-        </button>
-
-        <button onclick="mostrarFiltros()">Filtrar</button>
+        
 
         <!-- Título superior -->
         @if (!string.IsNullOrEmpty(NombreUsuario))
@@ -125,8 +108,20 @@
                         onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" />
                 }
                 <br>
+                <div class="image-navigation">
+                    <ul class="nav-buttons">
+        <li><button type="button" class="prev">Anterior</button></li>
+        <li><button type="button" class="delete">Eliminar</button></li>
+        
+        <button class="button1"><a asp-action="PruebasChatPriv" asp-controller="Chat" asp-route-itemid="@item.id">Invitar a Chat</a>
+                  </button>
+                  <li><button type="button" class="next">Siguiente</button></li>
+    </ul>
+    </div>
+
                 <br>
-                <a asp-action="PruebasChatPriv" asp-controller="Chat" asp-route-itemid="@item.id">Invitar a Room</a>
+                
+                 
                 <br>
                 <br>
                 <div class="details-container">
