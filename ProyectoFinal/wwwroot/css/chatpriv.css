@@ -23,7 +23,7 @@ body {
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .pepe .button {
@@ -38,7 +38,8 @@ body {
     font-weight: bold;
     margin-left: 8px;
 }
-.decoracion:hover{
+
+.decoracion:hover {
     color: #FFF;
 }
 
@@ -46,45 +47,96 @@ body {
     margin: 0;
     font-size: 24px;
 }
+.card {
+    background: linear-gradient(90deg, #442063, #1d3263);
+    border-radius: 12px;
+    background: linear-gradient(90deg, #442063, #1d3263);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
 .chat-container {
-    margin-top: 20px;
     display: grid;
-    gap: 20px;
+    
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    overflow-x: auto;
+    justify-content: center;
+    padding: 40px 20px;
+    flex-grow: 1;
+    scroll-behavior: smooth;
+}
+
+.chat-container:hover .chat-card {
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
 }
 
 .chat-card {
-    background-color: white;
+     height: 280px; 
+    background: linear-gradient(145deg, #ffffff, #f7f7f7);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 4px 4px 8px #000000, -4px -4px 8px #000000;
     padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 14px;
+    width: 100%;
 }
 
 .chat-card:hover {
-    transform: scale(1.02);
+   opacity: 1 !important; 
+    transform: translateY(-5px);
+    box-shadow: 6px 6px 12px #050505, -6px -6px 12px #0a0a0a;
+    z-index: 1;
 }
 
 .chat-card p {
-    margin: 10px 0;
+    margin: 6px 0;
     color: #333;
 }
 
-.chat-button button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
+.chat-card .heading {
+    font-size: 18px;
     font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    color: #333;
 }
 
-.chat-button button:hover {
-    background-color: #388e3c;
+
+.chat-button button {
+        padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
 }
+
+.chat-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+
+.chat-button button:hover {
+   border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
+}
+
 
 .dark {
     background: #121212;
