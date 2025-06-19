@@ -1,4 +1,13 @@
 @model List<ProyectoFinal.Models.RoomViewModel>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var count = 1;
+    var hecho = TempData["Hecho"];
+    var error = TempData["Error"];
+    var habilitar = Convert.ToInt32(TempData?["Habilitar"] ?? 0);
+    var NombreUsuario = HttpContextAccessor.HttpContext?.Session.GetString("NombreUser");
+    var userId = Convert.ToInt32(HttpContextAccessor.HttpContext?.Session.GetString("userId"));
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,47 +22,85 @@
 
 <body>
     <nav class="menu">
-        <a class="decoracion" asp-action="Principal" asp-controller="UserPerfil">Volver <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
+        <a class="decoracion" asp-action="Principal" asp-controller="UserPerfil">Volver <i
+                class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
         <h3 class="title">Elite Chats</h3>
-        <a class="decoracion" asp-action="CrearRoom" asp-controller="Chat">Crear Nuevo Chat <i class="fa-solid fa-users"style="color: #ffffff;"></i></a>
-
-    </div>
-
-
+        @* <a class="decoracion" asp-action="CrearRoom" asp-controller="Chat">Crear Nuevo Chat <i class="fa-solid fa-users"
+                style="color: #ffffff;"></i></a> *@
+        <button onclick="mostrarNewRoom()">Crear Nuevo Chat</button>
     </nav>
 
-    @{
-        var count = 1;
-        var habilitar = Convert.ToInt32(TempData?["Habilitar"] ?? 0);
-    }
-
-   <div class="chat-container">
-    @foreach (var item in Model)
+    @* Manejo de mensajes de error *@
+    @if (error != null)
     {
-        <div class="chat-card">
-            <p class="heading">Chat número: @count</p>
-            count++;
-            <p><strong>Nombre del Chat:</strong> @item.RoomUsuario.Room.RoomName</p>
-            <p><strong>Participantes:</strong> @item.TotalUsuariosEnRoom</p>
-            <p><strong>Creación:</strong> @item.RoomUsuario.Room.fechaCreacion</p>
-
-            @if (habilitar == 1)
-            {
-                <a class="chat-button" asp-controller="UserPerfil" asp-action="InvitarUs"
-                    asp-route-idChat="@item.RoomUsuario.Room.Id">
-                    <button>Seleccionar</button>
-                </a>
-            }
-            else
-            {
-                <a class="chat-button" asp-controller="Chat" asp-action="chat" asp-route-idChat="@item.RoomUsuario.Room.Id">
-                    <button>Ingresar</button>
-                </a>
-            }
+        <div class="alert alert-danger" id="alertError">
+            @error
         </div>
     }
-</div>
+    @if (hecho != null)
+    {
+        <div class="alert alert-succes" id="alertError">
+            @hecho
+        </div>
+    }
+    @* Formulario de creacion de nuevos chats *@
+    <div id="newRoomHidden" style="display: none;">
+        <button onclick="ocultarNewRoom()">✖️</button>
+        <form asp-action="InsertarRoom" asp-controller="Chat" method="post">
+            <label for="roomName">Nombre Room</label>
+            <input type="text" name="RoomName">
+            <label for="creadorName">Creador: </label>
+            <input type="text" name="CreadorName" value="@userId" hidden>
+            <label for="">@NombreUsuario</label>
+
+            <button type="submit">Crear</button>
+        </form>
+    </div>
+
+    <div class="chat-container">
+        @foreach (var item in Model)
+        {
+            <div class="chat-card">
+                <p class="heading">Chat número: @count</p>
+                @{
+                    count++;
+                }
+                <p><strong>Nombre del Chat:</strong> @item.RoomUsuario.Room.RoomName</p>
+                <p><strong>Participantes:</strong> @item.TotalUsuariosEnRoom</p>
+                <p><strong>Creación:</strong> @item.RoomUsuario.Room.fechaCreacion</p>
+
+                @if (habilitar == 1)
+                {
+                    <a class="chat-button" asp-controller="UserPerfil" asp-action="InvitarUs"
+                        asp-route-idChat="@item.RoomUsuario.Room.Id">
+                        <button>Seleccionar</button>
+                    </a>
+                }
+                else
+                {
+                    <a class="chat-button" asp-controller="Chat" asp-action="chat" asp-route-idChat="@item.RoomUsuario.Room.Id">
+                        <button>Ingresar</button>
+                    </a>
+                }
+            </div>
+        }
+    </div>
     <script src="~/js/Tema.js"></script>
+    <script asp-append-version="true">
+        let alertError = document.getElementById("alertError");
+        let newRoomHidden = document.getElementById("newRoomHidden");
+        if (alertError) {
+            setTimeout(() => {
+                alertError.style.display = "none";
+            }, 3000);
+        }
+        function mostrarNewRoom() {
+            newRoomHidden.style.display = "block";
+        }
+        function ocultarNewRoom() {
+            newRoomHidden.style.display = "none";
+        }
+    </script>
 </body>
 
 
