@@ -93,50 +93,17 @@
         @if (Model.NuevoUsuario.Edad >= 18)
         {
             <!-- Animacion -->
-            @foreach (var item in Model.ListaUsu)
-            {
-                @if (string.IsNullOrEmpty(item.FotoRuta))
-                {
-                    <img class="image-container" id="imageContainer" src="/uploads/fotosinfoto.png" alt="Foto de perfil" width="150"
-                        height="150" />
-                }
-                else
-                {
-                    <img class="image-container" id="imageContainer"
-                        src="@Url.Content(item.FotoRuta ?? " ~/uploads/fotosinfoto.png")" alt="No funciono" width="150" height="150"
-                        onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" />
-                }
-                <br>
-                <div class="image-navigation">
-                    <ul class="nav-buttons">
-        <li><button type="button" class="prev">Anterior</button></li>
-        <li><button type="button" class="delete">Eliminar</button></li>
-        
-        <button class="button1"><a asp-action="PruebasChatPriv" asp-controller="Chat" asp-route-itemid="@item.id">Invitar a Chat</a>
-                  </button>
-                  <li><button type="button" class="next">Siguiente</button></li>
-    </ul>
-    </div>
+            <div id="usuarioContainer"></div>
 
-                <br>
-                
-                 
-                <br>
-                <br>
-                <div class="details-container">
-                    <h3>Informacion Usuario</h3>
-                    @if (string.IsNullOrEmpty(item.nombreCompleto) || string.IsNullOrEmpty(item.Genero))
-                    {
-                        <p id="imageDetails">Usuario con datos incompletos...</p>
-                    }
-                    else
-                    {
-                        <p id="imageDetails">Nombre = @item.nombreCompleto</p>
-                        <p id="imageDetails">Genero = @item.Genero</p>
-                    }
-                </div>
+            <div id="image-navigation">
+                <ul class="nav-buttons">
+                    <li><button type="button" class="prev" onclick="mostrarAnterior()">Anterior</button></li>
+                    <li><button type="button" class="delete" onclick="eliminarUsuario()">Ocultar</button></li>
+                    <li><button class="button1" id="btnChat">Invitar</button></li>
+                    <li><button type="button" class="next" onclick="mostrarSiguiente()">Siguiente</button></li>
+                </ul>
+            </div>
 
-            }
         }
         else
         {
@@ -145,7 +112,7 @@
         }
         <script src="~/js/Tema.js"></script>
         <script asp-append-version="true">
-            formFiltros = document.getElementById("ocultar");
+            let formFiltros = document.getElementById("ocultar");
             function mostrarFiltros() {
                 formFiltros.style.display = "block";
             }
@@ -158,6 +125,74 @@
                     alertElement.style.display = "none";
                 }
             }, 5000); // Desaparece en 5 segundos
+        
+            // Mostrar usuarios
+            const usuarios = @Html.Raw(Json.Serialize(Model.ListaUsu));
+            let indiceActual = 0;
+
+            function mostrarUsuario(index) {
+                const container = document.getElementById('usuarioContainer');
+                const usuario = usuarios[index];
+
+                const imagen = usuario.fotoRuta && usuario.fotoRuta !== ""
+                ? usuario.fotoRuta
+                : "/uploads/fotosinfoto.png";
+
+                let html = `
+                    <img class="image-container" src="${imagen}" width="150" height="150"
+                        onerror="this.onerror=null; this.src='/uploads/fotosinfoto.png';" />
+                    <br><br>
+                    <div class="details-container">
+                        <h3>Informacion Usuario</h3>
+                        ${!usuario.nombreCompleto || !usuario.genero ? `
+                            <p>Usuario con datos incompletos...</p>
+                        ` : `
+                            <p>Nombre = ${usuario.nombreCompleto}</p>
+                            <p>Genero = ${usuario.genero}</p>
+                        `}
+                    </div>
+                `;
+
+                container.innerHTML = html;
+
+                // cambiar la URL del boton Invitar
+                document.getElementById("btnChat").onclick = function() {
+                   window.location.href = `/Chat/PruebasChatPriv?itemid=${usuario.id}`;
+                };
+            }
+
+            function mostrarSiguiente() {
+                if (indiceActual < usuarios.length - 1) {
+                    indiceActual++;
+                    mostrarUsuario(indiceActual);
+                }
+            }
+
+            function mostrarAnterior() {
+                if (indiceActual > 0) {
+                    indiceActual--;
+                    mostrarUsuario(indiceActual);
+                }
+            }
+
+            function eliminarUsuario() {
+                if (confirm("¿Deseas eliminar a este usuario?")) {
+                    const id = usuarios[indiceActual].id;
+                    // Aquí podrías hacer un fetch/POST para eliminar desde el servidor
+                    alert(`Usuario con ID ${id} eliminado (simulado).`);
+                    // Opcional: eliminar del array local y mostrar el siguiente
+                    usuarios.splice(indiceActual, 1);
+                    if (indiceActual >= usuarios.length) indiceActual = usuarios.length - 1;
+                    mostrarUsuario(indiceActual);
+                }
+            }
+
+            // Mostrar el primer usuario al cargar
+            document.addEventListener("DOMContentLoaded", function () {
+                if (usuarios.length > 0) {
+                    mostrarUsuario(indiceActual);
+                }
+            });
         </script>
 </body>
 
