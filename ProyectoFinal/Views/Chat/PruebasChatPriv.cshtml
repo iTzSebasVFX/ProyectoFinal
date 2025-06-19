@@ -6,36 +6,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/chatpriv.css">
     <title>Lista Chats</title>
 </head>
 
 <body>
-    <a asp-action="Principal" asp-controller="UserPerfil">Volver</a>
-    <h1>Bienvenido: Tu Lista de chats</h1>
+    <nav class="menu">
+        <a class="decoracion" asp-action="Principal" asp-controller="UserPerfil">Volver <i class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
+        <h3 class="title">Elite Chats</h3>
+        <a class="decoracion" asp-action="CrearRoom" asp-controller="Chat">Crear Nuevo Chat <i class="fa-solid fa-users"style="color: #ffffff;"></i></a>
+
+
+    </nav>
+
     @{
         var count = 1;
         var habilitar = Convert.ToInt32(TempData?["Habilitar"] ?? 0);
     }
-    @foreach (var item in Model)
-    {
-        <li>Chat numero: @count</li>
-        count++;
-        <li>Nombre del Chat: @item.RoomUsuario.Room.RoomName</li>
-        <li>Participantes: @item.TotalUsuariosEnRoom</li>
-        <li>Creación: @item.RoomUsuario.Room.fechaCreacion</li>
-        if (habilitar == 1)
+
+    <div class="chat-container">
+        @foreach (var item in Model)
         {
-            <a asp-controller="UserPerfil" asp-action="InvitarUs" asp-route-idChat="@item.RoomUsuario.Room.Id">
-                <button>Seleccionar</button>
-            </a>
+            <div class="chat-card">
+                <p><strong>Chat número:</strong> @count</p>
+                count++;
+                <p><strong>Nombre del Chat:</strong> @item.RoomUsuario.Room.RoomName</p>
+                <p><strong>Participantes:</strong> @item.TotalUsuariosEnRoom</p>
+                <p><strong>Creación:</strong> @item.RoomUsuario.Room.fechaCreacion</p>
+
+                @if (habilitar == 1)
+                {
+                    <a class="chat-button" asp-controller="UserPerfil" asp-action="InvitarUs"
+                        asp-route-idChat="@item.RoomUsuario.Room.Id">
+                        <button>Seleccionar</button>
+                    </a>
+                }
+                else
+                {
+                    <a class="chat-button" asp-controller="Chat" asp-action="chat" asp-route-idChat="@item.RoomUsuario.Room.Id">
+                        <button>Ingresar</button>
+                    </a>
+                }
+            </div>
         }
-        else
-        {
-            <a asp-controller="Chat" asp-action="chat" asp-route-idChat="@item.RoomUsuario.Room.Id">
-                <button>Ingresar</button>
-            </a>
-        }
-    }
+    </div>
+    <script src="~/js/Tema.js"></script>
 </body>
+
 
 </html>
