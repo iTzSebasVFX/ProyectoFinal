@@ -104,11 +104,6 @@ public class UserPerfilController : Controller
         return View("Juegos", ListaJuego);
     }
 
-    public IActionResult ZonaChat()
-    {
-        return RedirectToAction("ListaChats", "Chat");
-    }
-
     public async Task<IActionResult> ListaInvi()
     {
         var correoUsuario = HttpContext.Session.GetString("CorreoUsuario");

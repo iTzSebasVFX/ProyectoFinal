@@ -16,20 +16,7 @@ namespace ChatSignalR.controller
         {
             _context = context;
         }
-
-        public static Dictionary<int, string> Lista = new Dictionary<int, string>{
-            {1, "Musica"},
-            {2, "Juegos"},
-            {3, "Peliculas"}
-        };
-
         // Vistas
-
-        public IActionResult ListaChats()
-        {
-            return View("ListaChats", Lista);
-        }
-
         public IActionResult chat(int idChat)
         {
             var CorreoUsuario = HttpContext.Session.GetString("CorreoUsuario");
@@ -59,6 +46,8 @@ namespace ChatSignalR.controller
             {
                 return RedirectToAction("Principal", "UserPerfil");
             }
+            // Creamos una session con el id del usuario actual
+            HttpContext.Session.SetString("userId", SearchUser.id.ToString());
             var rooms = await _context.UsuariosRoom
                 .Include(r => r.Room)
                 .Include(ur => ur.Usuario)
@@ -83,32 +72,13 @@ namespace ChatSignalR.controller
         }
 
         // Creacion de nuevos rooms
-
-        public IActionResult CrearRoom()
-        {
-            var CorreoUsuario = HttpContext?.Session.GetString("CorreoUsuario");
-            var SearchUser = _context.Usuarios.FirstOrDefault(u => u.correoElectronico == CorreoUsuario);
-            if (SearchUser != null)
-            {
-                var datos = new RoomModel
-                {
-                    RoomName = null!,
-                    CreadorName = SearchUser.id.ToString()
-                };
-
-                return View("NewRoom", datos);
-            }
-            TempData["Error"] = "Error en el intento de creacion";
-            return RedirectToAction("ListaChats", "Chat");
-        }
-
         [HttpPost]
         public IActionResult InsertarRoom(RoomModel model)
         {
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Datos Incorrectos";
-                return RedirectToAction("CrearRoom");
+                return RedirectToAction("PruebasChatPriv", "Chat");
             }
             Console.WriteLine($"Id: + {model.Id} + RoomName: + {model.RoomName} + CreadorName: + {model.CreadorName} + fechaCreacion: + {model.fechaCreacion} + Participantes: {model.Participantes}");
             _context.Room.Add(model);
@@ -130,7 +100,7 @@ namespace ChatSignalR.controller
                 _context.SaveChanges();
 
                 TempData["Hecho"] = "Nuevo room insertado exitosamente";
-                return RedirectToAction("CrearRoom", "Chat");
+                return RedirectToAction("PruebasChatPriv", "Chat");
             }
 
             TempData["Error"] = "No hay una session registrada";
