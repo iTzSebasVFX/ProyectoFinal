@@ -17,6 +17,8 @@
         <h3 class="title">Elite Chats</h3>
         <a class="decoracion" asp-action="CrearRoom" asp-controller="Chat">Crear Nuevo Chat <i class="fa-solid fa-users"style="color: #ffffff;"></i></a>
 
+    </div>
+
 
     </nav>
 
@@ -25,32 +27,32 @@
         var habilitar = Convert.ToInt32(TempData?["Habilitar"] ?? 0);
     }
 
-    <div class="chat-container">
-        @foreach (var item in Model)
-        {
-            <div class="chat-card">
-                <p><strong>Chat número:</strong> @count</p>
-                count++;
-                <p><strong>Nombre del Chat:</strong> @item.RoomUsuario.Room.RoomName</p>
-                <p><strong>Participantes:</strong> @item.TotalUsuariosEnRoom</p>
-                <p><strong>Creación:</strong> @item.RoomUsuario.Room.fechaCreacion</p>
+   <div class="chat-container">
+    @foreach (var item in Model)
+    {
+        <div class="chat-card">
+            <p class="heading">Chat número: @count</p>
+            count++;
+            <p><strong>Nombre del Chat:</strong> @item.RoomUsuario.Room.RoomName</p>
+            <p><strong>Participantes:</strong> @item.TotalUsuariosEnRoom</p>
+            <p><strong>Creación:</strong> @item.RoomUsuario.Room.fechaCreacion</p>
 
-                @if (habilitar == 1)
-                {
-                    <a class="chat-button" asp-controller="UserPerfil" asp-action="InvitarUs"
-                        asp-route-idChat="@item.RoomUsuario.Room.Id">
-                        <button>Seleccionar</button>
-                    </a>
-                }
-                else
-                {
-                    <a class="chat-button" asp-controller="Chat" asp-action="chat" asp-route-idChat="@item.RoomUsuario.Room.Id">
-                        <button>Ingresar</button>
-                    </a>
-                }
-            </div>
-        }
-    </div>
+            @if (habilitar == 1)
+            {
+                <a class="chat-button" asp-controller="UserPerfil" asp-action="InvitarUs"
+                    asp-route-idChat="@item.RoomUsuario.Room.Id">
+                    <button>Seleccionar</button>
+                </a>
+            }
+            else
+            {
+                <a class="chat-button" asp-controller="Chat" asp-action="chat" asp-route-idChat="@item.RoomUsuario.Room.Id">
+                    <button>Ingresar</button>
+                </a>
+            }
+        </div>
+    }
+</div>
     <script src="~/js/Tema.js"></script>
 </body>
 
