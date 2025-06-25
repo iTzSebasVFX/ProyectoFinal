@@ -6,24 +6,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/invitaciones.css" asp-append-version="true">
+    <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
     <title>Invitaciones</title>
 </head>
 
 <body>
-    <h1>Tus Invitaciones</h1>
+    <nav class="menu">
+        <a class="decoracion" asp-action="Principal" asp-controller="UserPerfil">Volver <i
+                class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
+        <h3 class="title">Invitaciones</h3>
+        @* <a class="decoracion" asp-action="CrearRoom" asp-controller="Chat">Crear Nuevo Chat <i class="fa-solid fa-users"
+                style="color: #ffffff;"></i></a> *@
+    </nav>
+
+
     <ul>
+        <div class="card-container">
         @foreach (var item in Model)
         {
-            if (!item.Aceptada)
-            {
-                <li>Usted fue invitado a un chat por: @item.Remitente / <a asp-action="Añadir" asp-controller="Chat" asp-route-inviId="@item.Id"><button>Aceptar</button></a></li>
-            }
-            else 
-            {
-                <li>Usted acepto una invitacion por: @item.Remitente</li>
-            }
+            <div class="card">
+                <div class="card-border-top"></div>
+                <div class="img"><img src="/imgs/mujer2.jpg" alt="Descripción 2"/> </div>
+
+                <span>
+                    @if (!item.Aceptada)
+                    {
+                        <text>Invitación pendiente</text>
+                    }
+                    else
+                    {
+                        <text>Invitación aceptada</text>
+                    }
+                </span>
+
+                <p class="job">De: @item.Remitente</p>
+
+                @if (!item.Aceptada)
+                {
+                    <a asp-action="Añadir" asp-controller="Chat" asp-route-inviId="@item.Id">
+                        <button class="action-button">Aceptar</button>
+                    </a>
+                }
+                else
+                {
+                    <button class="disabled-button" disabled>Aceptado</button>
+                }
+            </div>
         }
+        </div>
     </ul>
+    <script src="~/js/Tema.js"></script>
 </body>
 
 </html>

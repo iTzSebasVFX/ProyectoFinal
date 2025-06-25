@@ -330,17 +330,60 @@ nav.menu {
 }
 
 .nav-buttons li button:hover {
-     border-radius: 5px;
+    border-radius: 5px;
     background-color: #1717175e;
     box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
     color: white;
 
 }
-.nav-buttons li .delete{
+
+.nav-buttons li .delete {
     color: #dc3545;
 
 }
-.nav-buttons li .delete:hover{
+
+.nav-buttons li .delete:hover {
     color: #dc3545;
 
+}
+
+.filtros-container {
+    display: grid;
+    flex-wrap: wrap;
+    /* permite que bajen en pantallas pequeñas */
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    /* opcional para centrar horizontal */
+    margin-top: 20px;
+}
+
+.form-select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    min-width: 160px;
+}
+
+.btnfil {
+    padding: 0.5em;
+    padding-left: 2.3em;
+    padding-right: 2.3em;
+    border-radius: 5px;
+    font-style: italic;
+    border: none;
+    align-items: end;
+    outline: none;
+    font-style: italic;
+    transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+    background-color: #070707;
+    color: white;
+}
+
+.btnfil:hover {
+    border-radius: 5px;
+    background-color: #1717175e;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: white;
 }

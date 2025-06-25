@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/0ec24d2dc8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/chatpriv.css">
-    <title>Lista Chats</title>
+    <title>Lista Chatss</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         <h3 class="title">Elite Chats</h3>
         @* <a class="decoracion" asp-action="CrearRoom" asp-controller="Chat">Crear Nuevo Chat <i class="fa-solid fa-users"
                 style="color: #ffffff;"></i></a> *@
-        <button onclick="mostrarNewRoom()">Crear Nuevo Chat</button>
+        <button class="decoracion" onclick="mostrarNewRoom()">Crear Nuevo Chat</button>
     </nav>
 
     @* Manejo de mensajes de error *@
@@ -44,18 +44,22 @@
         </div>
     }
     @* Formulario de creacion de nuevos chats *@
-    <div id="newRoomHidden" style="display: none;">
-        <button onclick="ocultarNewRoom()">✖️</button>
-        <form asp-action="InsertarRoom" asp-controller="Chat" method="post">
-            <label for="roomName">Nombre Room</label>
-            <input type="text" name="RoomName">
-            <label for="creadorName">Creador: </label>
-            <input type="text" name="CreadorName" value="@userId" hidden>
-            <label for="">@NombreUsuario</label>
+   <div id="newRoomHidden" class="new-room-modal" style="display: none;">
+    <div class="new-room-content">
+        <button class="close-btn" onclick="ocultarNewRoom()">✖️</button>
+        <h2>Crear Nuevo Chat</h2>
+        <form asp-action="InsertarRoom" asp-controller="Chat" method="post" class="new-room-form">
+            <label for="roomName">Nombre del chat</label>
+            <input type="text" name="RoomName" class="input-text" required>
 
-            <button type="submit">Crear</button>
+            <label for="creadorName">Creador:</label>
+            <input type="text" name="CreadorName" value="@userId" hidden>
+            <p class="creator-label">@NombreUsuario</p>
+
+            <button type="submit" class="submit-btn">Crear</button>
         </form>
     </div>
+</div>
 
     <div class="chat-container">
         @foreach (var item in Model)
