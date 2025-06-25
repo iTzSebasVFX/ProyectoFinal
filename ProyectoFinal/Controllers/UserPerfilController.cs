@@ -50,27 +50,27 @@ public class UserPerfilController : Controller
 
             if (!string.IsNullOrEmpty(genero))
             {
-                query = query.Where(u => u.Genero == genero);
+                query = query.Where(u => u.Genero == genero && u.id != SearchUser.id);
             }
             if (!string.IsNullOrEmpty(pais))
             {
-                query = query.Where(u => u.pais == pais);
+                query = query.Where(u => u.pais == pais && u.id != SearchUser.id);
             }
             if (!string.IsNullOrEmpty(edad))
             {
                 switch (edad)
                 {
                     case "18-25":
-                        query = query.Where(u => u.Edad >= 18 && u.Edad <= 25);
+                        query = query.Where(u => u.Edad >= 18 && u.Edad <= 25 && u.id != SearchUser.id);
                         break;
                     case "26-35":
-                        query = query.Where(u => u.Edad >= 26 && u.Edad <= 35);
+                        query = query.Where(u => u.Edad >= 26 && u.Edad <= 35 && u.id != SearchUser.id);
                         break;
                     case "36-45":
-                        query = query.Where(u => u.Edad >= 36 && u.Edad <= 45);
+                        query = query.Where(u => u.Edad >= 36 && u.Edad <= 45 && u.id != SearchUser.id);
                         break;
                     case "46+":
-                        query = query.Where(u => u.Edad >= 46);
+                        query = query.Where(u => u.Edad >= 46 && u.id != SearchUser.id);
                         break;
                 }
             }
