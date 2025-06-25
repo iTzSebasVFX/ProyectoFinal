@@ -12,13 +12,12 @@
 
 </head>
 
-<body transition-style="in:diamond:hesitate">
+<body class="fade-in-zoom">
+     <nav class="menu">
+        <a class="decoracion" asp-action="Index" asp-controller="Html">Volver <i
+                class="fa-solid fa-right-to-bracket" style="color: #ffffff;"></i></a>
+    </nav>
 
-    <label for="toggle" id="label_toggle">
-        <i class="fa-solid fa-palette" style="color: #ffffff;"></i>
-    </label>
-    <input type="checkbox" id="toggle">
-  
     <form class="form" method="post" asp-controller="Html" asp-action="Registrar">
         <h3 id="heading">Registro</h3>
 
@@ -87,7 +86,7 @@
         </div>
 
         @* 8*@
-        <div class="field"></div>
+        <div class="field">
         <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             viewBox="0 0 16 16">
             <path
@@ -96,6 +95,7 @@
         </svg>
         <input asp-for="clave" placeholder="Clave Recuperación" class="input-field" type="number">
         </div>
+
 
         <div class="btn">
             <button type="submit" class="button2">Registrar</button>
@@ -112,10 +112,10 @@
             if (alertElement) {
                 alertElement.style.display = "none"; // Oculta el mensaje después de 2 segundos
             }
-        }, 6000); // 2000 ms = 2 segundos
+        }, 2000); // 2000 ms = 2 segundos
     </script>
     <script src="~/js/Tema.js"></script>
-    <script src="~/js/salida.js"></script>
+  <script src="~/js/salida.js"></script>
   
 </body>
 

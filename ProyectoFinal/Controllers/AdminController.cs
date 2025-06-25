@@ -24,7 +24,7 @@ namespace ProyectoFinal.Controllers
         {
             var viewModel = new AdminViewModel
             {
-                ListaAdmins = _context.AdminUsers.ToList(),
+                ListaAdmins = _context.AdminUsers.OrderBy(au => au.Id).ToList(),
                 NuevoAdmin = new AdminModel()
             };
 

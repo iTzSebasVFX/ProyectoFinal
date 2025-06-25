@@ -270,3 +270,18 @@ body {
   .error__close path {
     fill: #fff;
   }
+
+@keyframes fade-in-zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in-zoom {
+  animation: fade-in-zoom 1s ease-out both;
+}

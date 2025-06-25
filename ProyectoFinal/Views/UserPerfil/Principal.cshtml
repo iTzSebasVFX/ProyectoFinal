@@ -58,37 +58,36 @@
             </div>
         }
         <div class="modalFiltros" id="ocultar" style="display: none;">
-            <button onclick="ocultarFiltros()">✖️</button>
-            <form asp-action="PrincipalFiltrado" asp-controller="UserPerfil" method="get" class="row g-2">
-                <div class="col-md-3">
-                    <select name="Genero" class="form-select">
-                        <option value="">Todos los géneros</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select name="Pais" class="form-select">
-                        <option value="">Todos los países</option>
-                        <option value="Colombia">Colombia</option>
-                        <option value="México">México</option>
-                        <option value="Argentina">Argentina</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select name="Edad" class="form-select">
-                        <option value="">Todas las edades</option>
-                        <option value="18-25">18 a 25 años</option>
-                        <option value="26-35">26 a 35 años</option>
-                        <option value="36-45">36 a 45 años</option>
-                        <option value="46+">46 años o más</option>
-                    </select>
-                </div>
-                <div class="col-md-12 text-end">
-                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
-                </div>
-            </form>
+    <button onclick="ocultarFiltros()">✖️</button>
+
+    <form asp-action="PrincipalFiltrado" asp-controller="UserPerfil" method="get" class="filtros-container">
+        <select name="Genero" class="form-select">
+            <option value="">Todos los géneros</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+        </select>
+
+        <select name="Pais" class="form-select">
+            <option value="">Todos los países</option>
+            <option value="Colombia">Colombia</option>
+            <option value="México">México</option>
+            <option value="Argentina">Argentina</option>
+        </select>
+
+        <select name="Edad" class="form-select">
+            <option value="">Todas las edades</option>
+            <option value="18-25">18 a 25 años</option>
+            <option value="26-35">26 a 35 años</option>
+            <option value="36-45">36 a 45 años</option>
+            <option value="46+">46 años o más</option>
+        </select>
+
+        <button type="submit" class="btnfil">Aplicar filtros</button>
+    </form>
+</div>
+
+        
         </div>
         @if (Model.NuevoUsuario.Edad >= 18)
         {
